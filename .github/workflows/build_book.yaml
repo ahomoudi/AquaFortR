@@ -1,9 +1,13 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+  workflow_dispatch:
 
-
-
-
-
-
+name: Build Quarto Book and deploy to gh-pages
 
 jobs:
   build-deploy:
@@ -31,3 +35,10 @@ jobs:
         # Add any command line argument needed
         run: |
           quarto render
+          
+      - name: Deploy to GitHub pages 🚀
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          branch: gh-pages
+          folder: BookOut

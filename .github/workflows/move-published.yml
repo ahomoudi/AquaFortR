@@ -23,7 +23,8 @@ jobs:
             git branch 
             ls -R 
             mkdir -p BookOutput
-            mv * BookOutput/
+            shopt -s extglob
+            mv !(BookOutput) BookOutput
         
       - name: Commit and push changes
         run: |

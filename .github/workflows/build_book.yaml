@@ -18,9 +18,6 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: List contents before build
-        run: ls -alhR && pwd
-        shell: bash
         
       - uses: actions/checkout@v3
 
@@ -41,6 +38,9 @@ jobs:
       - name: Intsall Deps
         run: install.packages(c("rmarkdown", "knitr", "quarto"))
         shell: Rscript {0}
+      - name: List contents before build
+        run: ls -alhR && pwd
+        shell: bash
 
       - name: Render book to all format
         # Add any command line argument needed

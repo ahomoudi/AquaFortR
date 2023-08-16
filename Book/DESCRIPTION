@@ -1,0 +1,51 @@
+Package: AquaFortR2
+Title: AquaFortR2 is not really an R package, but this is here
+    to list the dependencies for building the AquaFortR2 book. I took this file
+    from Hadley wickham repository "ggplot2-book"
+Version: 0.1
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+URL: https://github.com/ahmathlete/AquaFortR/tree/main/Book
+Depends: 
+    R (>= 3.1.0)
+Imports:
+    colorBlindness,
+    directlabels,
+    dplyr,
+    ggforce,
+    gghighlight,
+    ggnewscale,
+    ggplot2,
+    ggraph,
+    ggrepel,
+    ggtext,
+    ggthemes,
+    hexbin,
+    Hmisc,
+    mapproj,
+    maps,
+    munsell,
+    ozmaps,
+    paletteer (>= 1.2.0),
+    patchwork,
+    rmapshaper,
+    scico,
+    seriation,
+    sf,
+    stars,
+    tidygraph,
+    tidyr,
+    wesanderson
+Suggests:
+    babynames,
+    bookdown,
+    bslib,
+    conflicted,
+    desc,
+    downlit,
+    jsonlite,
+    sessioninfo
+Encoding: UTF-8

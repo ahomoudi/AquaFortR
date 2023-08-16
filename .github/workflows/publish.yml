@@ -21,9 +21,11 @@ jobs:
         with:
           packages:
             any::knitr
+            
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages:
             any::rmarkdown
-            any::downlit
-            any::xml2
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2

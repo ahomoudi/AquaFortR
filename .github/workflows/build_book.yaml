@@ -33,8 +33,6 @@ jobs:
         with:
           use-public-rspm: true
           
-      - uses: r-lib/actions/setup-renv@v2
-          
       - name: Intsall Deps
         run: install.packages(c("rmarkdown", "knitr", "quarto"))
         shell: Rscript {0}

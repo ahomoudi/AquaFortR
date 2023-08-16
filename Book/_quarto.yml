@@ -1,11 +1,10 @@
 project:
   type: book
-  output-dir: _book
 
 book:
   title: "Book"
   author: "Norah Jones"
-  date: "15/08/2023"
+  date: "16/08/2023"
   chapters:
     - index.qmd
     - intro.qmd
@@ -13,9 +12,6 @@ book:
     - references.qmd
 
 bibliography: references.bib
-
-execute:
-  freeze: true  # never re-execute computational content during project render
 
 format:
   html:

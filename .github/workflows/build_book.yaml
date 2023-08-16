@@ -7,11 +7,14 @@ on:
     branches: main
   workflow_dispatch:
 
-name: Build Quarto Book and deploy to gh-pages
+name: Build & Depoly Quarto Book
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    defaults:
+     run:
+        working-directory: Book # The working directory path
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -38,7 +41,7 @@ jobs:
           
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: gh-pages
           folder: BookOut

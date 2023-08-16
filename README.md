@@ -1,9 +1,13 @@
 # AquaFortR
+
+[![Quarto Publish](https://github.com/ahmathlete/AquaFortR/workflows/Quarto%20Publish/badge.svg)](https://github.com/ahmathlete/AquaFortR/actions?query=workflow:"Quarto+Publish")
+[![GitHub tag](https://img.shields.io/github/tag/ahmathlete/AquaFortR?include_prereleases=&sort=semver&color=blue)](https://github.com/ahmathlete/AquaFortR/releases/)
+[![License](https://img.shields.io/badge/License-CCBY-blue)](#license)
+
+This si the official repositery of the Project AquaFortR-Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R
 _Repo metadata_
 
-[![Quarto Publish](https://github.com/ahmathlete/badge-generator/workflows/Quarto%20Publish/badge.svg)](https://github.com/ahmathlete/badge-generator/actions?query=workflow:"Quarto+Publish")
-[![GitHub tag](https://img.shields.io/github/tag/ahmathlete/badge-generator?include_prereleases=&sort=semver&color=blue)](https://github.com/ahmathlete/badge-generator/releases/)
-[![License](https://img.shields.io/badge/License-CCBY-blue)](#license)
+
 
 
 _Call-to-Action buttons_
@@ -29,4 +33,3 @@ _Call-to-Action buttons_
 
 Released under [CCBY](/LICENSE) by [@ahmathlete](https://github.com/ahmathlete).
 
-This si the official repositery of the Project AquaFortR-Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R

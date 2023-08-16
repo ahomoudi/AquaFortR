@@ -1,0 +1,32 @@
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["Quarto Publish"]
+    types:
+      - completed
+
+name: Quarto Publish
+
+jobs:
+  build-orginse:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          
+      - name: Create Book folder
+          run: |
+            mkdir -p Book
+            mv * Book/
+        
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git commit -am "Move content to Book folder"
+          git push
+

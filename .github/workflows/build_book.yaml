@@ -18,6 +18,10 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - name: List contents before build
+        run: ls -alhR && pwd
+        shell: bash
+        
       - uses: actions/checkout@v3
 
       - name: Install Quarto
@@ -43,7 +47,8 @@ jobs:
         run: |
           quarto render
       - name: List contents after build
-        run: ls -alhR && pwd 
+        run: ls -alhR && pwd
+        shell: bash
           
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'

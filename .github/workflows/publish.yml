@@ -38,3 +38,14 @@ jobs:
           path: QuartoBook
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+  organize:                           
+    needs: build-deploy                       # https://stackoverflow.com/a/65698892/13818750
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: github.ref == 'refs/heads/gh-pages' #https://stackoverflow.com/a/58142412/13818750
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3

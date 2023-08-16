@@ -33,8 +33,6 @@ jobs:
         with:
           use-public-rspm: true
           
-      - uses: r-lib/actions/setup-renv@v2
-          
       - name: Intsall Deps
         run: install.packages(c("rmarkdown", "knitr", "quarto"))
         shell: Rscript {0}
@@ -55,4 +53,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: gh-pages
-          folder: _book
+          folder: ./_book
+          target-folder: BookOutput

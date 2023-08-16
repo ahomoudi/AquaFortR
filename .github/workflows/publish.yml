@@ -16,6 +16,10 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+       
+       - name: Intsall Deps
+        run: install.packages(c("knitr", "rmarkdown", "downlit", "xml2"))
+        shell: Rscript {0}
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2

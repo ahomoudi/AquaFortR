@@ -36,10 +36,17 @@ jobs:
       - name: Intsall Deps
         run: install.packages(c("rmarkdown", "knitr", "quarto"))
         shell: Rscript {0}
+        
       - name: List contents before build
         run: ls -alhR && pwd
         shell: bash
-
+        
+      - name: Cache quarto results
+        uses: actions/cache@v3
+        with:
+          path: _bookdown_files
+          key: bookdown-${{ hashFiles('**/*Rmd') }}
+          restore-keys: bookdown-
       - name: Render book to all format
         # Add any command line argument needed
         run: |
@@ -48,10 +55,8 @@ jobs:
         run: ls -alhR && pwd
         shell: bash
           
-      - name: Deploy to GitHub pages 🚀
-        if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.4.3
+      - name: Publish to GitHub Pages (and render)
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
-          branch: gh-pages
-          folder: ./_book
-          target-folder: BookOutput
+          target: gh-pages
+          path: BookOut

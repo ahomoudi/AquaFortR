@@ -32,6 +32,8 @@ jobs:
         with:
           use-public-rspm: true
           
+      - uses: r-lib/actions/setup-renv@v2
+          
       - name: Intsall Deps
         run: install.packages(c("rmarkdown", "knitr", "quarto"))
         shell: Rscript {0}
@@ -40,6 +42,8 @@ jobs:
         # Add any command line argument needed
         run: |
           quarto render
+      - name: List contents after build
+        run: ls -alhR && pwd 
           
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'

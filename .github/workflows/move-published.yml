@@ -19,7 +19,7 @@ jobs:
           ref: gh-pages
           
       - name: Create Book folder
-          run: |
+        run: |
             mkdir -p Book
             mv * Book/
         

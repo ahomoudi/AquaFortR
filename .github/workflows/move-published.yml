@@ -20,6 +20,8 @@ jobs:
           
       - name: Create Book folder
         run: |
+            git branch 
+            ls -R 
             mkdir -p Book
             mv * Book/
         

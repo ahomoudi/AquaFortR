@@ -22,8 +22,8 @@ jobs:
         run: |
             git branch 
             ls -R 
-            mkdir -p Book
-            mv * Book/
+            mkdir -p BookOutput
+            mv * BookOutput/
         
       - name: Commit and push changes
         run: |

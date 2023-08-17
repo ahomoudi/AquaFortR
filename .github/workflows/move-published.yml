@@ -26,7 +26,7 @@ jobs:
             mkdir -p gh-pages/quartobook
             shopt -s extglob
             cp -r !(gh-pages) gh-pages/quartobook/
-            ls -R gh-pages/quartobook/
+            ls -R gh-pages/quartobook/ && pwd
             
         
       - name: Commit and push changes
@@ -34,5 +34,6 @@ jobs:
           git add gh-pages/
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git commit -am "Move Book to GitHub Pages"
+          git commit -am "Move Book to GitHub Pages" || true
+          git pull 
           git push origin HEAD:gh-pages

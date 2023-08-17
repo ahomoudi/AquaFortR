@@ -37,7 +37,7 @@ jobs:
           path: QuartoBook
           
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.4.3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: book-depoly # The branch the action should deploy to.
           folder: _book # The folder the action should deploy.

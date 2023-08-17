@@ -25,7 +25,7 @@ jobs:
             ls -R  && pwd
             mkdir -p gh-pages/quartobook
             shopt -s extglob
-            cp -r !(gh-pages/quartobook) gh-pages/quartobook/
+            cp -r !(gh-pages) gh-pages/quartobook/
             ls -R gh-pages/quartobook/
             
         

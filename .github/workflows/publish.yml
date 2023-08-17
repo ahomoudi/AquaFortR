@@ -31,11 +31,13 @@ jobs:
             any::downlit
             any::xml2
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: book-depoly
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
           path: QuartoBook
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.4.3
+        with:
+          branch: book-depoly # The branch the action should deploy to.
+          folder: _book # The folder the action should deploy.
           

@@ -36,6 +36,12 @@ jobs:
         with:
           path: QuartoBook
           
+      - name: Debug
+        run: |
+          ls -R 
+          find . -type f -name "*QuartoBook.pdf*" -exec dirname "{}" \; |sort -u
+          pwd
+          
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

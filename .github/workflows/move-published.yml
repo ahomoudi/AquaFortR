@@ -1,5 +1,6 @@
 # Only trigger, when the build workflow succeeded
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["Quarto Publish"]
     types:
@@ -21,7 +22,7 @@ jobs:
       - name: Create Book folder
         run: |
             git branch 
-            ls -R 
+            ls -R  && pwd
             mkdir -p gh-pages/quartobook
             cp -R *  gh-pages/quartobook
         

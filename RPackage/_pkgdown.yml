@@ -1,4 +1,12 @@
 url: https://ahmathlete.github.io/AquaFortR/
 template:
   bootstrap: 5
+navbar:
+  structure:
+    left:  [intro, reference, articles, custombook]
+  components:
+    custombook:
+      text: Online Book
+      href: book/index.html
+      aria-label: Online Book
 

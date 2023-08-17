@@ -12,4 +12,7 @@ LazyData: true
 URL: https://ahmathlete.github.io/AquaFortR/
 RoxygenNote: 7.2.3
 Suggests: 
-    learnr
+    knitr,
+    learnr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -25,7 +25,8 @@ jobs:
             ls -R  && pwd
             mkdir -p gh-pages/quartobook
             shopt -s extglob
-            cp !(gh-pages/quartobook) gh-pages/quartobook/
+            cp -r !(gh-pages/quartobook) gh-pages/quartobook/
+            ls -R gh-pages/quartobook/
             
         
       - name: Commit and push changes

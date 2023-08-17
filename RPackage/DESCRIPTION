@@ -1,4 +1,4 @@
-Package: RPackage
+Package: AquaFortR
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
@@ -9,3 +9,7 @@ Description: More about what it does (maybe more than one line)
 License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
+URL: https://ahmathlete.github.io/AquaFortR/
+RoxygenNote: 7.2.3
+Suggests: 
+    learnr

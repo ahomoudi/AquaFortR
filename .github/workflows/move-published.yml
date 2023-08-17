@@ -23,19 +23,15 @@ jobs:
         run: |
             git branch 
             ls -R  && pwd
-            mkdir -p gh-pages/quartobook
+            mkdir -p quartobook/book
             shopt -s extglob
-            cp -r !(gh-pages) gh-pages/quartobook/
-            ls -R gh-pages/quartobook/ && pwd
+            cp -r !(quartobook) quartobook/book/
+            ls -R quartobook/book/ && pwd
             
         
-      - name: Commit and push changes
-        run: |
-          git add gh-pages/
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git commit -am "Move Book to GitHub Pages" || true
-          git checkout gh-pages 
-          git pull origin gh-pages
-          git merge origin/gh-pages
-          git push origin gh-pages
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: quartobook # The folder the action should deploy.
+          clean: false

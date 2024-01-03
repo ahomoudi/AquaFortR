@@ -1,15 +1,16 @@
 Package: AquaFortR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: 
+    person("Ahmed", "Homoudi", , "ahmed.homoudi@tu-dresden.de", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-6906-5986"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
-URL: https://ahmathlete.github.io/AquaFortR/
+URL: https://AHomoudi.github.io/AquaFortR/
 RoxygenNote: 7.2.3
 Suggests: 
     knitr,

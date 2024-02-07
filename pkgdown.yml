@@ -2,8 +2,8 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-01-03T11:08Z
+last_built: 2024-02-07T15:54Z
 urls:
-  reference: https://ahmathlete.github.io/AquaFortR/reference
-  article: https://ahmathlete.github.io/AquaFortR/articles
+  reference: https://AHomoudi.github.io/AquaFortR/reference
+  article: https://AHomoudi.github.io/AquaFortR/articles
 

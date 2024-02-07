@@ -1,0 +1,10 @@
+# Accelerate R Packages with Fortran
+
+This chapter will focus on wrapping the developed routines from the previous chapter in an R package.
+
+## Brief Introduction to R Packages
+
+## Developing AquaFortR Package 
+```{r}
+1 + 1
+```

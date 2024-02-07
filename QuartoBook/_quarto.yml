@@ -3,11 +3,13 @@ project:
 
 book:
   title: "QuartoBook"
-  author: "Norah Jones"
+  author: "Ahmed Homoudi"
   date: "16/08/2023"
   chapters:
     - index.qmd
     - intro.qmd
+    - scripts.qmd
+    - package.qmd
     - summary.qmd
     - references.qmd
 
@@ -16,8 +18,10 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    code-fold: true
   pdf:
     documentclass: scrreprt
+    toc-depth: 2
 
 
 

@@ -48,7 +48,15 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
+# compiled files
+*.o
+*.so
+*.mod
+
 
 *.html
-
+QuartoBook/_book/*
+QuartoBook/fortran/*
+QuartoBook/*.png
+toc_*
 AquaFortR.Rproj

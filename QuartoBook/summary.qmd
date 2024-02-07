@@ -5,3 +5,15 @@ In summary, this book has no content whatsoever.
 ```{r}
 1 + 1
 ```
+
+Some issues on memory allocation https://masuday.github.io/fortran_tutorial/r.html
+
+OpenMP support https://cran.r-project.org/doc/manuals/R-exts.html#OpenMP-support
+
+using FFTW library
+
+The Need for Speed Part 1: Building an R Package with Fortran (or C) https://www.r-bloggers.com/2018/12/the-need-for-speed-part-1-building-an-r-package-with-fortran-or-c/
+
+Advanced R by Hadley Wickham R’s C interface
+
+Conv and Xcorr shapes https://cran.r-project.org/web/packages/gsignal/gsignal.pdf

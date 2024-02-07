@@ -12,18 +12,15 @@ The repository is structured as follows:
  - RPackage  
  - SwirlCourse
 
+The documentation of the project is rendered [here](https://ahomoudi.github.io/AquaFortR/)
 
+## Installation 
 
+To install the AquaFortR package, please use: 
 
-
-
-
-
-## Documentation
-
-The documentation is of the project is rendered [here](https://ahomoudi.github.io/AquaFortR/)
-
-
+```r
+remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")
+```
 ## Acknowledgment
 
 This work has been funded by the German Research Foundation (DFG) through the project NFDI4Earth (DFG project no. 460036893, https://www.nfdi4earth.de/) within the German National Research Data Infrastructure (NFDI, https://www.nfdi.de/). 

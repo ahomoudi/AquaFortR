@@ -11,9 +11,11 @@ License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
 URL: https://AHomoudi.github.io/AquaFortR/
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Suggests: 
     knitr,
     learnr,
     rmarkdown
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)

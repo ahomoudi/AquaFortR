@@ -1,6 +1,7 @@
-url: https://ahmathlete.github.io/AquaFortR/
+url: https://AHomoudi.github.io/AquaFortR/
 template:
   bootstrap: 5
+  bootswatch: flatly
 navbar:
   structure:
     left:  [intro, reference, articles, custombook]

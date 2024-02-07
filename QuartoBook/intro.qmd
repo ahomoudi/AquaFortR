@@ -1,9 +1,12 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+This chapter briefly introduces the R programming language and how to install R on different operating systems. Furthermore, we will have a look at the installation of RStudio. Finally, we will learn briefly about Fortran. 
 
-See @knuth84 for additional discussion of literate programming.
+The book is designed to cater to individuals with a foundational understanding of programming, irrespective of their familiarity with a specific programming language.
 
-```{r}
-1 + 1
-```
+## R Programming lanaguage 
+## Installing R 
+## Installing Rstudio
+## Fortran 
+
+@intro2rbook

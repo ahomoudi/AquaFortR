@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+name: Quarto Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Debug
+        run: |
+          ls -R
+          find . -type f -name "*QuartoBook.pdf*" -exec dirname "{}" \; |sort -u
+          pwd
+
+      - name: ZIP
+        run: |
+          mkdir Swirl
+          zip -r Swirl/AquaFortR_Swirl.zip AquaFortR_Swirl/
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: Swirl # The folder the action should deploy.

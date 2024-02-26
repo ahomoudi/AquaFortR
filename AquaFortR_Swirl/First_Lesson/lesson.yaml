@@ -1,0 +1,69 @@
+- Class: meta
+  Course: AquaFortR_Swirl
+  Lesson: First Lesson
+  Author: Ahmed Homoudi
+  Type: Standard
+  Organization: TUD Dresden University of Technology
+  Version: 2.4.5
+  
+- Class: text
+  Output: 'Welcome to the first lesson in swirl course: "AquaFortR: Streamlining 
+  Atmospheric Science, Oceanography, Climate, and Water Research with 
+  Fortran-accelerated R."'
+  
+- Class: text
+  Output: 'In the first leason we will try to write a small Fortran subroutine 
+  and use it in R'
+  
+- Class: cmd_question
+  Output: Define one variable 'a' in R. and it has a value of 7
+  CorrectAnswer: a <- 7
+  AnswerTests: omnitest(correctExpr='a <- 7')
+  Hint: Just type a <- 7.
+  
+- Class: cmd_question
+  Output: Define one variable 'b' in R. and it has a value of 15
+  CorrectAnswer: b <- 15
+  AnswerTests: omnitest(correctExpr='b <- 15')
+  Hint: Just type b <- 15.
+  
+- Class: cmd_question
+  Output: Now, let us add a to b and save the output to c
+  CorrectAnswer: c <- a + b
+  AnswerTests: omnitest(correctExpr='c <- a + b')
+  Hint: Just type c <- a + b
+  
+- Class: text
+  Output: 'We did simple summation in R, Let us try to do that in Fortran togethor'
+  
+- Class: text
+  Output: 'Start by creating a txt file and save it as "add_f.f90"'
+  
+
+- Class: text_question
+  Output: Have you created the "add_f.f90" file?
+  CorrectAnswer: Yes
+  AnswerTests: omnitest(correctVal='Yes')
+  Hint: In RStudio, you can go to File then New File and then choose Text File
+  
+- Class : text
+  Output: |-
+    Now we write the Fortran subroutine in the 'add_f.f90'. The subroutine content is
+    
+     subroutine add_f(x, y, answer)
+     
+      ! add 2 numbers
+      
+      implicit none
+      
+      double precision :: x, y, answer
+      
+      answer = x + y
+      
+    end
+    
+- Class: text 
+  Output: Copy the subroutine from the last message starting from "subroutine" to "end".
+      And place the subroutine in the add_f.90 file. Please, omit the pipe sign | from the text.
+
+

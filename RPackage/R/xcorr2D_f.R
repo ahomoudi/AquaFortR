@@ -15,7 +15,7 @@
 #' @useDynLib AquaFortR
 #' @export
 xcorr2D_f <- function(a, b) {
-  stopifnot(length(dim(a))==2 | length(dim(b))==2)
+  stopifnot(length(dim(a)) == 2 | length(dim(b)) == 2)
   result <- .Call(
     c_xcorr2d_f,
     as.integer(dim(a)),

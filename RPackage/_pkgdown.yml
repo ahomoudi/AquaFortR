@@ -2,12 +2,16 @@ url: https://AHomoudi.github.io/AquaFortR/
 template:
   bootstrap: 5
   bootswatch: flatly
+  bslib:
+    base_font: {google: "Open Sans"}
+    heading_font: {google: "Open Sans"}
+    code_font: {google: "Open Sans"}
 navbar:
   structure:
-    left:  [intro, reference, articles, custombook]
+    left:  [intro, reference, custombook, customswirl]
   components:
     custombook:
-      text: Online Book
+      text: Book
       href: book/index.html
-      aria-label: Online Book
+      aria-label: Book
 

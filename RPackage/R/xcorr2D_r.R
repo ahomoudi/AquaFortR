@@ -15,7 +15,7 @@
 #' @useDynLib AquaFortR
 #' @export
 xcorr2D_r <- function(a, b) {
-  stopifnot(length(dim(a))==2 | length(dim(b))==2)
+  stopifnot(length(dim(a)) == 2 | length(dim(b)) == 2)
   # the full CC matrix
   cc_row <- nrow(a) + nrow(b) - 1
   cc_col <- ncol(a) + ncol(b) - 1

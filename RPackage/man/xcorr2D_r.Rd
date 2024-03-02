@@ -2,7 +2,7 @@
 % Please edit documentation in R/xcorr2D_r.R
 \name{xcorr2D_r}
 \alias{xcorr2D_r}
-\title{2D cross-correlation using 0.}
+\title{2D cross-correlation using R.}
 \usage{
 xcorr2D_r(a, b)
 }

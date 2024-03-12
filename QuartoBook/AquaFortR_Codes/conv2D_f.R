@@ -1,5 +1,5 @@
 conv2D_f0 <- function(a, b) {
-  dyn.load("fortran/conv2D.so")
+  dyn.load("AquaFortR_Codes/conv2D.so")
 
   # the full convolution matrix
   conv_row <- nrow(a) + nrow(b) - 1

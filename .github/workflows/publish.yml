@@ -30,7 +30,6 @@ jobs:
             any::xml2
             any::microbenchmark
             any::ggplot2
-            any::remotes
             any::devtools
             any::dotCall64
 
@@ -53,9 +52,9 @@ jobs:
           
       - name: Debug
         run: |
-          ls -R 
-          find . -type f -name "*QuartoBook.pdf*" -exec dirname "{}" \; |sort -u
-          pwd
+          #ls -R 
+          #find . -type f -name "*QuartoBook.pdf*" -exec dirname "{}" \; |sort -u
+          #pwd
           
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

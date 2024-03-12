@@ -1,7 +1,7 @@
 xcorr2D_f0 <- function(a, b) {
   # Please adjust the path to your setup. In my machine,
   # I have a folder called "fortran" containing all f90 files
-  dyn.load("fortran/xcorr2D.so")
+  dyn.load("AquaFortR_Codes/xcorr2D.so")
 
   # the full CC matrix
   cc_row <- nrow(a) + nrow(b) - 1

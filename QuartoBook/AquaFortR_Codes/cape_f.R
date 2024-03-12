@@ -1,7 +1,7 @@
 cape_f0 <- function(t_parcel, dwpt_parcel, mr_parcel,
                     p_profile, t_profile, mr_profile,
                     vtc = TRUE) {
-  dyn.load("fortran/cape_f.so")
+  dyn.load("AquaFortR_Codes/cape_f.so")
 
   nlevel <- length(p_profile)
   nresult <- 4

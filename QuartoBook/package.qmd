@@ -4,7 +4,29 @@ This chapter will focus on wrapping the developed routines from the previous cha
 
 ## Brief Introduction to R Packages
 
+### devtools package
+<!-- https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/ -->
 ## Developing AquaFortR Package 
-```{r}
-1 + 1
-```
+
+
+### R function 
+
+### Fortran subroutine 
+
+- iso_c_binidng 
+
+### C funtions
+ - C to Fortran 
+ - R to C  
+
+###  Package's files  
+
+
+<!-- .Fortran is primarily intended for Fortran 77 code, and long precedes any support for ‘modern’ Fortran. Nowadays implementations of Fortran support the Fortran 2003 module iso_c_binding, a better way to interface modern Fortran code to R is to use .C and write a C interface using use iso_c_binding.  -->
+<!-- F77_NAME(name) to declare a Fortran routine in C before use  -->
+<!-- F77_CALL(name) to call a Fortran routine from C  -->
+
+
+<!-- void R_orderVector (int* indx, int n, SEXP arglist, Rboolean nalast, Rboolean decreasing) -->
+
+<!-- Cross Platform Development -->

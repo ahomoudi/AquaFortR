@@ -1,0 +1,524 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Accelerate R Scripts with Fortran {#chap-scripts}
+
+In this chapter, we will compare the efficiency of running three
+computationally demanding examples in pure R script versus using another
+R script with the core computations performed in Fortran.
+
+## 2D Coss-Correlation {#sec-2Dxcorr}
+
+<!-- What is CC  -->
+
+<!-- What is used for  -->
+
+In signal processing, cross-correlation is a measure of the similarity
+between two signals as a function of the displacement of one relative to
+the other [@Wang2019]. It can deliver information about the time lag
+between the two signals. Cross-correlation is often applied in computer
+vision for visual tracking. For example, it is used in template
+matching, feature detection, and motion tracking. 2D cross-correlation
+also plays an important role in convolutional networks and machine
+learning.
+
+<!-- How it is important in Atmospheric Science, Oceanography, Climate, and Water Research -->
+
+In atmospheric science, oceanography, climate, and water research, 2D
+cross-correlation can be applied in various ways. For example, it can be
+used to estimate ocean surface currents [@Warren2016], cloud tracking
+using satellite imagery [@Seelig2021], and Particle Image Velocimetry
+(PIV) in fluid dynamics applications [@Willert1991].
+
+The 2D cross-correlation of an array $F$, with dimension $(M, N)$, and
+array $G$, with dimension $(P, Q)$, can be given as the array $CC$ that
+has a dimension of $(M+P-1, N+Q-1)$.
+
+$$
+CC_{(s,t)} = \sum_{m = 0}^{M-1}\sum_{n = 0}^{N-1} F_{(m,n)} G_{(m-s, n-t)}
+$$ {#eq-2DCC}
+
+where $s$ varies between $-(P-1)$ and $(M-1)$ while $t$ varies between
+$-(Q-1)$ and $(N-1)$. $F$ and $G \in R$.
+
+Now, let us define the `xcorr2D_r` function as shown in @lst-xcorrr. The
+function receives two matrices or arrays `a` & `b` and return the full
+cross-correlation plane `cc`.
+
+```{r}
+#| lst-label: lst-xcorrr
+#| lst-cap: Cross-correlation in R
+xcorr2D_r0 <- function(a, b) {
+  # the full CC matrix
+  cc_row <- nrow(a) + nrow(b) - 1
+  cc_col <- ncol(a) + ncol(b) - 1
+  cc <- matrix(1:c(cc_row * cc_col),
+    byrow = FALSE, ncol = cc_col
+  )
+
+  # obtain possible shifts
+  min_row_shift <- -(nrow(b) - 1)
+  max_row_shift <- (nrow(a) - 1)
+  min_col_shift <- -(ncol(b) - 1)
+  max_col_shift <- (ncol(a) - 1)
+
+  # Padded matrix
+  rows_padded <- abs(min_row_shift) +
+    nrow(a) + abs(max_row_shift)
+  cols_padded <- abs(min_col_shift) +
+    ncol(a) + abs(max_col_shift)
+  # a
+  padded_a <- matrix(0,
+    nrow = rows_padded,
+    ncol = cols_padded
+  )
+  padded_a[
+    (abs(min_row_shift) + 1):(abs(min_row_shift) + nrow(a)),
+    (abs(min_col_shift) + 1):(abs(min_col_shift) + ncol(a))
+  ] <- a
+
+  for (icol in 1:cc_col) {
+    for (irow in 1:cc_row) {
+      icc <- irow + ((icol - 1) * cc_row)
+      cols <- (icol):(icol + ncol(b) - 1)
+      rows <- (irow):(irow + nrow(b) - 1)
+      # b
+      padded_b <- array(0,
+        dim = c(rows_padded, cols_padded)
+      )
+      padded_b[rows, cols] <- b
+
+      cc[irow, icol] <- sum(padded_a * padded_b)
+    }
+  }
+
+  return(cc)
+}
+```
+
+
+
+Moving forward, we can define the `xcorr2d_f` subroutine in Fortran as
+shown in @lst-xcorrf. Subroutines are generally the approach for integrating 
+Fortran in R. Function in Fortran return a single value with no option of 
+altering the input arguments, while subroutines have the
+ability to perform complex tasks while altering input arguments.
+This proofs to be helpful e.g., in solving equations system.
+
+Another imperative point is to define the dimension of the arrays when
+passing them to Fortran (i.e. explicit-shape arrays). To illustrate, 
+`m, n, p, q, k, l` are the dimension of input arrays `a`and `b`, and 
+the out array `cc`.
+
+```{fortran, eval=FALSE}
+#| lst-label: lst-xcorrf
+#| lst-cap: Cross-correlation in Fortran
+subroutine xcorr2d_f(m, n, p, q, k, l, a, b, cc)
+   implicit none
+   integer                                :: m, n, p, q, k, l
+   double precision, dimension(m, n)      :: a
+   double precision, dimension(p, q)      :: b
+   double precision, dimension(k, l)      :: cc
+   !     dummy vars
+   integer                               :: min_row_shift, min_col_shift
+   integer                               :: max_row_shift, max_col_shift
+   integer                               :: rows_padded, cols_padded
+   integer                               :: icol, irow, icc, icol2, irow2
+   real, allocatable, dimension(:, :)    :: padded_a, padded_b
+
+   !     obtain possible shfits
+   min_row_shift = -1*(p - 1)
+   max_row_shift = m - 1
+   min_col_shift = -1*(q - 1)
+   max_col_shift = n - 1
+
+   !   Padded arrray
+   rows_padded = abs(min_row_shift) + m + abs(max_row_shift)
+   cols_padded = abs(min_col_shift) + n + abs(max_col_shift)
+   !    A
+   allocate (padded_a(rows_padded, cols_padded))
+   padded_a = 0.0
+   padded_a((abs(min_row_shift) + 1):(abs(min_row_shift) + m), &
+            (abs(min_col_shift) + 1):(abs(min_col_shift) + n)) = a
+
+   !    B
+   allocate (padded_b(rows_padded, cols_padded))
+   padded_b = 0.0
+   do icol = 1, l
+      do irow = 1, k
+         icc = irow + ((icol - 1)*k)
+         icol2 = icol + q - 1
+         irow2 = irow + p - 1
+         padded_b(irow:irow2, icol:icol2) = b
+         cc(irow, icol) = sum(padded_a*padded_b)
+         padded_b = 0.0
+      end do
+   end do
+end subroutine xcorr2d_f
+```
+
+Since Fortran is a compiled language, we need to save the subroutine in
+`xcorr2D.f90` file and compile it using: `R CMD SHLIB xcorr2D.f90`
+
+::: callout-note
+Please use the terminal tab in Rstudio or open a new terminal using
+`Alt+Shift+R`
+:::
+
+As mentioned earlier, we need to pass the dimension of the arrays to
+Fortran. Therefore, it would logical to write a wrapping function for
+Fortran subroutine that provides other input arguments. 
+
+In the wrapper function (@lst-xcorrfr), we initially require loading 
+the shared object, which is the compiled Fortran subroutine, as 
+`dyn.load("path/to/xcorr2D.so")`. Furthermore, it is important to prepare 
+other input variables for Fortran such as the dimensions of the input and 
+output arrays. Imperatively, data types should be approached carefully. Before 
+calling `.Fortran()`, all storage mode of the variables in R was 
+converted to the appropriate type using either `as.double()` or `as.integer()`. 
+If the wrong type is passed, it can result in a hard-to-catch error or 
+unexpected results^[Writing R Extensions, 5.2 Interface functions .C and .Fortran].
+
+
+
+```{r}
+#| lst-label: lst-xcorrfr
+#| lst-cap: Cross-correlation wrapping function 
+xcorr2D_f0 <- function(a, b) {
+  # Please adjust the path to your setup. In my machine,
+  dyn.load("AquaFortR_Codes/xcorr2D.so")
+
+  # the full CC matrix
+  cc_row <- nrow(a) + nrow(b) - 1
+  cc_col <- ncol(a) + ncol(b) - 1
+  cc <- matrix(1:c(cc_row * cc_col), byrow = FALSE, ncol = cc_col)
+
+  result <- .Fortran("xcorr2d_f",
+    m = as.integer(dim(a)[1]),
+    n = as.integer(dim(a)[2]),
+    p = as.integer(dim(b)[1]),
+    q = as.integer(dim(b)[2]),
+    k = as.integer(cc_row),
+    l = as.integer(cc_row),
+    a = as.double(a),
+    b = as.double(b),
+    cc = as.double(cc)
+  )$cc
+
+  return(result)
+}
+```
+
+**Example**
+
+Now, we can use an example to compare the performance of the two functions. 
+In order to do so, `microbenchmark` package needs to be installed, and `ggplot2` 
+is required for plotting.
+ 
+The obtained benchmarking data allows (`mbm`) for a quantitative comparison of 
+the computational efficiency between the two methods. By printing "mbm" in the console 
+(`print(mbm)`) it is evident that Fortran outperforms the R implementation of 2D 
+cross-correlation by a factor of 10. The significance of leveraging Fortran becomes 
+evident in @fig-xcorr2D.
+
+
+```{r}
+#| label: fig-xcorr2D
+#| fig-cap: "Performance comparison of 2D Cross-correlation in R and Fortran. Median is shown as red vertical line."
+library(microbenchmark)
+library(ggplot2)
+
+set.seed(72)
+# Assume a
+a <- structure(runif(64), dim = c(8L, 8L))
+# Assume b
+b <- structure(runif(64), dim = c(8L, 8L))
+mbm <- microbenchmark(
+  xcorr2D_r = xcorr2D_r0(a, b),
+  xcorr2D_f = xcorr2D_f0(a, b)
+)
+
+autoplot(mbm) +
+  stat_summary(
+    fun = "median",
+    geom = "crossbar",
+    width = 0.6,
+    colour = "red"
+  )
+```
+
+## 2D Convolution
+
+Convolution and cross-correlation are both operations applied to images.
+Cross-correlation means sliding a kernel (filter) across an image while
+convolution means sliding a flipped kernel across an image.
+[@Draelos_2019]. Therefore, the 2D convolution of an array $F$, with
+dimension $(M, N)$, and array $G$, with dimension $(P, Q)$, can be given
+as the array $CC$ that has a dimension of $(M+P-1, N+Q-1)$. $hv$ means
+that $G$ is flipped.
+
+$$
+CC_{(s,t)} = \sum_{m = 0}^{M-1}\sum_{n = 0}^{N-1} F_{(m,n)} G_{(m-s, n-t)}^{hv}
+$$
+
+where $s$ varies between $-(P-1)$ and $(M-1)$ while $t$ varies between
+$-(Q-1)$ and $(N-1)$. $F$ and $G \in R$.
+
+It is true that we can just flip the second array and use the functions from @sec-2Dxcorr. 
+However, we are interested in the complete workflow. 
+
+@lst-convrr
+
+```{r}
+#| lst-label: lst-convrr
+#| lst-cap: Convolution in R
+conv2D_r0 <- function(a, b) {
+  # the full convolution matrix
+  conv_row <- nrow(a) + nrow(b) - 1
+  conv_col <- ncol(a) + ncol(b) - 1
+  conv <- matrix(1:c(conv_row * conv_col), byrow = FALSE, ncol = conv_col)
+
+  # obtain possible shifts
+  min_row_shift <- -(nrow(b) - 1)
+  max_row_shift <- (nrow(a) - 1)
+  min_col_shift <- -(ncol(b) - 1)
+  max_col_shift <- (ncol(a) - 1)
+
+  # Padded matrix
+  rows_padded <- abs(min_row_shift) + nrow(a) + abs(max_row_shift)
+  cols_padded <- abs(min_col_shift) + ncol(a) + abs(max_col_shift)
+  # a
+  padded_a <- matrix(0, nrow = rows_padded, ncol = cols_padded)
+  padded_a[
+    (abs(min_row_shift) + 1):(abs(min_row_shift) + nrow(a)),
+    (abs(min_col_shift) + 1):(abs(min_col_shift) + ncol(a))
+  ] <- a
+
+  for (icol in 1:conv_col) {
+    for (irow in 1:conv_row) {
+      iconv <- irow + ((icol - 1) * conv_row)
+      cols <- (icol):(icol + ncol(b) - 1)
+      rows <- (irow):(irow + nrow(b) - 1)
+      # b
+      padded_b <- array(0, dim = c(rows_padded, cols_padded))
+      # flip the kernel i.e. b
+      padded_b[rows, cols] <- b[nrow(b):1, ncol(b):1]
+
+      conv[irow, icol] <- sum(padded_a * padded_b)
+    }
+  }
+
+  return(conv)
+}
+```
+
+@lst-convrf
+
+```{fortran, eval=FALSE}
+#| lst-label: lst-convrf
+#| lst-cap: Convolution in Fortran
+subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
+   implicit none
+   integer                                :: m, n, p, q, k, l, i, j
+   double precision, dimension(m, n)      :: a
+   double precision, dimension(p, q)      :: b, b_flipped
+   double precision, dimension(k, l)      :: conv
+   !     dummy vars
+   integer                               :: min_row_shift, min_col_shift
+   integer                               :: max_row_shift, max_col_shift
+   integer                               :: rows_padded, cols_padded
+   integer                               :: icol, irow, iconv, icol2, irow2
+   real, allocatable, dimension(:, :)    :: padded_a, padded_b
+
+   !     obtain possible shfits
+   min_row_shift = -1*(p - 1)
+   max_row_shift = m - 1
+   min_col_shift = -1*(q - 1)
+   max_col_shift = n - 1
+
+   !   Flip the kernel i.e. B
+   b_flipped = 0.0
+   do i = 1, p
+      do j = 1, q
+         b_flipped(p - i + 1, q - j + 1) = b(i, j)
+      end do
+   end do
+
+   !   Padded arrray
+   rows_padded = abs(min_row_shift) + m + abs(max_row_shift)
+   cols_padded = abs(min_col_shift) + n + abs(max_col_shift)
+   !    A
+   allocate (padded_a(rows_padded, cols_padded))
+   padded_a = 0.0
+   padded_a((abs(min_row_shift) + 1):(abs(min_row_shift) + m), &
+            (abs(min_col_shift) + 1):(abs(min_col_shift) + n)) = a
+
+   !    B
+   allocate (padded_b(rows_padded, cols_padded))
+   padded_b = 0.0
+   do icol = 1, l
+      do irow = 1, k
+         iconv = irow + ((icol - 1)*k)
+         icol2 = icol + q - 1
+         irow2 = irow + p - 1
+         padded_b(irow:irow2, icol:icol2) = b_flipped
+         conv(irow, icol) = sum(padded_a*padded_b)
+         padded_b = 0.0
+      end do
+   end do
+end subroutine conv2d_f
+```
+
+You might need some flags when compile Fortran subroutine, For example, to enable 
+the generation of run-time check `-fcheck=all`. The code below shows two options to 
+compile `conv2D.f90` either by R or gfortran compiler. 
+
+```{bash}
+#| eval: FALSE
+# R
+R CMD SHLIB conv2D.f90
+
+# gfortran
+gfortran -fpic -shared conv2D.f90 -o conv2D.so
+```
+
+@lst-convrfr
+
+
+```{r}
+#| lst-label: lst-convrfr
+#| lst-cap: Convolution wrapping function
+conv2D_f0 <- function(a, b) {
+  require(dotCall64)
+  dyn.load("AquaFortR_Codes/conv2D.so")
+
+  # the full convolution matrix
+  conv_row <- nrow(a) + nrow(b) - 1
+  conv_col <- ncol(a) + ncol(b) - 1
+  conv <- matrix(0, byrow = FALSE, ncol = conv_col)
+
+  result <- .C64("conv2d_f",
+                 SIGNATURE = c(rep("integer",6),
+                              rep("double",3)),
+                 m = dim(a)[1],
+                 n = dim(a)[2],
+                 p = dim(b)[1],
+                 q = dim(b)[2],
+                 k = integer(conv_row),
+                 l = integer(conv_col),
+                 a = as.double(a),
+                 b = as.double(b),
+                 conv = as.double(conv))$conv
+
+  return(result)
+}
+```
+
+Similar to cross-correlation calculation, the Fortran implementation of convolution 
+outperforms the R one by 
+
+```{r}
+#| label: fig-conv2D
+#| fig-cap: "Performance comparison of 2D Convolution in R and Fortran. Median is shown as red vertical line."
+library(microbenchmark)
+library(ggplot2)
+
+
+set.seed(72)
+# Assume a
+a <- structure(runif(64), dim = c(8L, 8L))
+# Assume b
+b <- structure(runif(64), dim = c(8L, 8L))
+mbm <- microbenchmark(
+  conv2D_r = conv2D_r0(a, b),
+  conv2D_f = conv2D_f0(a, b)
+)
+
+autoplot(mbm) +
+  stat_summary(
+    fun = "mean",
+    geom = "crossbar",
+    width = 0.6,
+    colour = "red"
+  )
+```
+
+::: {.callout-tip}
+## Question
+
+After learning about `.Fortran()` and `.C64()`, you can use one of the two examples 
+above and compare the performance of the two interfaces using `microbenchmark()`.
+Which function is faster?
+:::
+
+
+## Convective Available Potential Energy (CAPE)
+
+<!-- definition  -->
+
+<!-- why is important  -->
+
+<!-- why it is time consuming -->
+
+The maximum buoyancy of an undiluted air parcel, related to the
+potential up-draft strength of thunderstorms.
+
+```{r}
+#| warning: false
+#|
+if (!require(AquaFortR)) {
+  remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")
+}
+
+library(AquaFortR)
+data("radiosonde")
+
+Temperature <- radiosonde$temp + 273.15 # K
+Dewpoint <- radiosonde$dpt + 273.15 # K
+Pressure <- radiosonde$pressure # hPa
+# Mixing ratio
+MixingRatio <- mixing_ratio_from_dewpoint(Dewpoint, Pressure)
+t_parcel <- Temperature[1]
+dwpt_parcel <- Dewpoint[1]
+mr_parcel <- MixingRatio[1]
+
+source("AquaFortR_Codes/cape_r.R")
+source("AquaFortR_Codes/cape_f.R")
+```
+
+```{r}
+#| label: fig-cape
+#| fig-cap: "Performance comparison of CAPE in R and Fortran"
+library(microbenchmark)
+library(ggplot2)
+
+mbm <- microbenchmark(
+  cape_r = cape_r0(t_parcel, dwpt_parcel, mr_parcel,
+    Pressure, Temperature, MixingRatio,
+    vtc = TRUE
+  ),
+  cape_f = cape_f0(t_parcel, dwpt_parcel, mr_parcel,
+    Pressure, Temperature, MixingRatio,
+    vtc = TRUE
+  )
+)
+
+autoplot(mbm) +
+  stat_summary(
+    fun = "mean",
+    geom = "crossbar",
+    width = 0.3,
+    colour = "green"
+  )
+```
+
+https://www.f5wx.com/pages/CAPECalc.htm
+
+https://geo.libretexts.org/Bookshelves/Meteorology_and_Climate_Science/Practical_Meteorology\_(Stull)/14%3A_Thunderstorm_Fundamentals/14.03%3A_Section_4-
+
+https://journals.ametsoc.org/view/journals/clim/33/6/jcli-d-19-0461.1.xml
+
+https://www.weather.gov/source/zhu/ZHU_Training_Page/convective_parameters/Sounding_Stuff/MesoscaleParameters.html

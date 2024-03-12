@@ -1,12 +1,158 @@
-# Introduction
+# Introduction {#chap-intro}
 
-This chapter briefly introduces the R programming language and how to install R on different operating systems. Furthermore, we will have a look at the installation of RStudio. Finally, we will learn briefly about Fortran. 
+This chapter briefly introduces the R programming language and how to install R 
+on different operating systems. Furthermore, we will have a look at the installation 
+of RStudio. Finally, we will learn briefly about Fortran. 
 
-The book is designed to cater to individuals with a foundational understanding of programming, irrespective of their familiarity with a specific programming language.
+The book is designed to cater to individuals with a foundational understanding 
+of programming, irrespective of their familiarity with a specific programming language.
 
-## R Programming lanaguage 
-## Installing R 
-## Installing Rstudio
+## R
+<!-- What is R? -->
+R is a powerful and versatile open-source language and environment for statistical
+computing and graphics [@RManual]. R was developed to facilitate data manipulation,
+exploration, and visualisation, providing various statistical and graphical tools.
+
+<!-- What makes R easy? -->
+The R environment is designed for effective data handling, array and matrix 
+operations, and is a well-developed and simple programming language [@RManual]. 
+Its syntax is concise and expressive, making it an accessible language for 
+newbies and seasoned programmers. R can perform tasks either by executing scripts
+or interactively. The latter is advantageous for beginners and during the first 
+stages of script development. The interactive environment is accessible through 
+command lines or various integrated development environments (IDEs), such [RStudio](https://posit.co/products/open-source/rstudio/).
+
+
+Many factors play an important role in the popularity of R. For example, the 
+ability to produce graphics with a publication's quality. Simultaneously, the 
+users maintain full control over customising the plots according to their 
+preferences and intricate details. Another significant factor is its ability 
+to be extended to fit the user's demand. The Comprehensive R Archive Network 
+[(CRAN)](https://cran.r-project.org/) contains an extensive array of libraries 
+and packages to extend R's functionality for various tasks. With over 
+[20447](https://cran.r-project.org/web/packages/) available packages, the 
+CRAN package repository is a testament to R's versatility and adaptability.
+
+<!-- Examples of R in Data science -->
+[Tidyverse](https://www.tidyverse.org/) is the most popular bundle of R packages
+for data science. It was developed by Hadley Wickham and his team. The common 
+shared design among tidyverse packages increases the consistency across functions
+and makes each new function or package a little easier to comprehend and utilise [@Wickham2023].
+
+<!-- Examples of R in Spatial data analysis -->
+Many packages have been developed for spatial data analysis to address various 
+challenging tasks. [R-spatial](https://r-spatial.org) provides a rich set of 
+packages for handling spatial or spatio-temporal data. For example, [sf](https://cran.r-project.org/web/packages/sf/index.html) provides simple features
+access in R, which is a standardized method for encoding spatial vector data. The [stars](https://cran.r-project.org/web/packages/stars/index.html) package aims 
+to handle spatiotemporal arrays. Additionally, the 
+[terra](https://cran.r-project.org/web/packages/terra/index.html) 
+package works with spatial data and has the ability to process large datasets on
+the disk when loading into memory (RAM) is not feasible.
+
+<!-- hdf5 and ncdf4 -->
+Furthermore, research produces a large data sets; therefore, it is essential to 
+store them according to the FAIR principles (**F**indability, **A**ccessibility, 
+**I**nteroperability, and **R**euse of digital assets; @Wilkinson2016). NetCDF 
+and HDF5 are among the most prominent scientific data formats owing to their 
+numerous capabilities. The R package 
+[ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) delivers a 
+high-level R interface to data files written using Unidata's netCDF library. 
+Additionally, [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html) 
+provides an interface between HDF5 and R.
+
+<!-- Interpolatable with Python C, C++, Fortran -->
+
+Regarding the integration of other programming languages, R has diverse interfaces,
+which are either a fundamental implementation of R or attainable via another R 
+package [@Chambers2016]. The fundamental interfaces are `.Call()`, `.C()`, and 
+`.Fortran()` to C and Fortran. The development of the 
+[Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html) package has 
+revolutionised seamless access to C++. Python is also accessible using the [reticulate](https://cran.r-project.org/web/packages/reticulate/index.html) package.
+Finally, the Java interface was granted using the 
+[rJava](https://cran.r-project.org/web/packages/rJava/index.html) package. 
+
+
+In conclusion, R is a valuable tool in the Earth System, as it can effectively 
+tackle multifarious scientific tasks and address numerous outstanding research 
+inquiries.
+
 ## Fortran 
 
-@intro2rbook
+Fortran, short for **For**mula **Tran**slation, is one of the oldest high-level 
+programming languages. It was first developed in the 1950s, and is nonetheless widely 
+used in scientific and engineering applications. Key features of Fortran include 
+its ability to efficiently handle arrays and matrices, making it well-suited for 
+numerical computations. Additionally, Fortran has a simple and straightforward 
+syntax that makes it easy to learn and use, because it is possible to write 
+mathematical formulas almost as they written in mathematical texts [@metcalf2018modern]. 
+
+Fortran has been revised multiple times, with the most recent iteration being Fortran [2023](https://wg5-fortran.org/f2023.html). Another important feature of Fortran 
+is its support for parallel programming, enabling developers to take advantage of 
+multicore processors and high-performance computing architectures.
+
+There are frequently numerous good reasons to integrate different programming languages 
+to achieve tasks. Interoperability with C programming language is a feature that 
+was introduced with Fortran 95 [@metcalf2018modern]. Given that C is widely used 
+for system-level programming, many of the other languages include 
+support for C. Therefore, the C Application Programming Interface (API) can also 
+be used to connect two non-C languages [@chirila2014introduction]. For instance, 
+in atmospheric modelling, Fortran is used for its high performance and capcity to 
+handle large data sets, while C is utilised for its efficiency and control over 
+memory usage.
+
+Noteworthy, developing software using Fortran necessitates utilisation of its primitive
+procedures and developing from scratch. This is because Fortran is not similar to 
+scripting languages (i.e. R) that requires a special environment [@Masuda_2020].
+However, Fortran is privileged with its persistent backward compatibility, resulting
+in the usability of countless (legacy) codes written decades ago.
+
+
+<!-- why R and Fortran? -->
+Since R was designed to streamline data analysis and statistics
+[@wickham2015advanced] and Fortran is renowned for its high performance, it makes 
+seance to integrate the two languages. It should be noted that both programming 
+languages present arrays in column-major order, which makes it easier to bridge 
+without causing confusion. Additionally, R is developed using Fortran, C, and R 
+programming languages, and it features `.Call` and `.External()` functions that 
+allows users to utilise compiled code from other R packages. 
+
+Despite the development of newer programming languages, Fortran remains a popular 
+choice for many scientists and engineers due to its reliability, efficiency, 
+and ability to handle large amounts of data. 
+
+
+## Installation
+
+**R**
+
+Installation of R differs according to the operating system:
+
+  - The webpage [here](https://cran.r-project.org/bin/linux/) provides 
+  information on installing R according to the Linux distribution.
+  - For Windows, The executable can be downloaded from 
+  [here](https://cran.r-project.org/bin/windows/base/).
+  Additionally, [Previous releases](https://cran.r-project.org/bin/windows/base/old/) 
+  of R for Windows exit. 
+  - For macOS, various releases and versions are accessible 
+  [here](https://cran.r-project.org/bin/macosx/).
+
+**RStudio**
+
+As mentioned earlier, RStudio is an IDE for R. Although it is the most prominent,
+other IDEs exist, such as Jupyter Notebook and Visual Studio Code. In this book, 
+RStudio will be the main IDE. To install Rstudio, visit the posit 
+[page](https://posit.co/download/rstudio-desktop/) to download the suitable installers.
+
+**Fortran**
+
+Fortran doesn't require an explicit installation, unlike interpreted languages 
+such as R. The source code would be translated to the machine language using the 
+Fortran compiler, and then it can be executed. Therefore, it is important to make 
+sure that a Fortran compiler, i.e., the [GNU Fortran](https://gcc.gnu.org/fortran/) 
+(gfortran) compiler, exists in the working machine. 
+
+  - In the majority of Linux distributions, the GCC compilers, including gfortran, 
+  come pre-installed.
+  - For Windows, installing RTools should ensure the existence of gfortran
+  - For macOS, binaires for gfortran are avaiable [here](https://gcc.gnu.org/wiki/GFortranBinaries). 
+  Furthermore, more information is available on R for macOS [here](https://cran.r-project.org/bin/macosx/tools/) 

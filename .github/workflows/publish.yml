@@ -33,10 +33,11 @@ jobs:
             any::microbenchmark
             any::ggplot2
             any::remotes
+            any::devtools
             
       - name: Install remotes
         run: |
-          Rscript -e 'remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")'
+          Rscript -e 'devtools::install("RPackage/")'
            
       - name: Compile
         run: |

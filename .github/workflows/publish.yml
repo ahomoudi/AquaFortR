@@ -36,7 +36,7 @@ jobs:
             
       - name: Install remotes
         run: |
-          Rscript -e "remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")"
+          Rscript -e 'remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")'
            
       - name: Compile
         run: |

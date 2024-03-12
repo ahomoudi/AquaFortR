@@ -30,13 +30,21 @@ jobs:
             any::rmarkdown
             any::downlit
             any::xml2
+            any::microbenchmark
+            any::ggplot2
+            any::remotes
             
+      - name: Install remotes
+        run: |
+          Rscript -e "remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")"
+           
       - name: Compile
         run: |
           cd QuartoBook/AquaFortR_Codes/
           R CMD SHLIB xcorr2D.f90
           R CMD SHLIB conv2D.f90
           R CMD SHLIB cape.f90
+          #cd ../../
 
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2

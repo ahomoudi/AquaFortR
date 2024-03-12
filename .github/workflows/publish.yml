@@ -30,6 +30,13 @@ jobs:
             any::rmarkdown
             any::downlit
             any::xml2
+            
+      - name: Compile
+        run: |
+          cd QuartoBook/AquaFortR_Codes/
+          R CMD SHLIB xcorr2D.f90
+          R CMD SHLIB conv2D.f90
+          R CMD SHLIB cape.f90
 
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2

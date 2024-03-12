@@ -22,11 +22,12 @@ jobs:
 
       - name: ZIP
         run: |
-          mkdir Swirl
-          zip -r Swirl/AquaFortR_Swirl.zip AquaFortR_Swirl/
+          mkdir materials
+          zip -r materials/AquaFortR_Swirl.zip AquaFortR_Swirl/
+          zip -r materials/AquaFortR_Codes.zip QuartoBook/AquaFortR_Codes.zip
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: Swirl # The folder the action should deploy.
+          folder: materials # The folder the action should deploy.

@@ -1,6 +1,5 @@
 xcorr2D_f0 <- function(a, b) {
-  # Please adjust the path to your setup. In my machine,
-  # I have a folder called "fortran" containing all f90 files
+  # Please adjust the path to your setup.
   dyn.load("AquaFortR_Codes/xcorr2D.so")
 
   # the full CC matrix

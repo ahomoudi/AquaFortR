@@ -1,5 +1,12 @@
 # AquaFortR
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/AHomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AHomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml)
+[![Quarto Publish](https://github.com/AHomoudi/AquaFortR/workflows/Quarto%20Publish/badge.svg)](https://github.com/AHomoudi/AquaFortR/actions?query=workflow:"Quarto+Publish")
+[![GitHub tag](https://img.shields.io/github/tag/AHomoudi/AquaFortR?include_prereleases=&sort=semver&color=blue)](https://github.com/AHomoudi/AquaFortR/releases/)
+[![License](https://img.shields.io/badge/License-CCBY-blue)](#license)
+<!-- badges: end -->
+
 This is the main webpage of the project AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R. 
 
 The project's [repository](https://ahomoudi.github.io/AquaFortR/) is structured as follows:
@@ -11,20 +18,25 @@ The project's [repository](https://ahomoudi.github.io/AquaFortR/) is structured 
 ## Installation 
 
 ### Package
+
 To install the AquaFortR package, please use: 
 
 ```r
 remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")
 ```
 ### Swirl
-To install the AquaFortR Swirl Course, please download the compressed course and 
-use the code below. 
-
-<a href="AquaFortR_Swirl.zip">Download</a>
+To install the AquaFortR Swirl Course, please download the compressed course from 
+<a href="AquaFortR_Swirl.zip">here</a> and use the code below. 
 
 ```r
 swirl::install_course_zip("path/to/AquaFortR_Swirl.zip")
 ```
+
+### Book 
+
+Materials for the chapter 2 are available <a href="AquaFortR_Codes.zip">here</a>. Please, 
+revise the path to the shared libraries files in the R-Fortran functions.
+
 
 ## Acknowledgment
 

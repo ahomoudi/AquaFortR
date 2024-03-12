@@ -31,7 +31,7 @@ specific_heat_liquid_water <- function(temperature) {
 #' Estimation of Saturation vapour pressure [hPa] from temperature [k].
 #' @param temperature in [k]
 #' @param ice TRUE or FALSE, if to consider ice state or not.
-#' @author Klemens Barfus
+#' @author Klemens Barfus (Original in Fortran), translated to R by Ahmed Homoudi
 #' @export
 saturation_vapour_pressure <- function(temperature, ice = FALSE) {
   e0 <- 0.611 # kPa

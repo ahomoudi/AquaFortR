@@ -34,6 +34,8 @@ To install the AquaFortR Swirl Course, please download the compressed course fro
 swirl::install_course_zip("path/to/AquaFortR_Swirl.zip")
 ```
 
+**_NOTE:_**  The R packages dotCall64, ggplot2, and microbenchmark are required for the course.
+
 ### Book 
 
 Materials for the chapter 2 are available <a href="AquaFortR_Codes.zip">here</a>. Please, 

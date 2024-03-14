@@ -1,0 +1,202 @@
+- Class: meta
+  Course: AquaFortR_Swirl
+  Lesson: Second Lesson
+  Author: Ahmed Homoudi
+  Type: Standard
+  Organization: TUD Dresden University of Technology
+  Version: 2.4.5
+- Class: text
+  Output: >-
+    Welcome to the second lesson in swirl course: "AquaFortR: Streamlining 
+    Atmospheric Science, Oceanography, Climate, and Water Research with 
+    Fortran-accelerated R."
+- Class: text
+  Output: >-
+    In this lesson, we use a more sophisticated example to integrate Fortran
+    into R. Namely, we use two-dimensional cross-correlation (xcorr2D).  Maybe
+    you have already noticed a xcorr2D_r0 function in the R environment.
+- Class: text
+  Output: >-
+    Let us define two matrices and estimate the cross-correlation plane using
+    xcorr2D_r0 function.
+- Class: cmd_question
+  Output: >-
+    We define matrix a with eight row and eight columns. A runif() can be used
+    to fill this matrix.
+  CorrectAnswer: 'a <- matrix(runif(8*8), nrow = 8, ncol = 8)'
+  AnswerTests: omnitest(correctExpr='a <- matrix(runif(8*8), nrow = 8, ncol = 8)')
+  Hint: a <- matrix(runif(8*8), nrow = 8, ncol = 8)
+- Class: cmd_question
+  Output: 'Similar to a, we define a matrix b (8x8).'
+  CorrectAnswer: b <- matrix(runif(8*8), nrow = 8, ncol = 8)
+  AnswerTests: omnitest(correctExpr='b <- matrix(runif(8*8), nrow = 8, ncol = 8)')
+  Hint: b <- matrix(runif(8*8), nrow = 8, ncol = 8)
+- Class: text
+  Output: >-
+    R implementation of cross-correlation is already loaded with this lesson. 
+    Check the global environment in RStudio.
+- Class: cmd_question
+  Output: 'Now, we estimate the cc_R plane using the xcorr2D_r0 function.'
+  CorrectAnswer: 'cc_R <- xcorr2D_r0(a,b)'
+  AnswerTests: omnitest(correctExpr='cc_R <- xcorr2D_r0(a,b)')
+  Hint: cc_R <- xcorr2D_r0(a,b)
+- Class: text
+  Output: >-
+    Let us try to do the same in Fortran: You may notice there is a  
+    "xcorr2D_f_txt" variable in the global environment. We need to write it to 
+    Fortran file and compile it, similar to what we learned in the first lesson.
+- Class: cmd_question
+  Output: ' Please use "writeLines()" function to write "xcorr2D_f_txt" to text file. File name is "xcorr2D.f90".'
+  CorrectAnswer: writeLines(xcorr2D_f_txt, "xcorr2D.f90")
+  AnswerTests: omnitest(correctExpr='writeLines(xcorr2D_f_txt, "xcorr2D.f90")')
+  Hint: writeLines(xcorr2D_f_txt, "xcorr2D.f90")
+- Class: text
+  Output: >-
+    In the first lesson, we learned how to compile Fortran subroutines using R. 
+    Here we will learn to use gfortran compiler. If it is not available in your
+    mashine, you can just use R.
+- Class: text
+  Output: 'To use gfortran, open the terminal and run: gfortran -fpic -shared xcorr2D.f90 -o xcorr2D.so'
+- Class: text_question
+  Output: Have you successfully compiled xcorr2D.f90? Look if xcorr2D.so exists
+  CorrectAnswer: 'yes'
+  AnswerTests: omnitest(correctVal='yes')
+  Hint: hint
+- Class: text
+  Output: 'Now, we use "dyn.load()" to load the compiled subroutine in R.'
+- Class: cmd_question
+  Output: Please load the compiled library file.
+  CorrectAnswer: dyn.load("xcorr2D.so")
+  AnswerTests: omnitest(correctExpr='dyn.load("xcorr2D.so")')
+  Hint: dyn.load("xcorr2D.so")
+- Class: text
+  Output: >-
+    Get ready for a bumpy ride starting from here,  but do not worry—I am here
+    to help you through it all.
+- Class: text
+  Output: >-
+    We need .C64() function from the dotCall64 package to use the Fortran subroutine.
+    Similar to .Fortran() in the first lesson. .C64() has the ability to coerce 
+    variables to the correct storage mode.
+    In the first lesson we used as.integer() or as.double() to do that.
+- Class: text
+  Output: >-
+    Let us examine what the Fortran subroutine (xcorr2D.f90 file) needs as an input. Firstly, six
+    integer values that represent the dimensions of the matrices a, b, and cc.
+    Then the matrices are passed as double precision, which corresponds to a
+    double in R.
+- Class: cmd_question
+  Output: >-
+    Create two variables, first, m storing the number of rows of matrix a
+  CorrectAnswer: m <- nrow(a)
+  AnswerTests: omnitest(correctExpr="m <- nrow(a)")
+  Hint: m <- nrow(a)
+- Class: cmd_question
+  Output: >-
+    Then, n storing the number of columns of matrix a
+  CorrectAnswer: n <- ncol(a)
+  AnswerTests: omnitest(correctExpr="n <- ncol(a)")
+  Hint: n <- ncol(a)
+- Class: cmd_question
+  Output: >-
+    Create two variables, first, p storing the number of rows of matrix v
+  CorrectAnswer: p <- nrow(b)
+  AnswerTests: omnitest(correctExpr="p <- nrow(b)")
+  Hint: p <- nrow(b)
+- Class: cmd_question
+  Output: >-
+    Then, q storing the number of columns of matrix b
+  CorrectAnswer: q <- ncol(b)
+  AnswerTests: omnitest(correctExpr="q <- ncol(b)")
+  Hint: q <- ncol(b)
+- Class: text
+  Output: >-
+    The dimension of the cross-correlation plane (cc_F) is kxl, where k = m + p
+    - 1,  and l = n + q - 1
+- Class: cmd_question
+  Output: >-
+    Create two variables, k & l storing the number of rows and columns of
+    matrix cc_F. First, we create k:
+  CorrectAnswer: k <- m + p - 1
+  AnswerTests: omnitest(correctExpr='k <- m + p - 1')
+  Hint: k <- m + p - 1
+- Class: cmd_question
+  Output: >-
+    Then, we create l:
+  CorrectAnswer: l <- n + q - 1
+  AnswerTests: omnitest(correctExpr='l <- n + q - 1')
+  Hint: l <- n + q - 1
+- Class: text
+  Output: >-
+    Now, we need to create the cc_F which an empty matrix that will be  filled
+    by Fortran subroutine.
+- Class: cmd_question
+  Output: Create cc_F array which is filled with zeros
+  CorrectAnswer: cc_F <-matrix(0, nrow = k, ncol = l)
+  AnswerTests: omnitest(correctExpr='cc_F <-matrix(0, nrow = k, ncol = l)') 
+  Hint: matrix(0, nrow = k, ncol = l)
+- Class: text
+  Output: >-
+    For the .C64() function, we need to create a string vector containing the
+    storage mode of our variables such c("integer",  "double", ...)
+- Class: text
+  Output: >-
+    Since we have six integer and three double variables we can use 
+    rep() function: string_vector<-c(rep("integer", 6), rep("double", 3))
+
+- Class: cmd_question
+  Output: >-
+    Create the string_vector.
+  CorrectAnswer: string_vector<-c(rep("integer", 6), rep("double" , 3))
+  AnswerTests: omnitest(correctExpr='string_vector<-c(rep("integer", 6), rep("double" , 3))')
+  Hint: string_vector<-c(rep("integer", 6), rep("double" , 3))
+  
+- Class: cmd_question
+  Output: >-
+    Now, we ready to test .C64() function, please run: 
+    .C64("xcorr2d_f", SIGNATURE = string_vector, m, n, p, q, k, l, a, b , cc_F)
+  CorrectAnswer: .C64("xcorr2d_f", SIGNATURE = string_vector, m, n, p, q, k, l, a, b , cc_F)
+  AnswerTests: omnitest(correctExpr = '.C64("xcorr2d_f", SIGNATURE = string_vector, m, n, p, q, k, l, a, b , cc_F)')
+  Hint: .C64("xcorr2d_f", SIGNATURE = string_vector, m, n, p, q, k, l, a, b , cc_F)
+  
+- Class: text
+  Output: >- 
+    You may notice that the results are rather a list. however, we are looking for a matrix.
+    The charm of Fortran subroutine that it returns all what it got back. We can obtain cc_F
+    directly by adding $cc_F to the code above. 
+    
+- Class: text
+  Output: >- 
+    Let us compare the performance of the two functions. But first, we need to create 
+    a function xcorr2D_f0. To make stuff easier for you, the function has been created and
+    already loaded. You can find it in the global environment.
+  
+- Class: cmd_question
+  Output: >- 
+    Let us test the performance of the two functions using microbenchmark: 
+    mbm <- microbenchmark(R = xcorr2D_r0(a,b),  F = xcorr2D_f0(a,b))
+  CorrectAnswer: mbm <- microbenchmark(R = xcorr2D_r0(a,b),  F = xcorr2D_f0(a,b))
+  AnswerTests: omnitest(correctExpr='mbm <- microbenchmark(R = xcorr2D_r0(a,b),  F =  xcorr2D_f0(a,b))')
+  Hint: mbm <- microbenchmark(R = xcorr2D_r0(a,b),  F = xcorr2D_f0(a,b))
+
+- Class: cmd_question
+  Output: >- 
+    You can explore the performance test result using print(mbm) or autoplot(mbm)
+  CorrectAnswer: print(mbm); autoplot(mbm)
+  AnswerTests: any_of_exprs('print(mbm)','autoplot(mbm)')
+  Hint: print(mbm) or autoplot(mbm)
+
+- Class: text
+  Output: >-
+    Fortran clearly outperforms R in this example by a factor of ~6 (on my mashine). 
+    When we consider big data sets when 2D cross-correlation is performed hundreds of times, 
+    implementing Fortran is beneficial in terms of reducing the required computational resources
+    and carbon emissions, especially from high performance centres.
+  
+  
+- Class: text
+  Output: >- 
+    Feel free to explore the perfomance of .Fortran and .C64 using the xcorr2D 
+    subroutine or any other example. Good luck with your efforts to enhance the 
+    speed of your R work using Fortran (and saving the planet 🌻).
+  

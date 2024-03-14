@@ -12,17 +12,17 @@
   Fortran-accelerated R."'
   
 - Class: text
-  Output: 'In the first leason we will try to write a small Fortran subroutine 
-  and use it in R'
+  Output: 'In our initial lesson, we will endeavour to create a modest Fortran 
+  subroutine and employ it in R'
   
 - Class: cmd_question
-  Output: Define one variable 'a' in R. and it has a value of 7
+  Output: Define one variable 'a' in R, and it has a value of 7
   CorrectAnswer: a <- 7
   AnswerTests: omnitest(correctExpr='a <- 7')
-  Hint: Just type a <- 7.
+  Hint: Type a <- 7.
   
 - Class: cmd_question
-  Output: Define one variable 'b' in R. and it has a value of 15
+  Output: Define one variable 'b' in R, and it has a value of 15
   CorrectAnswer: b <- 15
   AnswerTests: omnitest(correctExpr='b <- 15')
   Hint: Just type b <- 15.
@@ -32,38 +32,127 @@
   CorrectAnswer: c <- a + b
   AnswerTests: omnitest(correctExpr='c <- a + b')
   Hint: Just type c <- a + b
-  
 - Class: text
   Output: 'We did simple summation in R, Let us try to do that in Fortran togethor'
   
 - Class: text
-  Output: 'Start by creating a txt file and save it as "add_f.f90"'
+  Output: 'To achieve that, we need to write a Fortran file called "add_f.f90"'
   
+- Class: text
+  Output: 'If you look at the enviroment subwindow, you will find "add_f_txt". 
+   this Fortran subroutine we will use.' 
 
-- Class: text_question
-  Output: Have you created the "add_f.f90" file?
-  CorrectAnswer: Yes
-  AnswerTests: omnitest(correctVal='Yes')
-  Hint: In RStudio, you can go to File then New File and then choose Text File
+
+- Class: cmd_question
+  Output: Look at the content of add_f_txt in the console by typing the variable name
+  CorrectAnswer: add_f_txt
+  AnswerTests: omnitest(correctExpr='add_f_txt')
+  Hint: add_f_txt
   
-- Class : text
-  Output: |-
-    Now we write the Fortran subroutine in the 'add_f.f90'. The subroutine content is
-    
-     subroutine add_f(x, y, answer)
-     
-      ! add 2 numbers
-      
-      implicit none
-      
-      double precision :: x, y, answer
-      
-      answer = x + y
-      
-    end
-    
-- Class: text 
-  Output: Copy the subroutine from the last message starting from "subroutine" to "end".
-      And place the subroutine in the add_f.90 file. Please, omit the pipe sign | from the text.
+  
+- Class: cmd_question
+  Output: 'Now, we can use the writeLines function to write the add_f_txt variable to
+  the "add_f.f90" file.'
+  CorrectAnswer: writeLines(add_f_txt, "add_f.f90")
+  AnswerTests: omnitest(correctExpr='writeLines(add_f_txt, "add_f.f90")')
+  Hint: writeLines(add_f_txt, "add_f.f90")
+  
+- Class: text
+  Output: 'Take some time to look at the add_f.f90 to understand its basic structure.'
+  
+- Class: text
+  Output: 'Great! Now, we need to complie the Fortran subroutine in order to use it.
+  In most mashines, you can simply run "R CMD SHLIB add_f.f90" allowing R to help
+  with compilation. Otherwise, you can use "gfortran -shared -o add_f.so add_f.o". Hint:
+  it should be done in the terminal, not the console.'
+  
+- Class: text_question
+  Output: After compilation, do you see the add_f.so file in your working directory? 
+  CorrectAnswer: 'yes'
+  AnswerTests: omnitest(correctVal = 'yes')
+  Hint: yes or no 
+
+- Class: text
+  Output: 'The compiled library file contains the subroutine that we will use in 
+  summation. In order to use the add_f.so file we need to load it in R using dyn.load("add_f.so")' 
+  
+- Class: cmd_question
+  Output: Please load the compiled library file.
+  CorrectAnswer: dyn.load("add_f.so")
+  AnswerTests: omnitest(correctExpr='dyn.load("add_f.so")')
+  Hint: dyn.load("add_f.so")
+  
+- Class: text
+  Output: 'You cans also explore is.loaded function. It is helpful to check if the 
+  subroutine is actually loaded.'
+  
+- Class: text
+  Output: 'Moving further, we need to use add_f subroutine now in R. We will use
+  .Fortran function as follows: .Fortran("add_f", a, b, c_f = 0). Since it is a subroutine,
+  we need to provide input and output variables. c_f is the output variable.'
+
+- Class: cmd_question
+  Output: Now, we can test the .Fortran code above. 
+  CorrectAnswer: .Fortran("add_f", a, b, c_f = 0)
+  AnswerTests: omnitest(correctExpr='.Fortran("add_f", a, b, c_f = 0)')
+  Hint: .Fortran("add_f", a, b, c_f = 0)
+
+- Class: text
+  Output: 'You notice that the output in the console is different from just running a + b. 
+  It is a list and this is because .Fortran retuens all input and ouput variables. We can get
+  c_f variable only by using .Fortran("add_f", a, b, c_f = 0)$c_f'
+  
+- Class: text
+  Output: Now, we can write a small function to do that. Also, to have a nicer code!
+   add_f<-function(a,b){dyn.load("add_f.so");.Fortran("add_f", a, b, c_f = 0)$c_f}
+  
+- Class: mult_question
+  Output: What did we do in the add_f function?
+  AnswerChoices: Loaded the .so file only;Loaded the .so file & extracted output variable from .Fortran; Used .Fortran function only
+  CorrectAnswer: Loaded the .so file & extracted output variable from .Fortran
+  AnswerTests: omnitest(correctVal= 'Loaded the .so file & extracted output variable from .Fortran')
+  Hint: Be aware of the ; sign. 
+  
+- Class: text
+  Output: "We can compare the perfomance of addition in R vs Fortran."
+  
+- Class: text
+  Output: 'Now, we compare the two functions using a microbenchmark() function. 
+  Please have a look at the documentation of this function.'
+
+- Class: cmd_question
+  Output: 'Using the microbenchmark() is easy! We provide expressions that we want to compare.
+  It could be something such: mbm <- microbenchmark(R = a + b, F = add_f(a,b))'
+  CorrectAnswer:  mbm <- microbenchmark(R = a + b, F = add_f(a , b))
+  AnswerTests: omnitest(correctExpr=' mbm <- microbenchmark(R = a + b, F = add_f(a,b))')
+  Hint:  mbm <- microbenchmark(R = a + b, F = add_f(a + b))
+  
+- Class: cmd_question
+  Output: We can explore the mbm variables in the console. 
+  CorrectAnswer: mbm
+  AnswerTests: omnitest(correctExpr='mbm')
+  Hint: type mbm in console 
+
+- Class: cmd_question
+  Output: "We can also use autoplot() to show the results graphically."
+  CorrectAnswer: autoplot(mbm)
+  AnswerTests: omnitest(correctExpr='autoplot(mbm)')
+  Hint: autoplot(mbm)
+  
+- Class: text
+  Output: 'From the mbm values and plot, Fortran was not faster than R. 
+  Nevertheless, it is a very simple process, and probably most computation 
+  time is due to copying the variables to Fortran.'
+  
+- Class: text
+  Output: 'We reached the end of the 1st lesson. In the next lesson, we will check
+  more computationally complicated example to see the benefits of integrating Fortran in R.' 
+  
+  
+#- Class: cmd_question
+  #Output: "Do not forget to load the two packages after installation."
+  #CorrectAnswer: library(microbenchmark); library(ggplot2)
+  #AnswerTests: omnitest(correctExpr='library(microbenchmark); library(ggplot2)')
+  #Hint: library(microbenchmark); library(ggplot2)
 
 

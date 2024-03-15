@@ -242,7 +242,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions and Optimization Insights</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -432,7 +438,7 @@ Listing&nbsp;2.3: Cross-correlation wrapping function
 <span>  <span class="va">cc_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
 <span>  <span class="va">cc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cc_row</span> <span class="op">*</span> <span class="va">cc_col</span><span class="op">)</span>, byrow <span class="op">=</span> <span class="cn">FALSE</span>, ncol <span class="op">=</span> <span class="va">cc_col</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Foreign.html">.Fortran</a></span><span class="op">(</span><span class="st">"xcorr2d_f"</span>,</span>
+<span>  <span class="va">cc</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Foreign.html">.Fortran</a></span><span class="op">(</span><span class="st">"xcorr2d_f"</span>,</span>
 <span>    m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>    n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>    p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
@@ -444,7 +450,7 @@ Listing&nbsp;2.3: Cross-correlation wrapping function
 <span>    cc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="va">cc</span><span class="op">)</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">cc</span></span>
 <span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">cc</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </figure>
@@ -452,7 +458,7 @@ Listing&nbsp;2.3: Cross-correlation wrapping function
 </div>
 <p><strong>Example</strong></p>
 <p>Now, we can use an example to compare the performance of the two functions. In order to do so, <code>microbenchmark</code> package needs to be installed, and <code>ggplot2</code> is required for plotting.</p>
-<p>The obtained benchmarking data allows (<code>mbm</code>) for a quantitative comparison of the computational efficiency between the two methods. By printing “mbm” in the console (<code>print(mbm)</code>) it is evident that Fortran outperforms the R implementation of 2D cross-correlation by a factor of 10. The significance of leveraging Fortran becomes evident in <a href="#fig-xcorr2D" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
+<p>The obtained benchmarking data allows (<code>mbm</code>) for a quantitative comparison of the computational efficiency between the two methods. By printing “mbm” in the console (<code>print(mbm)</code>) it is evident that Fortran outperforms the R implementation of 2D cross-correlation by a factor of ~10. The significance of leveraging Fortran becomes evident in <a href="#fig-xcorr2D" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
@@ -487,13 +493,13 @@ Figure&nbsp;2.1: Performance comparison of 2D Cross-correlation in R and Fortran
 </div>
 </section><section id="d-convolution" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="d-convolution">
 <span class="header-section-number">2.2</span> 2D Convolution</h2>
-<p>Convolution and cross-correlation are both operations applied to images. Cross-correlation means sliding a kernel (filter) across an image while convolution means sliding a flipped kernel across an image. <span class="citation" data-cites="Draelos_2019">(<a href="references.html#ref-Draelos_2019" role="doc-biblioref">Draelos, 2019</a>)</span>. Therefore, the 2D convolution of an array <span class="math inline">\(F\)</span>, with dimension <span class="math inline">\((M, N)\)</span>, and array <span class="math inline">\(G\)</span>, with dimension <span class="math inline">\((P, Q)\)</span>, can be given as the array <span class="math inline">\(CC\)</span> that has a dimension of <span class="math inline">\((M+P-1, N+Q-1)\)</span>. <span class="math inline">\(hv\)</span> means that <span class="math inline">\(G\)</span> is flipped.</p>
+<p>Convolution and cross-correlation are both operations applied to images. Cross-correlation involves sliding a kernel (filter) across an image, while convolution involves sliding a flipped kernel across an image. <span class="citation" data-cites="Draelos_2019">(<a href="references.html#ref-Draelos_2019" role="doc-biblioref">Draelos, 2019</a>)</span>. Most spatial data in earth science are is discretised resulting in large data sets. Sometimes, these data sets include noise which can obscure meaningful patterns and relationships. One of the prominent methods to remove this nose while preserving important features and structures is the Gaussian smoothing filter. Gaussian smoothing is often achieved by convolution where <span class="math inline">\(F\)</span> is the original data, and <span class="math inline">\(G\)</span> is the kernel representing the 2D Gaussian coefficients.</p>
+<p>The 2D convolution of an array <span class="math inline">\(F\)</span>, with dimension <span class="math inline">\((M, N)\)</span>, and array <span class="math inline">\(G\)</span>, with dimension <span class="math inline">\((P, Q)\)</span>, can be given as the array <span class="math inline">\(CC\)</span> that has a dimension of <span class="math inline">\((M+P-1, N+Q-1)\)</span>. <span class="math inline">\(hv\)</span> means that <span class="math inline">\(G\)</span> is flipped.</p>
 <p><span class="math display">\[
 CC_{(s,t)} = \sum_{m = 0}^{M-1}\sum_{n = 0}^{N-1} F_{(m,n)} G_{(m-s, n-t)}^{hv}
 \]</span></p>
 <p>where <span class="math inline">\(s\)</span> varies between <span class="math inline">\(-(P-1)\)</span> and <span class="math inline">\((M-1)\)</span> while <span class="math inline">\(t\)</span> varies between <span class="math inline">\(-(Q-1)\)</span> and <span class="math inline">\((N-1)\)</span>. <span class="math inline">\(F\)</span> and <span class="math inline">\(G \in R\)</span>.</p>
-<p>It is true that we can just flip the second array and use the functions from <a href="#sec-2Dxcorr" class="quarto-xref"><span>Section 2.1</span></a>. However, we are interested in the complete workflow.</p>
-<p><a href="#lst-convrr" class="quarto-xref">Listing&nbsp;<span>2.4</span></a></p>
+<p>Indeed, it is possible to flip the second array and utilise the functions from <a href="#sec-2Dxcorr" class="quarto-xref"><span>Section 2.1</span></a>. Nevertheless, our focus is on the comprehensive workflow. <a href="#lst-convrr" class="quarto-xref">Listing&nbsp;<span>2.4</span></a> presents the implementation of convolution in R, whereas <a href="#lst-convrf" class="quarto-xref">Listing&nbsp;<span>2.5</span></a> demonstrates the Fortran version.</p>
 <div class="cell">
 <div id="lst-convrr" class="r cell-code listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-convrr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -541,7 +547,6 @@ Listing&nbsp;2.4: Convolution in R
 </figure>
 </div>
 </div>
-<p><a href="#lst-convrf" class="quarto-xref">Listing&nbsp;<span>2.5</span></a></p>
 <div class="cell">
 <div id="lst-convrf" class="fortran cell-code listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-convrf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -551,7 +556,7 @@ Listing&nbsp;2.5: Convolution in Fortran
 <span id="lst-convrf-2"><a href="#lst-convrf-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">implicit</span> <span class="kw">none</span></span>
 <span id="lst-convrf-3"><a href="#lst-convrf-3" aria-hidden="true" tabindex="-1"></a>   <span class="dt">integer</span>                                <span class="dt">::</span> m, n, p, q, k, l, i, j</span>
 <span id="lst-convrf-4"><a href="#lst-convrf-4" aria-hidden="true" tabindex="-1"></a>   <span class="dt">double precision</span>, <span class="dt">dimension(m, n)</span>      <span class="dt">::</span> a</span>
-<span id="lst-convrf-5"><a href="#lst-convrf-5" aria-hidden="true" tabindex="-1"></a>   <span class="dt">double precision</span>, <span class="dt">dimension(p, q)</span>      <span class="dt">::</span> b, b_flipped</span>
+<span id="lst-convrf-5"><a href="#lst-convrf-5" aria-hidden="true" tabindex="-1"></a>   <span class="dt">double precision</span>, <span class="dt">dimension(p, q)</span>      <span class="dt">::</span> b</span>
 <span id="lst-convrf-6"><a href="#lst-convrf-6" aria-hidden="true" tabindex="-1"></a>   <span class="dt">double precision</span>, <span class="dt">dimension(k, l)</span>      <span class="dt">::</span> conv</span>
 <span id="lst-convrf-7"><a href="#lst-convrf-7" aria-hidden="true" tabindex="-1"></a>   <span class="co">!     dummy vars</span></span>
 <span id="lst-convrf-8"><a href="#lst-convrf-8" aria-hidden="true" tabindex="-1"></a>   <span class="dt">integer</span>                               <span class="dt">::</span> min_row_shift, min_col_shift</span>
@@ -566,42 +571,35 @@ Listing&nbsp;2.5: Convolution in Fortran
 <span id="lst-convrf-17"><a href="#lst-convrf-17" aria-hidden="true" tabindex="-1"></a>   min_col_shift <span class="kw">=</span> <span class="kw">-</span><span class="dv">1</span><span class="kw">*</span>(q <span class="kw">-</span> <span class="dv">1</span>)</span>
 <span id="lst-convrf-18"><a href="#lst-convrf-18" aria-hidden="true" tabindex="-1"></a>   max_col_shift <span class="kw">=</span> n <span class="kw">-</span> <span class="dv">1</span></span>
 <span id="lst-convrf-19"><a href="#lst-convrf-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-convrf-20"><a href="#lst-convrf-20" aria-hidden="true" tabindex="-1"></a>   <span class="co">!   Flip the kernel i.e. B</span></span>
-<span id="lst-convrf-21"><a href="#lst-convrf-21" aria-hidden="true" tabindex="-1"></a>   b_flipped <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="lst-convrf-22"><a href="#lst-convrf-22" aria-hidden="true" tabindex="-1"></a>   <span class="kw">do</span> i <span class="kw">=</span> <span class="dv">1</span>, p</span>
-<span id="lst-convrf-23"><a href="#lst-convrf-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">do</span> j <span class="kw">=</span> <span class="dv">1</span>, q</span>
-<span id="lst-convrf-24"><a href="#lst-convrf-24" aria-hidden="true" tabindex="-1"></a>         b_flipped(p <span class="kw">-</span> i <span class="kw">+</span> <span class="dv">1</span>, q <span class="kw">-</span> j <span class="kw">+</span> <span class="dv">1</span>) <span class="kw">=</span> b(i, j)</span>
-<span id="lst-convrf-25"><a href="#lst-convrf-25" aria-hidden="true" tabindex="-1"></a>      <span class="kw">end do</span></span>
-<span id="lst-convrf-26"><a href="#lst-convrf-26" aria-hidden="true" tabindex="-1"></a>   <span class="kw">end do</span></span>
-<span id="lst-convrf-27"><a href="#lst-convrf-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-convrf-28"><a href="#lst-convrf-28" aria-hidden="true" tabindex="-1"></a>   <span class="co">!   Padded arrray</span></span>
-<span id="lst-convrf-29"><a href="#lst-convrf-29" aria-hidden="true" tabindex="-1"></a>   rows_padded <span class="kw">=</span> <span class="bu">abs</span>(min_row_shift) <span class="kw">+</span> m <span class="kw">+</span> <span class="bu">abs</span>(max_row_shift)</span>
-<span id="lst-convrf-30"><a href="#lst-convrf-30" aria-hidden="true" tabindex="-1"></a>   cols_padded <span class="kw">=</span> <span class="bu">abs</span>(min_col_shift) <span class="kw">+</span> n <span class="kw">+</span> <span class="bu">abs</span>(max_col_shift)</span>
-<span id="lst-convrf-31"><a href="#lst-convrf-31" aria-hidden="true" tabindex="-1"></a>   <span class="co">!    A</span></span>
-<span id="lst-convrf-32"><a href="#lst-convrf-32" aria-hidden="true" tabindex="-1"></a>   <span class="kw">allocate</span> (padded_a(rows_padded, cols_padded))</span>
-<span id="lst-convrf-33"><a href="#lst-convrf-33" aria-hidden="true" tabindex="-1"></a>   padded_a <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="lst-convrf-34"><a href="#lst-convrf-34" aria-hidden="true" tabindex="-1"></a>   padded_a((<span class="bu">abs</span>(min_row_shift) <span class="kw">+</span> <span class="dv">1</span>):(<span class="bu">abs</span>(min_row_shift) <span class="kw">+</span> m), <span class="kw">&amp;</span></span>
-<span id="lst-convrf-35"><a href="#lst-convrf-35" aria-hidden="true" tabindex="-1"></a>            (<span class="bu">abs</span>(min_col_shift) <span class="kw">+</span> <span class="dv">1</span>):(<span class="bu">abs</span>(min_col_shift) <span class="kw">+</span> n)) <span class="kw">=</span> a</span>
-<span id="lst-convrf-36"><a href="#lst-convrf-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-convrf-37"><a href="#lst-convrf-37" aria-hidden="true" tabindex="-1"></a>   <span class="co">!    B</span></span>
-<span id="lst-convrf-38"><a href="#lst-convrf-38" aria-hidden="true" tabindex="-1"></a>   <span class="kw">allocate</span> (padded_b(rows_padded, cols_padded))</span>
-<span id="lst-convrf-39"><a href="#lst-convrf-39" aria-hidden="true" tabindex="-1"></a>   padded_b <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="lst-convrf-40"><a href="#lst-convrf-40" aria-hidden="true" tabindex="-1"></a>   <span class="kw">do</span> icol <span class="kw">=</span> <span class="dv">1</span>, l</span>
-<span id="lst-convrf-41"><a href="#lst-convrf-41" aria-hidden="true" tabindex="-1"></a>      <span class="kw">do</span> irow <span class="kw">=</span> <span class="dv">1</span>, k</span>
-<span id="lst-convrf-42"><a href="#lst-convrf-42" aria-hidden="true" tabindex="-1"></a>         iconv <span class="kw">=</span> irow <span class="kw">+</span> ((icol <span class="kw">-</span> <span class="dv">1</span>)<span class="kw">*</span>k)</span>
-<span id="lst-convrf-43"><a href="#lst-convrf-43" aria-hidden="true" tabindex="-1"></a>         icol2 <span class="kw">=</span> icol <span class="kw">+</span> q <span class="kw">-</span> <span class="dv">1</span></span>
-<span id="lst-convrf-44"><a href="#lst-convrf-44" aria-hidden="true" tabindex="-1"></a>         irow2 <span class="kw">=</span> irow <span class="kw">+</span> p <span class="kw">-</span> <span class="dv">1</span></span>
-<span id="lst-convrf-45"><a href="#lst-convrf-45" aria-hidden="true" tabindex="-1"></a>         padded_b(irow:irow2, icol:icol2) <span class="kw">=</span> b_flipped</span>
-<span id="lst-convrf-46"><a href="#lst-convrf-46" aria-hidden="true" tabindex="-1"></a>         conv(irow, icol) <span class="kw">=</span> <span class="fu">sum</span>(padded_a<span class="kw">*</span>padded_b)</span>
-<span id="lst-convrf-47"><a href="#lst-convrf-47" aria-hidden="true" tabindex="-1"></a>         padded_b <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="lst-convrf-48"><a href="#lst-convrf-48" aria-hidden="true" tabindex="-1"></a>      <span class="kw">end do</span></span>
-<span id="lst-convrf-49"><a href="#lst-convrf-49" aria-hidden="true" tabindex="-1"></a>   <span class="kw">end do</span></span>
-<span id="lst-convrf-50"><a href="#lst-convrf-50" aria-hidden="true" tabindex="-1"></a><span class="kw">end subroutine</span> conv2d_f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="lst-convrf-20"><a href="#lst-convrf-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-convrf-21"><a href="#lst-convrf-21" aria-hidden="true" tabindex="-1"></a>   <span class="co">!   Padded arrray</span></span>
+<span id="lst-convrf-22"><a href="#lst-convrf-22" aria-hidden="true" tabindex="-1"></a>   rows_padded <span class="kw">=</span> <span class="bu">abs</span>(min_row_shift) <span class="kw">+</span> m <span class="kw">+</span> <span class="bu">abs</span>(max_row_shift)</span>
+<span id="lst-convrf-23"><a href="#lst-convrf-23" aria-hidden="true" tabindex="-1"></a>   cols_padded <span class="kw">=</span> <span class="bu">abs</span>(min_col_shift) <span class="kw">+</span> n <span class="kw">+</span> <span class="bu">abs</span>(max_col_shift)</span>
+<span id="lst-convrf-24"><a href="#lst-convrf-24" aria-hidden="true" tabindex="-1"></a>   <span class="co">!    A</span></span>
+<span id="lst-convrf-25"><a href="#lst-convrf-25" aria-hidden="true" tabindex="-1"></a>   <span class="kw">allocate</span> (padded_a(rows_padded, cols_padded))</span>
+<span id="lst-convrf-26"><a href="#lst-convrf-26" aria-hidden="true" tabindex="-1"></a>   padded_a <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="lst-convrf-27"><a href="#lst-convrf-27" aria-hidden="true" tabindex="-1"></a>   padded_a((<span class="bu">abs</span>(min_row_shift) <span class="kw">+</span> <span class="dv">1</span>):(<span class="bu">abs</span>(min_row_shift) <span class="kw">+</span> m), <span class="kw">&amp;</span></span>
+<span id="lst-convrf-28"><a href="#lst-convrf-28" aria-hidden="true" tabindex="-1"></a>            (<span class="bu">abs</span>(min_col_shift) <span class="kw">+</span> <span class="dv">1</span>):(<span class="bu">abs</span>(min_col_shift) <span class="kw">+</span> n)) <span class="kw">=</span> a</span>
+<span id="lst-convrf-29"><a href="#lst-convrf-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-convrf-30"><a href="#lst-convrf-30" aria-hidden="true" tabindex="-1"></a>   <span class="co">!    B</span></span>
+<span id="lst-convrf-31"><a href="#lst-convrf-31" aria-hidden="true" tabindex="-1"></a>   <span class="kw">allocate</span> (padded_b(rows_padded, cols_padded))</span>
+<span id="lst-convrf-32"><a href="#lst-convrf-32" aria-hidden="true" tabindex="-1"></a>   padded_b <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="lst-convrf-33"><a href="#lst-convrf-33" aria-hidden="true" tabindex="-1"></a>   <span class="kw">do</span> icol <span class="kw">=</span> <span class="dv">1</span>, l</span>
+<span id="lst-convrf-34"><a href="#lst-convrf-34" aria-hidden="true" tabindex="-1"></a>      <span class="kw">do</span> irow <span class="kw">=</span> <span class="dv">1</span>, k</span>
+<span id="lst-convrf-35"><a href="#lst-convrf-35" aria-hidden="true" tabindex="-1"></a>         iconv <span class="kw">=</span> irow <span class="kw">+</span> ((icol <span class="kw">-</span> <span class="dv">1</span>)<span class="kw">*</span>k)</span>
+<span id="lst-convrf-36"><a href="#lst-convrf-36" aria-hidden="true" tabindex="-1"></a>         icol2 <span class="kw">=</span> icol <span class="kw">+</span> q <span class="kw">-</span> <span class="dv">1</span></span>
+<span id="lst-convrf-37"><a href="#lst-convrf-37" aria-hidden="true" tabindex="-1"></a>         irow2 <span class="kw">=</span> irow <span class="kw">+</span> p <span class="kw">-</span> <span class="dv">1</span></span>
+<span id="lst-convrf-38"><a href="#lst-convrf-38" aria-hidden="true" tabindex="-1"></a>         padded_b(irow:irow2, icol:icol2) <span class="kw">=</span> b(p:<span class="dv">1</span>:<span class="kw">-</span><span class="dv">1</span>,q:<span class="dv">1</span>:<span class="kw">-</span><span class="dv">1</span>)</span>
+<span id="lst-convrf-39"><a href="#lst-convrf-39" aria-hidden="true" tabindex="-1"></a>         conv(irow, icol) <span class="kw">=</span> <span class="fu">sum</span>(padded_a<span class="kw">*</span>padded_b)</span>
+<span id="lst-convrf-40"><a href="#lst-convrf-40" aria-hidden="true" tabindex="-1"></a>         padded_b <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="lst-convrf-41"><a href="#lst-convrf-41" aria-hidden="true" tabindex="-1"></a>      <span class="kw">end do</span></span>
+<span id="lst-convrf-42"><a href="#lst-convrf-42" aria-hidden="true" tabindex="-1"></a>   <span class="kw">end do</span></span>
+<span id="lst-convrf-43"><a href="#lst-convrf-43" aria-hidden="true" tabindex="-1"></a><span class="kw">end subroutine</span> conv2d_f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </figure>
 </div>
 </div>
-<p>You might need some flags when compile Fortran subroutine, For example, to enable the generation of run-time check <code>-fcheck=all</code>. The code below shows two options to compile <code>conv2D.f90</code> either by R or gfortran compiler.</p>
+<p>The gfortran compiler is also capable of creating shared libraries. It allows for easy addition of other flags, such as enabling the generation of the run-time check (<code>-fcheck=all</code>). The code below shows two options for compiling <code>conv2D.f90</code> by R or the gfortran compiler.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> CMD SHLIB conv2D.f90</span>
@@ -609,7 +607,8 @@ Listing&nbsp;2.5: Convolution in Fortran
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># gfortran</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">gfortran</span> <span class="at">-fpic</span> <span class="at">-shared</span> conv2D.f90 <span class="at">-o</span> conv2D.so</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><a href="#lst-convrfr" class="quarto-xref">Listing&nbsp;<span>2.6</span></a></p>
+<p>In R wrapper function, <code><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64()</a></code> from <a href="https://cran.r-project.org/web/packages/dotCall64/index.html">dotCall64</a> package will be used instead of <code><a href="https://rdrr.io/r/base/Foreign.html">.Fortran()</a></code>. According to <span class="citation" data-cites="GERBER2018217">Gerber et al. (<a href="references.html#ref-GERBER2018217" role="doc-biblioref">2018</a>)</span>, <code><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64()</a></code> transcends other foreign function interfaces in many aspects: - it supports long vectors. - The <code>SIGNATURE</code> argument ensures that the interfaced R objects are of the specified types - The <code>INTENT</code> argument helps avoid unnecessary copies of R objects between languages. It is very important when working with large data sets.</p>
+<p>In <a href="#lst-convrfr" class="quarto-xref">Listing&nbsp;<span>2.6</span></a>, the basic input arguments, such as the dimensions of input and output arrays, are prepared. Afterwards, the <code>SIGNATURE</code> is defined as six integers and three doubles corresponding to the required types in the subroutine. <code>INTENT</code> will ensure that only the <code>conv</code> argument is copied between R and Fortran. This is particularly important in large productions, where coping the subroutine parameters can extend beyond the available memory (RAM).</p>
 <div class="cell">
 <div id="lst-convrfr" class="r cell-code listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-convrfr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -619,31 +618,50 @@ Listing&nbsp;2.6: Convolution wrapping function
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://git.math.uzh.ch/reinhard.furrer/dotCall64">dotCall64</a></span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/dynload.html">dyn.load</a></span><span class="op">(</span><span class="st">"AquaFortR_Codes/conv2D.so"</span><span class="op">)</span></span>
 <span></span>
+<span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span>  <span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
 <span>  <span class="co"># the full convolution matrix</span></span>
-<span>  <span class="va">conv_row</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
-<span>  <span class="va">conv_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
-<span>  <span class="va">conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>, byrow <span class="op">=</span> <span class="cn">FALSE</span>, ncol <span class="op">=</span> <span class="va">conv_col</span><span class="op">)</span></span>
+<span>  <span class="va">conv_row</span> <span class="op">&lt;-</span> <span class="va">m</span> <span class="op">+</span> <span class="va">p</span> <span class="op">-</span> <span class="fl">1</span></span>
+<span>  <span class="va">conv_col</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">+</span> <span class="va">q</span> <span class="op">-</span> <span class="fl">1</span></span>
+<span>  <span class="va">conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,</span>
+<span>    ncol <span class="op">=</span> <span class="va">conv_col</span>,</span>
+<span>    nrow <span class="op">=</span> <span class="va">conv_row</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64</a></span><span class="op">(</span><span class="st">"conv2d_f"</span>,</span>
-<span>                 SIGNATURE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"integer"</span>,<span class="fl">6</span><span class="op">)</span>,</span>
-<span>                              <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"double"</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                 m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span>                 n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
-<span>                 p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span>                 q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
-<span>                 k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span><span class="op">(</span><span class="va">conv_row</span><span class="op">)</span>,</span>
-<span>                 l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span><span class="op">(</span><span class="va">conv_col</span><span class="op">)</span>,</span>
-<span>                 a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>,</span>
-<span>                 b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span>,</span>
-<span>                 conv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="va">conv</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">conv</span></span>
+<span>  <span class="va">conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64</a></span><span class="op">(</span><span class="st">"conv2d_f"</span>,</span>
+<span>    SIGNATURE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"integer"</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    INTENT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"r"</span>,<span class="fl">8</span><span class="op">)</span>, <span class="st">"rw"</span><span class="op">)</span>,</span>
+<span>    <span class="va">m</span>, <span class="va">n</span>, <span class="va">p</span>, <span class="va">q</span>,</span>
+<span>    k <span class="op">=</span> <span class="va">conv_row</span>,</span>
+<span>    l <span class="op">=</span> <span class="va">conv_col</span>,</span>
+<span>    a <span class="op">=</span> <span class="va">a</span>, b <span class="op">=</span> <span class="va">b</span>,</span>
+<span>    conv <span class="op">=</span> <span class="va">conv</span></span>
+<span>  <span class="op">)</span><span class="op">$</span><span class="va">conv</span></span>
 <span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">conv</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </figure>
 </div>
 </div>
-<p>Similar to cross-correlation calculation, the Fortran implementation of convolution outperforms the R one by</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A Gaussian smoothing filter can be applied to an array <code>a</code> using <code>b</code> as the Gaussian kernel or the 2D Gaussian coefficients. However, the convolution and cross-correlation can be optimised using the Fast Fourier Transform (FFT). See <span class="citation" data-cites="chap-summary">(<a href="references.html#ref-chap-summary" role="doc-biblioref"><strong>chap-summary?</strong></a>)</span>.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
@@ -677,6 +695,7 @@ Figure&nbsp;2.2: Performance comparison of 2D Convolution in R and Fortran. Medi
 </div>
 </div>
 </div>
+<p>Similar to cross-correlation calculation, the Fortran implementation of convolution outperforms the R one by a factor of ~10. Performing convolution in large data set using R and Fortran is beneficial since it reduce the required computational resources.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -693,23 +712,31 @@ Question
 </section><section id="convective-available-potential-energy-cape" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="convective-available-potential-energy-cape">
 <span class="header-section-number">2.3</span> Convective Available Potential Energy (CAPE)</h2>
 <!-- definition  -->
-<!-- why is important  -->
-<!-- why it is time consuming -->
-<p>The maximum buoyancy of an undiluted air parcel, related to the potential up-draft strength of thunderstorms.</p>
+<p>According to the <a href="https://glossary.ametsoc.org/wiki/Convective_available_potential_energy">Glossary of Meteorology</a>, CAPE is “the potential energy of an air parcel due to positive buoyancy, which is a useful tool for forecasting, parameterising, and estimating the potential updraft strength of convective clouds.” CAPE is calculated as follows <span class="citation" data-cites="stull2016practical">(<a href="references.html#ref-stull2016practical" role="doc-biblioref">Stull, 2016</a>)</span>:</p>
+<p><span id="eq-cape"><span class="math display">\[
+CAPE =  R_d \sum_{p_{LFC}}^{p_{EL}} (T_p - T_v) . ln(\frac{p_{bottom}}{p_{top}})
+\tag{2.2}\]</span></span></p>
+<p>where <span class="math inline">\(R_d\)</span> is the gas constant for dry air, <span class="math inline">\(T_p\)</span> is the parcel temperature, <span class="math inline">\(T_e\)</span> is the environment temperature, <span class="math inline">\(p\)</span> is pressure, <span class="math inline">\(LFC\)</span> is the Level of Free Convection, and <span class="math inline">\(EL\)</span> is the Equilibrium Level.</p>
+<p>Under a warming climate, CAPE is expected to increase <span class="citation" data-cites="Chen2020">(<a href="references.html#ref-Chen2020" role="doc-biblioref">Chen et al., 2020</a>)</span>, which can result in an elevated risk of thunderstorms. It is crucial for humanity to quantify the future risk for proper preparation and mitigation. Typically, thunderstorms are investigated with convective-permitting modelling (CPM) where the horizontal resolution is less than 4km. CPM simulations produce vast amount of data sets, and CAPE estimation requires atmospheric vertical profiles at a specific gridpoint and time.</p>
+<p>Given the rapid advancements in computing power, it is anticipated that CPM is expected to be performed at finer horizontal and vertical resolution, thereby increasing the complexity of estimating CAPE. It is essential that the enhancement of computing power is accompanied by responsible management and allocation of these resources.</p>
+<p>Since CAPE calculation scripts are highly complex and lengthy, the necessary codes are only available in supplementary materials. Additionally, to test the two implementations of CAPE, the AquaFortR package should be installed to utilise the example data. See <a href="#lst-cape" class="quarto-xref">Listing&nbsp;<span>2.7</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#|</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://AHomoudi.github.io/AquaFortR/">AquaFortR</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<div id="lst-cape" class="r cell-code listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-cape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;2.7: CAPE implementation in R and Fortran
+</figcaption><div aria-describedby="lst-cape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-cape"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://AHomoudi.github.io/AquaFortR">AquaFortR</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"AHomoudi/AquaFortR"</span>, subdir <span class="op">=</span> <span class="st">"RPackage"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://AHomoudi.github.io/AquaFortR/">AquaFortR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://AHomoudi.github.io/AquaFortR">AquaFortR</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"radiosonde"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">Temperature</span> <span class="op">&lt;-</span> <span class="va">radiosonde</span><span class="op">$</span><span class="va">temp</span> <span class="op">+</span> <span class="fl">273.15</span> <span class="co"># K</span></span>
 <span><span class="va">Dewpoint</span> <span class="op">&lt;-</span> <span class="va">radiosonde</span><span class="op">$</span><span class="va">dpt</span> <span class="op">+</span> <span class="fl">273.15</span> <span class="co"># K</span></span>
 <span><span class="va">Pressure</span> <span class="op">&lt;-</span> <span class="va">radiosonde</span><span class="op">$</span><span class="va">pressure</span> <span class="co"># hPa</span></span>
 <span><span class="co"># Mixing ratio</span></span>
-<span><span class="va">MixingRatio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://AHomoudi.github.io/AquaFortR/reference/mixing_ratio_from_dewpoint.html">mixing_ratio_from_dewpoint</a></span><span class="op">(</span><span class="va">Dewpoint</span>, <span class="va">Pressure</span><span class="op">)</span></span>
+<span><span class="va">MixingRatio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AquaFortR/man/mixing_ratio_from_dewpoint.html">mixing_ratio_from_dewpoint</a></span><span class="op">(</span><span class="va">Dewpoint</span>, <span class="va">Pressure</span><span class="op">)</span></span>
 <span><span class="va">t_parcel</span> <span class="op">&lt;-</span> <span class="va">Temperature</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">dwpt_parcel</span> <span class="op">&lt;-</span> <span class="va">Dewpoint</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">mr_parcel</span> <span class="op">&lt;-</span> <span class="va">MixingRatio</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
@@ -717,8 +744,25 @@ Question
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"AquaFortR_Codes/cape_r.R"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"AquaFortR_Codes/cape_f.R"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Foremost, the Fortran subroutine need to be complied as shown in previous sections. The path to the shared library cape_f.so in cape_f.R file should be adapted to the correct path.</p>
+</div>
+</div>
+<p>Exploring <a href="#fig-cape" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>, it is evident that the implementation of Fortran is faster than R by a factor of ~28, proofing that integrating Fortran in R is vital for performance and beneficial for the environment.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span></span>
@@ -736,8 +780,8 @@ Question
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span></span>
 <span>    fun <span class="op">=</span> <span class="st">"mean"</span>,</span>
 <span>    geom <span class="op">=</span> <span class="st">"crossbar"</span>,</span>
-<span>    width <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>    colour <span class="op">=</span> <span class="st">"green"</span></span>
+<span>    width <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>    colour <span class="op">=</span> <span class="st">"red"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-cape" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -750,18 +794,23 @@ Figure&nbsp;2.3: Performance comparison of CAPE in R and Fortran
 </div>
 </div>
 </div>
-<p>https://www.f5wx.com/pages/CAPECalc.htm</p>
-<p>https://geo.libretexts.org/Bookshelves/Meteorology_and_Climate_Science/Practical_Meteorology_(Stull)/14%3A_Thunderstorm_Fundamentals/14.03%3A_Section_4-</p>
-<p>https://journals.ametsoc.org/view/journals/clim/33/6/jcli-d-19-0461.1.xml</p>
-<p>https://www.weather.gov/source/zhu/ZHU_Training_Page/convective_parameters/Sounding_Stuff/MesoscaleParameters.html</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Chen2020" class="csl-entry" role="listitem">
+Chen, J., Dai, A., Zhang, Y., &amp; Rasmussen, K. L. (2020). Changes in convective available potential energy and convective inhibition under global warming. <em>Journal of Climate</em>, <em>33</em>(6), 2025–2050. <a href="https://doi.org/10.1175/JCLI-D-19-0461.1">https://doi.org/10.1175/JCLI-D-19-0461.1</a>
+</div>
 <div id="ref-Draelos_2019" class="csl-entry" role="listitem">
 Draelos, R. (2019). Convolution vs. Cross-correlation. In <em>Glass Box</em>. <a href="https://glassboxmedicine.com/2019/07/26/convolution-vs-cross-correlation/">https://glassboxmedicine.com/2019/07/26/convolution-vs-cross-correlation/</a>
 </div>
+<div id="ref-GERBER2018217" class="csl-entry" role="listitem">
+Gerber, F., Mösinger, K., &amp; Furrer, R. (2018). dotCall64: An r package providing an efficient interface to compiled c, c++, and fortran code supporting long vectors. <em>SoftwareX</em>, <em>7</em>, 217–221. https://doi.org/<a href="https://doi.org/10.1016/j.softx.2018.06.002">https://doi.org/10.1016/j.softx.2018.06.002</a>
+</div>
 <div id="ref-Seelig2021" class="csl-entry" role="listitem">
 Seelig, T., Deneke, H., Quaas, J., &amp; Tesche, M. (2021). <span class="nocase">Life Cycle of Shallow Marine Cumulus Clouds From Geostationary Satellite Observations</span>. <em>Journal of Geophysical Research: Atmospheres</em>, <em>126</em>(22). <a href="https://doi.org/10.1029/2021JD035577">https://doi.org/10.1029/2021JD035577</a>
+</div>
+<div id="ref-stull2016practical" class="csl-entry" role="listitem">
+Stull, R. (2016). <em>Practical meteorology: An algebra-based survey of atmospheric science</em>. AVP International, University of British Columbia. <a href="https://books.google.de/books?id=xP2sDAEACAAJ">https://books.google.de/books?id=xP2sDAEACAAJ</a>
 </div>
 <div id="ref-Wang2019" class="csl-entry" role="listitem">
 Wang, C. (2019). <em>Kernel learning for visual perception</em>. <a href="https://doi.org/10.32657/10220/47835">https://doi.org/10.32657/10220/47835</a>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R - 4&nbsp; Summary</title>
+<title>AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R - 4&nbsp; Conclusions and Optimization Insights</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./further_reading.html" rel="next">
 <link href="./package.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R - 4&nbsp; Summary">
+<meta property="og:title" content="AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R - 4&nbsp; Conclusions and Optimization Insights">
 <meta property="og:site_name" content="AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate,  and Water Research with Fortran-accelerated R">
 </head>
 
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./summary.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./summary.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions and Optimization Insights</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -176,7 +176,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions and Optimization Insights</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./further_reading.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Further Reading</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -191,20 +197,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link active" data-scroll-target="#further-reading"><span class="header-section-number">4.1</span> Further Reading</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></h1>
+<h1 class="title"><span id="chap-summary" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conclusions and Optimization Insights</span></span></h1>
 </div>
 
 
@@ -228,34 +228,13 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Mention the memory allocation issues related to .Fortran</p></li>
 <li><p>OpenMp implementation in Fortran, <a href="https://github.com/wrathematics/Romp">Romp</a></p></li>
 <li><p>Explain how beneficial R, Fortran with OpenMP is. For examples calculating cape for each vertical profile in a high resolution (1-4km) climate simulation (years) output (nlat, lon, nlevels, ntime) can be accelerated by passing the whole input arrays from R to Fortran, then loop over (nlat, lon, ntime) with OpenMP.</p></li>
-<li><p>The cross-correlation can be speed up by using FFT. Also, in Fortran, the FFTW C library can be used. In summary, this book has no content whatsoever.</p></li>
-<li><p>Possibility of calling BLAS, LAPACK and LINPACK linear algebra functions Fortran using C (R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h)</p></li>
+<li><p>The cross-correlation can be speed up by using FFT. Also, in Fortran, the FFTW C library can be used.</p></li>
+<li><p>Possibility of calling BLAS, LAPACK and LINPACK linear algebra functions</p></li>
+<li><p>Fortran using C (R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h)</p></li>
 <li><p>Final words why packaging is better.</p></li>
 </ul>
-<section id="further-reading" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">4.1</span> Further Reading</h2>
-<ul>
-<li><a href="https://www.r-bloggers.com/2014/04/fortran-and-r-speed-things-up/">Fortran and R – Speed Things Up</a></li>
-<li><a href="https://www.r-bloggers.com/2018/12/the-need-for-speed-part-1-building-an-r-package-with-fortran-or-c/">The Need for Speed Part 1: Building an R Package with Fortran (or C)</a></li>
-<li><a href="https://www.avrahamadler.com/2018/12/23/the-need-for-speed-part-2-c-vs-fortran-vs-c/">The Need for Speed Part 2: C++ vs.&nbsp;Fortran vs.&nbsp;C</a></li>
-<li><a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-Extensions">Writing R Extensions</a></li>
-<li><a href="https://fortran-lang.discourse.group/t/extend-r-with-fortran/2386">Extend R with Fortran</a></li>
-<li><a href="http://adv-r.had.co.nz/">Advanced R by Hadley Wickham</a></li>
-<li><a href="http://web.stanford.edu/class/me200c/tutorial_90/">Fortran 90 Tutorial</a></li>
-<li><a href="https://masuday.github.io/fortran_tutorial/index.html">Modern Fortran Tutorial</a></li>
-<li><a href="https://fortranwiki.org/fortran/show/Libraries">Fortran Wiki - Libraries</a></li>
-<li><a href="https://fortran-lang.org/en/learn/best_practices/#fortran-best-practices">Fortran Best Practices</a></li>
-<li><a href="https://rstudio-education.github.io/hopr/">Hands-On Programming with R</a></li>
-<li><a href="https://rspatial.org/index.html">Spatial Data Science</a></li>
-<li><a href="https://r4ds.hadley.nz/">R for Data Science (2e)</a></li>
-<li><a href="https://bookdown.org/igisc/EnvDataSci/">Introduction to Environmental Data Science</a></li>
-</ul>
-<!-- https://cran.r-project.org/doc/manuals/r-release/R-exts.html#System-and-foreign-language-interfaces-1 -->
-<!-- Fortran is primarily intended for Fortran 77 code, and long precedes any support for Fortran 9x. Now current implementations of Fortran 9x support the Fortran 2003 module iso_c_binding, a better way to interface modern Fortran code to R is to use .C and write a C interface using use iso_c_binding.  -->
-<!-- The header files R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h contains declarations of the BLAS, LAPACK and LINPACK linear algebra functions included in R. -->
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -818,8 +797,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./further_reading.html" class="pagination-link" aria-label="Further Reading">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Further Reading</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

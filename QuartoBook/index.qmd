@@ -4,7 +4,7 @@
  Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R"**. 
  In this book, you will gain invaluable insights into seamlessly speeding up R scripts 
  by harnessing the power of Fortran. You will acquire 
- essential perspectives into speeding up your package using simple C and Fortran codes.
+ essential perspectives into speeding up your package using simple Fortran codes.
  Furthermore, you will accumulate tweaks to accelerate your scripts or packages, 
  and supplementary reading will prove to be both advantageous and highly beneficial for further 
  optimization, and efficiency. 

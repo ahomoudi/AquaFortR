@@ -51,6 +51,7 @@ format:
      dark:
        - darkly
    code-link: true
+   #code-line-numbers: true
   pdf:
     documentclass: book
     template-partials:
@@ -71,6 +72,7 @@ format:
     linkcolor: blue
     citecolor: blue
     fontsize: 12pt
+    link-citations: true
 
 
     

@@ -19,7 +19,7 @@ R script with the core computations performed in Fortran.
 In signal processing, cross-correlation is a measure of the similarity
 between two signals as a function of the displacement of one relative to
 the other [@Wang2019]. It can deliver information about the time lag
-between the two signals. Cross-correlation is often applied in computer
+between the two signals. 2D cross-correlation is often applied in computer
 vision for visual tracking. For example, it is used in template
 matching, feature detection, and motion tracking. 2D cross-correlation
 also plays an important role in convolutional networks and machine
@@ -33,9 +33,8 @@ used to estimate ocean surface currents [@Warren2016], cloud tracking
 using satellite imagery [@Seelig2021], and Particle Image Velocimetry
 (PIV) in fluid dynamics applications [@Willert1991].
 
-The 2D cross-correlation of an array $F$, with dimension $(M, N)$, and
-array $G$, with dimension $(P, Q)$, can be given as the array $CC$ that
-has a dimension of $(M+P-1, N+Q-1)$.
+The 2D cross-correlation of an array $F_{(M, N)}$, and
+array $G_{(P, Q)}$, can be given as the array $CC_{(M+P-1, N+Q-1)}$ as shown in @eq-2DCC.
 
 $$
 CC_{(s,t)} = \sum_{m = 0}^{M-1}\sum_{n = 0}^{N-1} F_{(m,n)} G_{(m-s, n-t)}
@@ -212,8 +211,6 @@ xcorr2D_f0 <- function(a, b) {
 }
 ```
 
-**Example**
-
 Now, we can use an example to compare the performance of the two functions. 
 In order to do so, `microbenchmark` package needs to be installed, and `ggplot2` 
 is required for plotting.
@@ -252,9 +249,9 @@ autoplot(mbm) +
 
 ## 2D Convolution
 
-Convolution and cross-correlation are both operations applied to images. 
-Cross-correlation involves sliding a kernel (filter) across an image, 
-while convolution involves sliding a flipped kernel across an image. [@Draelos_2019].
+Convolution and cross-correlation are both operations applied to two dimensional data (e.g., matrix). 
+Cross-correlation involves sliding a kernel (filter) across a matrix, 
+while convolution involves sliding a flipped kernel across an matrix [@Draelos_2019].
 Most spatial data in earth science are is discretised resulting in large data
 sets. Sometimes, these data sets include noise which can obscure meaningful 
 patterns and relationships. One of the prominent methods to remove this nose while 
@@ -263,13 +260,13 @@ Gaussian smoothing is often achieved by convolution where $F$ is the original
 data, and $G$ is the kernel representing the 2D Gaussian coefficients.
 
 
-The 2D convolution of an array $F$, with dimension $(M, N)$, 
-and array $G$, with dimension $(P, Q)$, can be given as the array $CC$ that has 
-a dimension of $(M+P-1, N+Q-1)$. $hv$ means that $G$ is flipped.
+The 2D convolution of an array $F_{(M, N)}$, 
+and array $G_{(P, Q)}$, can be given as the array $Conv_{(M+P-1, N+Q-1)}$. 
+$hv$ means that $G$ is flipped.
 
 $$
-CC_{(s,t)} = \sum_{m = 0}^{M-1}\sum_{n = 0}^{N-1} F_{(m,n)} G_{(m-s, n-t)}^{hv}
-$$
+Conv_{(s,t)} = \sum_{m = 0}^{M-1}\sum_{n = 0}^{N-1} F_{(m,n)} G_{(m-s, n-t)}^{hv}
+$$ {#eq-conv}
 
 where $s$ varies between $-(P-1)$ and $(M-1)$ while $t$ varies between
 $-(Q-1)$ and $(N-1)$. $F$ and $G \in R$.
@@ -388,9 +385,12 @@ gfortran -fpic -shared conv2D.f90 -o conv2D.so
 ```
 
 In R wrapper function, `.C64()` from [dotCall64](https://cran.r-project.org/web/packages/dotCall64/index.html) package will be used instead of `.Fortran()`. According to @GERBER2018217, `.C64()` transcends other foreign function interfaces in many aspects: 
- - it supports long vectors. 
- - The `SIGNATURE` argument ensures that the interfaced R objects are of the specified types
- - The `INTENT` argument helps avoid unnecessary copies of R objects between languages. It is very important when working with large data sets. 
+
+  - It supports long vectors. 
+  - The `SIGNATURE` argument ensures that the interfaced R objects 
+      are of the specified types
+  - The `INTENT` argument helps avoid unnecessary copies of R objects
+      between languages. It is very important when working with large data sets. 
  
 
 In @lst-convrfr, the basic input arguments, such as the dimensions of input and 
@@ -440,7 +440,7 @@ conv2D_f0 <- function(a, b) {
 ::: {.callout-note}
 A Gaussian smoothing filter can be applied to an array `a` using `b` as the Gaussian kernel 
 or the 2D Gaussian coefficients. However, the convolution and cross-correlation 
-can be optimised using the Fast Fourier Transform (FFT). See @chap-summary. 
+can be optimised using the Fast Fourier Transform (FFT). See @sec-summary. 
 :::
 
 ```{r}
@@ -501,8 +501,7 @@ in an elevated risk of thunderstorms. It is crucial for humanity to quantify the
 future risk for proper preparation and mitigation. Typically, thunderstorms are 
 investigated with convective-permitting modelling (CPM) where the horizontal 
 resolution is less than 4km. CPM simulations produce vast amount of data sets, 
-and CAPE estimation requires atmospheric vertical profiles at a specific gridpoint 
-and time. 
+and CAPE estimation at a specific gridpoint and time is an integration along the vertical profile (@#eq-cape). 
 
 Given the rapid advancements in computing power, it is anticipated that  CPM is 
 expected to be performed at finer horizontal and vertical resolution, 
@@ -547,6 +546,12 @@ Foremost, the Fortran subroutine need to be complied as shown in previous
 sections. The path to the shared library cape_f.so in cape_f.R file should be 
 adapted to the correct path. 
 :::
+
+As mentioned, integration between R and Fortran should be accomplished through 
+subroutines. Nevertheless, some calculations are complex, and using functions 
+or other subroutines is inevitable. In cape.f90, a module containing all the 
+required utilities was written, and then the main subroutine was included. 
+The approach ensures cape_f has access to the module and is simultaneously available to R. 
 
 Exploring @fig-cape, it is evident that the implementation of Fortran is faster than R by a factor of ~28, proofing that integrating Fortran in R is vital for performance and beneficial for the environment.
 

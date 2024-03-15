@@ -1,3 +1,9 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
 # Introduction {#chap-intro}
 
 This chapter briefly introduces the R programming language and how to install R 
@@ -27,7 +33,7 @@ Many factors play an important role in the popularity of R. For example, the
 ability to produce graphics with a publication's quality. Simultaneously, the 
 users maintain full control over customising the plots according to their 
 preferences and intricate details. Another significant factor is its ability 
-to be extended to fit the user's demand. The Comprehensive R Archive Network 
+to be extended to meet the user's demand. The Comprehensive R Archive Network 
 [(CRAN)](https://cran.r-project.org/) contains an extensive array of libraries 
 and packages to extend R's functionality for various tasks. With over 
 [20447](https://cran.r-project.org/web/packages/) available packages, the 
@@ -129,9 +135,9 @@ Installation of R differs according to the operating system:
 
   - The webpage [here](https://cran.r-project.org/bin/linux/) provides 
   information on installing R according to the Linux distribution.
-  - For Windows, The executable can be downloaded from 
+  - For Windows, the executable can be downloaded from 
   [here](https://cran.r-project.org/bin/windows/base/).
-  Additionally, [Previous releases](https://cran.r-project.org/bin/windows/base/old/) 
+  Additionally, [previous releases](https://cran.r-project.org/bin/windows/base/old/) 
   of R for Windows exit. 
   - For macOS, various releases and versions are accessible 
   [here](https://cran.r-project.org/bin/macosx/).
@@ -153,6 +159,6 @@ sure that a Fortran compiler, i.e., the [GNU Fortran](https://gcc.gnu.org/fortra
 
   - In the majority of Linux distributions, the GCC compilers, including gfortran, 
   come pre-installed.
-  - For Windows, installing RTools should ensure the existence of gfortran
-  - For macOS, binaires for gfortran are avaiable [here](https://gcc.gnu.org/wiki/GFortranBinaries). 
+  - For Windows, installing rtools should ensure the existence of gfortran
+  - For macOS, binaries for gfortran are available [here](https://gcc.gnu.org/wiki/GFortranBinaries). 
   Furthermore, more information is available on R for macOS [here](https://cran.r-project.org/bin/macosx/tools/) 

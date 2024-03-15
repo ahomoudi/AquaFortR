@@ -1,24 +1,28 @@
 conv2D_f0 <- function(a, b) {
+  require(dotCall64)
   dyn.load("AquaFortR_Codes/conv2D.so")
-
+  
+  m <- nrow(a)
+  n <- ncol(b)
+  
+  p <- nrow(b)
+  q <- ncol(b)
   # the full convolution matrix
-  conv_row <- nrow(a) + nrow(b) - 1
-  conv_col <- ncol(a) + ncol(b) - 1
-  conv <- matrix(1:c(conv_row * conv_col),
-    byrow = FALSE, ncol = conv_col
-  )
-
-  result <- .Fortran("conv2d_f",
-    m = as.integer(dim(a)[1]),
-    n = as.integer(dim(a)[2]),
-    p = as.integer(dim(b)[1]),
-    q = as.integer(dim(b)[2]),
-    k = as.integer(conv_row),
-    l = as.integer(conv_col),
-    a = as.double(a),
-    b = as.double(b),
-    conv = as.double(conv)
-  )$conv
-
-  return(matrix(result, nrow = conv_row, ncol = conv_col))
+  conv_row <- m + p - 1
+  conv_col <- n + q - 1
+  conv <- matrix(0,
+                 ncol = conv_col,
+                 nrow = conv_row)
+  
+  conv <- .C64("conv2d_f",
+               SIGNATURE = c(rep("integer",6),
+                             rep("double",3)),
+               INTENT = c(rep("r",8), "rw"),
+               m, n, p, q,
+               k = conv_row,
+               l = conv_col,
+               a = a, b = b,
+               conv = conv)$conv
+  
+  return(conv)
 }

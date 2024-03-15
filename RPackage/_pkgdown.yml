@@ -1,4 +1,5 @@
 url: https://AHomoudi.github.io/AquaFortR/
+
 template:
   bootstrap: 5
   bootswatch: flatly
@@ -6,9 +7,10 @@ template:
     base_font: {google: "Open Sans"}
     heading_font: {google: "Open Sans"}
     code_font: {google: "Open Sans"}
+    navbar-color: "#05668D"
 navbar:
   structure:
-    left:  [intro, reference, custombook, customswirl]
+    left:  [intro, reference, custombook]
   components:
     custombook:
       text: Book

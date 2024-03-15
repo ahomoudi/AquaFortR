@@ -34,6 +34,7 @@ book:
     - scripts.qmd
     - package.qmd
     - summary.qmd
+    - further_reading.qmd
     - references.qmd
   page-navigation: true
 

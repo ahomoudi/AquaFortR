@@ -2,11 +2,11 @@
 
  Welcome to the enlightening journey through the pages of **"AquaFortR: Streamlining 
  Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R"**. 
- In this book, you will gain invaluable insights into seamlessly integrating Fortran 
- into R scripts by harnessing the power of Fortran. You will acquire 
- invaluable insights into how to speed up your package using simple C and Fortran codes.
- Furthermore, you will accumulate tweaks to further accelerate your scripts or packages, 
- and further reading will prove to be both advantageous and highly beneficial for further 
+ In this book, you will gain invaluable insights into seamlessly speeding up R scripts 
+ by harnessing the power of Fortran. You will acquire 
+ essential perspectives into speeding up your package using simple C and Fortran codes.
+ Furthermore, you will accumulate tweaks to accelerate your scripts or packages, 
+ and supplementary reading will prove to be both advantageous and highly beneficial for further 
  optimization, and efficiency. 
 
 &nbsp;

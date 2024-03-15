@@ -1,4 +1,4 @@
-# Summary
+# Conclusions and Optimization Insights {#chap-summary}
 
 - positive features of R 
 - positive features of Fortran 
@@ -11,29 +11,9 @@ in a high resolution (1-4km) climate simulation (years) output (nlat, lon, nleve
 by passing the whole input arrays from R to Fortran, then loop over (nlat, lon, ntime) with OpenMP. 
 
 - The cross-correlation can be speed up by using FFT. Also, in Fortran, the FFTW C library can be used. 
-In summary, this book has no content whatsoever.
-- Possibility of calling BLAS, LAPACK and LINPACK linear algebra functions Fortran using C (R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h)
+- Possibility of calling BLAS, LAPACK and LINPACK linear algebra functions 
+- Fortran using C (R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h)
 
 - Final words why packaging is better. 
 
-## Further Reading 
- * [Fortran and R – Speed Things Up](https://www.r-bloggers.com/2014/04/fortran-and-r-speed-things-up/)
- * [The Need for Speed Part 1: Building an R Package with Fortran (or C)](https://www.r-bloggers.com/2018/12/the-need-for-speed-part-1-building-an-r-package-with-fortran-or-c/)
- * [The Need for Speed Part 2: C++ vs. Fortran vs. C](https://www.avrahamadler.com/2018/12/23/the-need-for-speed-part-2-c-vs-fortran-vs-c/)
- * [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-Extensions)
- * [Extend R with Fortran](https://fortran-lang.discourse.group/t/extend-r-with-fortran/2386)
- * [Advanced R by Hadley Wickham](http://adv-r.had.co.nz/)
- * [Fortran 90 Tutorial](http://web.stanford.edu/class/me200c/tutorial_90/)
- * [Modern Fortran Tutorial](https://masuday.github.io/fortran_tutorial/index.html)
- * [Fortran Wiki - Libraries](https://fortranwiki.org/fortran/show/Libraries)
- * [Fortran Best Practices](https://fortran-lang.org/en/learn/best_practices/#fortran-best-practices)
- * [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
- * [Spatial Data Science](https://rspatial.org/index.html)
- * [R for Data Science (2e)](https://r4ds.hadley.nz/)
- * [Introduction to Environmental Data Science](https://bookdown.org/igisc/EnvDataSci/)
 
-<!-- https://cran.r-project.org/doc/manuals/r-release/R-exts.html#System-and-foreign-language-interfaces-1 -->
-
-<!-- Fortran is primarily intended for Fortran 77 code, and long precedes any support for Fortran 9x. Now current implementations of Fortran 9x support the Fortran 2003 module iso_c_binding, a better way to interface modern Fortran code to R is to use .C and write a C interface using use iso_c_binding.  -->
-
-<!-- The header files R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h contains declarations of the BLAS, LAPACK and LINPACK linear algebra functions included in R. -->

@@ -8,12 +8,12 @@ This chapter will focus on wrapping the developed routines from the previous cha
 <!-- https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/ -->
 ## Developing AquaFortR Package 
 
-
-### R function 
-
 ### Fortran subroutine 
 
-- iso_c_binidng 
+iso_c_binidng
+<!-- -  https://gcc.gnu.org/onlinedocs/gfortran/Intrinsic-Types.html -->
+
+### R function 
 
 ### C funtions
  - C to Fortran 

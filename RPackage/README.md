@@ -9,7 +9,7 @@
 
 This is the main webpage of the project AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R. 
 
-The project's [repository](https://ahomoudi.github.io/AquaFortR/) is structured as follows:
+The project's [repository](https://github.com/AHomoudi/AquaFortR/) is structured as follows:
 
  - QuartoBook  
  - RPackage  

@@ -1,0 +1,23 @@
+# Further Reading 
+ * [Fortran and R – Speed Things Up](https://www.r-bloggers.com/2014/04/fortran-and-r-speed-things-up/) by Steve Pittard
+ * [The Need for Speed Part 1: Building an R Package with Fortran (or C)](https://www.r-bloggers.com/2018/12/the-need-for-speed-part-1-building-an-r-package-with-fortran-or-c/) by Avraham Adler
+ * [The Need for Speed Part 2: C++ vs. Fortran vs. C](https://www.avrahamadler.com/2018/12/23/the-need-for-speed-part-2-c-vs-fortran-vs-c/) by Avraham Adler
+ * [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-Extensions) by R Core Team
+ * [Modern Fortran Tutorial](https://masuday.github.io/fortran_tutorial/index.html) by Yutaka Masuda
+ * [Extend R with Fortran](https://masuday.github.io/fortran_tutorial/r.html) by Yutaka Masuda
+ * [Advanced R](http://adv-r.had.co.nz/) by Hadley Wickham
+ * [Fortran 90 Tutorial](http://web.stanford.edu/class/me200c/tutorial_90/) by Stanford University
+ * [Fortran Libraries](https://fortranwiki.org/fortran/show/Libraries) by Fortran Wiki
+ * [Fortran Best Practices](https://fortran-lang.org/en/learn/best_practices/#fortran-best-practices) by Fortran Community
+ * [Fortran 90 Reference Card](https://web.pa.msu.edu/people/duxbury/courses/phy480/fortran90_refcard.pdf) by  Michael Goerz.
+ * [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) by Garrett Grolemund
+ * [r-spatial](https://r-spatial.org/) by Edzer Pebesma, Marius Appel, and Daniel Nüst
+ * [Spatial Data Science](https://rspatial.org/index.html)
+ * [R for Data Science (2e)](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund
+ * [Introduction to Environmental Data Science](https://bookdown.org/igisc/EnvDataSci/) by Jerry Davis
+
+<!-- https://cran.r-project.org/doc/manuals/r-release/R-exts.html#System-and-foreign-language-interfaces-1 -->
+
+<!-- Fortran is primarily intended for Fortran 77 code, and long precedes any support for Fortran 9x. Now current implementations of Fortran 9x support the Fortran 2003 module iso_c_binding, a better way to interface modern Fortran code to R is to use .C and write a C interface using use iso_c_binding.  -->
+
+<!-- The header files R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h contains declarations of the BLAS, LAPACK and LINPACK linear algebra functions included in R. -->

@@ -5,12 +5,18 @@ Version: 0.1.0
 Authors@R: 
     person("Ahmed", "Homoudi", , "ahmed.homoudi@tu-dresden.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6906-5986"))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: AquaFortR is an educational package for students and researchers in 
+    Atmospheric Science, Oceanography, Climate, and Water Research. AquaFortR aims 
+    to show that using simple Fortran scripts can fulfil the need to speed up R, 
+    especially considering that most data sets in these fields are large discretised 
+    arrays representing earth system processes. Fortran is one of the fastest 
+    programming languages in number crunching, if not the fastest, and 
+    multidimensional arrays are a core part of Fortran.  
 License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
-URL: https://AHomoudi.github.io/AquaFortR/
+URL: https://AHomoudi.github.io/AquaFortR
+BugReports: https://github.com/AHomoudi/AquaFortR/issues
 RoxygenNote: 7.3.1
 Suggests: 
     knitr,

@@ -196,7 +196,7 @@ xcorr2D_f0 <- function(a, b) {
   cc_col <- ncol(a) + ncol(b) - 1
   cc <- matrix(1:c(cc_row * cc_col), byrow = FALSE, ncol = cc_col)
 
-  result <- .Fortran("xcorr2d_f",
+  cc<- .Fortran("xcorr2d_f",
     m = as.integer(dim(a)[1]),
     n = as.integer(dim(a)[2]),
     p = as.integer(dim(b)[1]),
@@ -208,7 +208,7 @@ xcorr2D_f0 <- function(a, b) {
     cc = as.double(cc)
   )$cc
 
-  return(result)
+  return(cc)
 }
 ```
 
@@ -221,7 +221,7 @@ is required for plotting.
 The obtained benchmarking data allows (`mbm`) for a quantitative comparison of 
 the computational efficiency between the two methods. By printing "mbm" in the console 
 (`print(mbm)`) it is evident that Fortran outperforms the R implementation of 2D 
-cross-correlation by a factor of 10. The significance of leveraging Fortran becomes 
+cross-correlation by a factor of ~10. The significance of leveraging Fortran becomes 
 evident in @fig-xcorr2D.
 
 
@@ -252,13 +252,20 @@ autoplot(mbm) +
 
 ## 2D Convolution
 
-Convolution and cross-correlation are both operations applied to images.
-Cross-correlation means sliding a kernel (filter) across an image while
-convolution means sliding a flipped kernel across an image.
-[@Draelos_2019]. Therefore, the 2D convolution of an array $F$, with
-dimension $(M, N)$, and array $G$, with dimension $(P, Q)$, can be given
-as the array $CC$ that has a dimension of $(M+P-1, N+Q-1)$. $hv$ means
-that $G$ is flipped.
+Convolution and cross-correlation are both operations applied to images. 
+Cross-correlation involves sliding a kernel (filter) across an image, 
+while convolution involves sliding a flipped kernel across an image. [@Draelos_2019].
+Most spatial data in earth science are is discretised resulting in large data
+sets. Sometimes, these data sets include noise which can obscure meaningful 
+patterns and relationships. One of the prominent methods to remove this nose while 
+preserving important features and structures is the Gaussian smoothing filter. 
+Gaussian smoothing is often achieved by convolution where $F$ is the original 
+data, and $G$ is the kernel representing the 2D Gaussian coefficients.
+
+
+The 2D convolution of an array $F$, with dimension $(M, N)$, 
+and array $G$, with dimension $(P, Q)$, can be given as the array $CC$ that has 
+a dimension of $(M+P-1, N+Q-1)$. $hv$ means that $G$ is flipped.
 
 $$
 CC_{(s,t)} = \sum_{m = 0}^{M-1}\sum_{n = 0}^{N-1} F_{(m,n)} G_{(m-s, n-t)}^{hv}
@@ -267,10 +274,10 @@ $$
 where $s$ varies between $-(P-1)$ and $(M-1)$ while $t$ varies between
 $-(Q-1)$ and $(N-1)$. $F$ and $G \in R$.
 
-It is true that we can just flip the second array and use the functions from @sec-2Dxcorr. 
-However, we are interested in the complete workflow. 
-
-@lst-convrr
+Indeed, it is possible to flip the second array and utilise the functions from 
+@sec-2Dxcorr. Nevertheless, our focus is on the comprehensive workflow. 
+@lst-convrr presents the implementation of convolution in R, whereas 
+@lst-convrf demonstrates the Fortran version.
 
 ```{r}
 #| lst-label: lst-convrr
@@ -315,7 +322,6 @@ conv2D_r0 <- function(a, b) {
 }
 ```
 
-@lst-convrf
 
 ```{fortran, eval=FALSE}
 #| lst-label: lst-convrf
@@ -324,7 +330,7 @@ subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
    implicit none
    integer                                :: m, n, p, q, k, l, i, j
    double precision, dimension(m, n)      :: a
-   double precision, dimension(p, q)      :: b, b_flipped
+   double precision, dimension(p, q)      :: b
    double precision, dimension(k, l)      :: conv
    !     dummy vars
    integer                               :: min_row_shift, min_col_shift
@@ -339,13 +345,6 @@ subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
    min_col_shift = -1*(q - 1)
    max_col_shift = n - 1
 
-   !   Flip the kernel i.e. B
-   b_flipped = 0.0
-   do i = 1, p
-      do j = 1, q
-         b_flipped(p - i + 1, q - j + 1) = b(i, j)
-      end do
-   end do
 
    !   Padded arrray
    rows_padded = abs(min_row_shift) + m + abs(max_row_shift)
@@ -364,7 +363,7 @@ subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
          iconv = irow + ((icol - 1)*k)
          icol2 = icol + q - 1
          irow2 = irow + p - 1
-         padded_b(irow:irow2, icol:icol2) = b_flipped
+         padded_b(irow:irow2, icol:icol2) = b(p:1:-1,q:1:-1)
          conv(irow, icol) = sum(padded_a*padded_b)
          padded_b = 0.0
       end do
@@ -372,9 +371,12 @@ subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
 end subroutine conv2d_f
 ```
 
-You might need some flags when compile Fortran subroutine, For example, to enable 
-the generation of run-time check `-fcheck=all`. The code below shows two options to 
-compile `conv2D.f90` either by R or gfortran compiler. 
+
+The gfortran compiler is also capable of creating shared libraries. 
+It allows for easy addition of other flags, such as enabling the generation of 
+the run-time check (`-fcheck=all`). The code below shows two options for 
+compiling `conv2D.f90` by R or the gfortran compiler. 
+
 
 ```{bash}
 #| eval: FALSE
@@ -385,7 +387,18 @@ R CMD SHLIB conv2D.f90
 gfortran -fpic -shared conv2D.f90 -o conv2D.so
 ```
 
-@lst-convrfr
+In R wrapper function, `.C64()` from [dotCall64](https://cran.r-project.org/web/packages/dotCall64/index.html) package will be used instead of `.Fortran()`. According to @GERBER2018217, `.C64()` transcends other foreign function interfaces in many aspects: 
+ - it supports long vectors. 
+ - The `SIGNATURE` argument ensures that the interfaced R objects are of the specified types
+ - The `INTENT` argument helps avoid unnecessary copies of R objects between languages. It is very important when working with large data sets. 
+ 
+
+In @lst-convrfr, the basic input arguments, such as the dimensions of input and 
+output arrays, are prepared. Afterwards, the `SIGNATURE` is defined as six 
+integers and three doubles corresponding to the required types in the subroutine. 
+`INTENT` will ensure that only the `conv` argument is copied between R and Fortran. 
+This is particularly important in large productions, where coping the subroutine 
+parameters can extend beyond the available memory (RAM).
 
 
 ```{r}
@@ -395,30 +408,40 @@ conv2D_f0 <- function(a, b) {
   require(dotCall64)
   dyn.load("AquaFortR_Codes/conv2D.so")
 
+  m <- nrow(a)
+  n <- ncol(b)
+
+  p <- nrow(b)
+  q <- ncol(b)
   # the full convolution matrix
-  conv_row <- nrow(a) + nrow(b) - 1
-  conv_col <- ncol(a) + ncol(b) - 1
-  conv <- matrix(0, byrow = FALSE, ncol = conv_col)
+  conv_row <- m + p - 1
+  conv_col <- n + q - 1
+  conv <- matrix(0,
+    ncol = conv_col,
+    nrow = conv_row
+  )
 
-  result <- .C64("conv2d_f",
-                 SIGNATURE = c(rep("integer",6),
-                              rep("double",3)),
-                 m = dim(a)[1],
-                 n = dim(a)[2],
-                 p = dim(b)[1],
-                 q = dim(b)[2],
-                 k = integer(conv_row),
-                 l = integer(conv_col),
-                 a = as.double(a),
-                 b = as.double(b),
-                 conv = as.double(conv))$conv
+  conv <- .C64("conv2d_f",
+    SIGNATURE = c(
+      rep("integer", 6),
+      rep("double", 3)),
+    INTENT = c(rep("r",8), "rw"),
+    m, n, p, q,
+    k = conv_row,
+    l = conv_col,
+    a = a, b = b,
+    conv = conv
+  )$conv
 
-  return(result)
+  return(conv)
 }
 ```
 
-Similar to cross-correlation calculation, the Fortran implementation of convolution 
-outperforms the R one by 
+::: {.callout-note}
+A Gaussian smoothing filter can be applied to an array `a` using `b` as the Gaussian kernel 
+or the 2D Gaussian coefficients. However, the convolution and cross-correlation 
+can be optimised using the Fast Fourier Transform (FFT). See @chap-summary. 
+:::
 
 ```{r}
 #| label: fig-conv2D
@@ -446,6 +469,10 @@ autoplot(mbm) +
   )
 ```
 
+Similar to cross-correlation calculation, the Fortran implementation of convolution 
+outperforms the R one by a factor of ~10. Performing convolution in large data set
+using R and Fortran is beneficial since it reduce the required computational resources. 
+
 ::: {.callout-tip}
 ## Question
 
@@ -454,21 +481,46 @@ above and compare the performance of the two interfaces using `microbenchmark()`
 Which function is faster?
 :::
 
-
 ## Convective Available Potential Energy (CAPE)
 
 <!-- definition  -->
+According to the [Glossary of Meteorology](https://glossary.ametsoc.org/wiki/Convective_available_potential_energy), 
+CAPE is "the potential energy of an air parcel due to positive buoyancy, which is a useful tool for forecasting, parameterising, and estimating the potential updraft strength of convective clouds."
+CAPE is calculated as follows [@stull2016practical]:
 
-<!-- why is important  -->
+$$
+CAPE =  R_d \sum_{p_{LFC}}^{p_{EL}} (T_p - T_v) . ln(\frac{p_{bottom}}{p_{top}})
+$$ {#eq-cape}
 
-<!-- why it is time consuming -->
+where $R_d$ is the gas constant for dry air, $T_p$ is the parcel temperature, $T_e$
+is the environment temperature, $p$ is pressure, $LFC$ is the Level of Free Convection,
+and $EL$ is the Equilibrium Level.  
 
-The maximum buoyancy of an undiluted air parcel, related to the
-potential up-draft strength of thunderstorms.
+Under a warming climate, CAPE is expected to increase [@Chen2020], which can result 
+in an elevated risk of thunderstorms. It is crucial for humanity to quantify the 
+future risk for proper preparation and mitigation. Typically, thunderstorms are 
+investigated with convective-permitting modelling (CPM) where the horizontal 
+resolution is less than 4km. CPM simulations produce vast amount of data sets, 
+and CAPE estimation requires atmospheric vertical profiles at a specific gridpoint 
+and time. 
+
+Given the rapid advancements in computing power, it is anticipated that  CPM is 
+expected to be performed at finer horizontal and vertical resolution, 
+thereby increasing the complexity of estimating CAPE. It is essential that the 
+enhancement of computing power is accompanied by responsible management and 
+allocation of these resources.
+
+
+Since CAPE calculation scripts are highly complex and lengthy, the necessary 
+codes are only available in supplementary materials. Additionally, to test the 
+two implementations of CAPE, the AquaFortR package should be installed to 
+utilise the example data. See @lst-cape.
+
 
 ```{r}
+#| lst-label: lst-cape
+#| lst-cap: CAPE implementation in R and Fortran
 #| warning: false
-#|
 if (!require(AquaFortR)) {
   remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")
 }
@@ -488,6 +540,15 @@ mr_parcel <- MixingRatio[1]
 source("AquaFortR_Codes/cape_r.R")
 source("AquaFortR_Codes/cape_f.R")
 ```
+
+::: {.callout-important}
+
+Foremost, the Fortran subroutine need to be complied as shown in previous 
+sections. The path to the shared library cape_f.so in cape_f.R file should be 
+adapted to the correct path. 
+:::
+
+Exploring @fig-cape, it is evident that the implementation of Fortran is faster than R by a factor of ~28, proofing that integrating Fortran in R is vital for performance and beneficial for the environment.
 
 ```{r}
 #| label: fig-cape
@@ -510,15 +571,9 @@ autoplot(mbm) +
   stat_summary(
     fun = "mean",
     geom = "crossbar",
-    width = 0.3,
-    colour = "green"
+    width = 0.6,
+    colour = "red"
   )
 ```
 
-https://www.f5wx.com/pages/CAPECalc.htm
 
-https://geo.libretexts.org/Bookshelves/Meteorology_and_Climate_Science/Practical_Meteorology\_(Stull)/14%3A_Thunderstorm_Fundamentals/14.03%3A_Section_4-
-
-https://journals.ametsoc.org/view/journals/clim/33/6/jcli-d-19-0461.1.xml
-
-https://www.weather.gov/source/zhu/ZHU_Training_Page/convective_parameters/Sounding_Stuff/MesoscaleParameters.html

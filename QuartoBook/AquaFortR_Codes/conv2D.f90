@@ -2,7 +2,7 @@ subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
    implicit none
    integer                                :: m, n, p, q, k, l, i, j
    double precision, dimension(m, n)      :: a
-   double precision, dimension(p, q)      :: b, b_flipped
+   double precision, dimension(p, q)      :: b
    double precision, dimension(k, l)      :: conv
    !     dummy vars
    integer                               :: min_row_shift, min_col_shift
@@ -17,13 +17,6 @@ subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
    min_col_shift = -1*(q - 1)
    max_col_shift = n - 1
 
-   !   Flip the kernel i.e. B
-   b_flipped = 0.0
-   do i = 1, p
-      do j = 1, q
-         b_flipped(p - i + 1, q - j + 1) = b(i, j)
-      end do
-   end do
 
    !   Padded arrray
    rows_padded = abs(min_row_shift) + m + abs(max_row_shift)
@@ -42,7 +35,7 @@ subroutine conv2d_f(m, n, p, q, k, l, a, b, conv)
          iconv = irow + ((icol - 1)*k)
          icol2 = icol + q - 1
          irow2 = irow + p - 1
-         padded_b(irow:irow2, icol:icol2) = b_flipped
+         padded_b(irow:irow2, icol:icol2) = b(p:1:-1,q:1:-1)
          conv(irow, icol) = sum(padded_a*padded_b)
          padded_b = 0.0
       end do

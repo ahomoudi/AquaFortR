@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir materials
           zip -r materials/AquaFortR_Swirl.zip AquaFortR_Swirl/
-          zip -r materials/AquaFortR_Codes.zip QuartoBook/AquaFortR_Codes/
+          zip -r -j materials/AquaFortR_Codes.zip QuartoBook/AquaFortR_Codes/
           
 
       - name: Deploy 🚀

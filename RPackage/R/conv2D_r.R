@@ -10,7 +10,7 @@
 #' @examples
 #' a <- matrix(c(1, 2, 3, 4), ncol = 2)
 #' b <- matrix(c(5, 6, 7, 8), ncol = 2)
-#' conv2D_f(a, b)
+#' conv2D_r(a, b)
 #' @author Ahmed Homoudi
 #' @export
 conv2D_r <- function(a, b) {

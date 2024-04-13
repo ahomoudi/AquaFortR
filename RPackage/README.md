@@ -1,15 +1,15 @@
 # AquaFortR
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/AHomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AHomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml)
-[![Quarto Publish](https://github.com/AHomoudi/AquaFortR/workflows/Quarto%20Publish/badge.svg)](https://github.com/AHomoudi/AquaFortR/actions?query=workflow:"Quarto+Publish")
-[![GitHub tag](https://img.shields.io/github/tag/AHomoudi/AquaFortR?include_prereleases=&sort=semver&color=blue)](https://github.com/AHomoudi/AquaFortR/releases/)
+[![R-CMD-check](https://github.com/ahomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ahomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml)
+[![Quarto Publish](https://github.com/ahomoudi/AquaFortR/workflows/Quarto%20Publish/badge.svg)](https://github.com/ahomoudi/AquaFortR/actions?query=workflow:"Quarto+Publish")
+[![GitHub tag](https://img.shields.io/github/tag/ahomoudi/AquaFortR?include_prereleases=&sort=semver&color=blue)](https://github.com/ahomoudi/AquaFortR/releases/)
 [![License](https://img.shields.io/badge/License-CCBY-blue)](#license)
 <!-- badges: end -->
 
 This is the main webpage of the project AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R. 
 
-The project's [repository](https://github.com/AHomoudi/AquaFortR/) is structured as follows:
+The project's [repository](https://github.com/ahomoudi/AquaFortR/) is structured as follows:
 
  - QuartoBook  
  - RPackage  
@@ -22,7 +22,7 @@ The project's [repository](https://github.com/AHomoudi/AquaFortR/) is structured
 To install the AquaFortR package, please use: 
 
 ```r
-remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")
+remotes::install_github("ahomoudi/AquaFortR", subdir = "RPackage")
 ```
 ### Swirl
 To install the AquaFortR Swirl Course, please download the compressed course from 
@@ -44,7 +44,7 @@ This work has been funded by the German Research Foundation (DFG) through the pr
 
 ## License
 
-Released under [CCBY](/LICENSE) by [@AHomoudi](https://github.com/AHomoudi).
+Released under [CCBY](/LICENSE) by [@ahomoudi](https://github.com/ahomoudi).
 
 
 <!---  setwd("C:\\Projects\\AquaFortR") --->

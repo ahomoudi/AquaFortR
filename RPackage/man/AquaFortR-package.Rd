@@ -11,8 +11,8 @@ AquaFortR is an educational package for students and researchers in Atmospheric 
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://AHomoudi.github.io/AquaFortR}
-  \item Report bugs at \url{https://github.com/AHomoudi/AquaFortR/issues}
+  \item \url{https://ahomoudi.github.io/AquaFortR}
+  \item Report bugs at \url{https://github.com/ahomoudi/AquaFortR/issues}
 }
 
 }

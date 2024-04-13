@@ -61,3 +61,4 @@ QuartoBook/fortran/*
 QuartoBook/*.png
 toc_*
 AquaFortR.Rproj
+prepare_data.R

@@ -26,7 +26,6 @@
 #'   vtc = TRUE
 #' )
 #' @author Klemens Barfus (Original in Fortran), Ahmed Homoudi (Translation to R)
-#' @useDynLib AquaFortR
 #' @export
 cape_r <- function(t_parcel, dwpt_parcel, mr_parcel,
                    p_profile, t_profile, mr_profile,

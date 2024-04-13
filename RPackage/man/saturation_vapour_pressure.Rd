@@ -15,5 +15,5 @@ saturation_vapour_pressure(temperature, ice = FALSE)
 Estimation of Saturation vapour pressure [hPa] from temperature [k].
 }
 \author{
-Klemens Barfus
+Klemens Barfus (Original in Fortran), translated to R by Ahmed Homoudi
 }

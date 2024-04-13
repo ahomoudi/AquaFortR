@@ -12,16 +12,13 @@
 #' b <- matrix(c(5, 6, 7, 8), ncol = 2)
 #' conv2D_f(a, b)
 #' @author Ahmed Homoudi
-#' @useDynLib AquaFortR
 #' @export
 conv2D_f <- function(a, b) {
   stopifnot(length(dim(a)) == 2 | length(dim(b)) == 2)
   result <- .Call(
     c_conv2d_f,
-    as.integer(dim(a)),
-    as.double(a),
-    as.integer(dim(b)),
-    as.double(b)
+    a,
+    b
   )
   return(result)
 }

@@ -12,7 +12,6 @@
 #' b <- matrix(c(5, 6, 7, 8), ncol = 2)
 #' conv2D_f(a, b)
 #' @author Ahmed Homoudi
-#' @useDynLib AquaFortR
 #' @export
 conv2D_r <- function(a, b) {
   stopifnot(length(dim(a)) == 2 | length(dim(b)) == 2)

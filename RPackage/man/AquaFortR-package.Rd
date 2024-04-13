@@ -6,12 +6,13 @@
 \alias{AquaFortR-package}
 \title{AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R}
 \description{
-More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
+AquaFortR is an educational package for students and researchers in Atmospheric Science, Oceanography, Climate, and Water Research. AquaFortR aims to show that using simple Fortran scripts can fulfil the need to speed up R, especially considering that most data sets in these fields are large discretised arrays representing earth system processes. Fortran is one of the fastest programming languages in number crunching, if not the fastest, and multidimensional arrays are a core part of Fortran.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://AHomoudi.github.io/AquaFortR/}
+  \item \url{https://AHomoudi.github.io/AquaFortR}
+  \item Report bugs at \url{https://github.com/AHomoudi/AquaFortR/issues}
 }
 
 }

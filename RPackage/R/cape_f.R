@@ -26,27 +26,26 @@
 #'   vtc = TRUE
 #' )
 #' @author Klemens Barfus (Original in Fortran), Ahmed Homoudi (Integration in R)
-#' @useDynLib AquaFortR
 #' @export
 cape_f <- function(t_parcel, dwpt_parcel, mr_parcel,
                    p_profile, t_profile, mr_profile,
                    vtc = TRUE) {
-  DIM <- c(
-    length(p_profile),
-    4,
-    as.integer(vtc)
-  )
+
+  vtc <-as.integer(vtc)
+
   result <- .Call(
     c_cape_f,
-    as.double(t_parcel),
-    as.double(dwpt_parcel),
-    as.double(mr_parcel),
-    as.double(p_profile),
-    as.double(t_profile),
-    as.double(mr_profile),
-    as.integer(DIM)
+    t_parcel,
+    dwpt_parcel,
+    mr_parcel,
+    p_profile,
+    t_profile,
+    mr_profile,
+    vtc
   )
 
   names(result) <- c("CAPE", "CIN", "p_LCL", "p_LFC")
   return(result)
 }
+
+

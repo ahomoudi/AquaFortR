@@ -4,6 +4,7 @@ module AquaFortRmodule
 
    public :: xcorr2d_f
    public :: conv2d_f
+   public :: cape_f
 contains
 
    ! Cross-Correlation

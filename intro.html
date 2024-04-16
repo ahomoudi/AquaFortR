@@ -51,7 +51,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./scripts.html" rel="next">
-<link href="./preface.html" rel="prev">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -167,12 +167,6 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">&nbsp;</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./preface.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -258,15 +252,15 @@ div.csl-indent {
 <p>R is a powerful and versatile open-source language and environment for statistical computing and graphics <span class="citation" data-cites="RManual">(<a href="references.html#ref-RManual" role="doc-biblioref">R Core Team, 2023</a>)</span>. R was developed to facilitate data manipulation, exploration, and visualisation, providing various statistical and graphical tools.</p>
 <!-- What makes R easy? -->
 <p>The R environment is designed for effective data handling, array and matrix operations, and is a well-developed and simple programming language <span class="citation" data-cites="RManual">(<a href="references.html#ref-RManual" role="doc-biblioref">R Core Team, 2023</a>)</span>. Its syntax is concise and expressive, making it an accessible language for newbies and seasoned programmers. R can perform tasks either by executing scripts or interactively. The latter is advantageous for beginners and during the first stages of script development. The interactive environment is accessible through command lines or various integrated development environments (IDEs), such <a href="https://posit.co/products/open-source/rstudio/">RStudio</a>.</p>
-<p>Many factors play an important role in the popularity of R. For example, the ability to produce graphics with a publication’s quality. Simultaneously, the users maintain full control over customising the plots according to their preferences and intricate details. Another significant factor is its ability to be extended to meet the user’s demand. The Comprehensive R Archive Network <a href="https://cran.r-project.org/">(CRAN)</a> contains an extensive array of libraries and packages to extend R’s functionality for various tasks. With over <a href="https://cran.r-project.org/web/packages/">20447</a> available packages, the CRAN package repository is a testament to R’s versatility and adaptability.</p>
+<p>Many factors play an important role in the popularity of R. For example, the ability to produce graphics with a publication’s quality. Simultaneously, the users maintain full control over customising the plots according to their preferences and intricate details. Another significant factor is its ability to be extended to meet the user’s demand. The Comprehensive R Archive Network <a href="https://cran.r-project.org/">(CRAN)</a> contains an extensive array of libraries and packages to extend R’s functionality for various tasks. With over <a href="https://cran.r-project.org/web/packages/">20447</a> available packages (March 2024), the CRAN package repository is a testament to R’s versatility and adaptability.</p>
 <!-- Examples of R in Data science -->
-<p><a href="https://www.tidyverse.org/">Tidyverse</a> is the most popular bundle of R packages for data science. It was developed by Hadley Wickham and his team. The common shared design among tidyverse packages increases the consistency across functions and makes each new function or package a little easier to comprehend and utilise <span class="citation" data-cites="Wickham2023">(<a href="references.html#ref-Wickham2023" role="doc-biblioref">Wickham et al., 2023</a>)</span>.</p>
+<p>Tidyverse <span class="citation" data-cites="tidyverse2019 R-tidyverse">(<a href="references.html#ref-tidyverse2019" role="doc-biblioref">Wickham et al., 2019</a>; <a href="references.html#ref-R-tidyverse" role="doc-biblioref">Wickham, 2023</a>)</span> is the most popular bundle of R packages for data science. It was developed by Hadley Wickham and his team. The common shared design among tidyverse packages increases the consistency across functions and makes each new function or package a little easier to comprehend and utilise <span class="citation" data-cites="Wickham2023">(<a href="references.html#ref-Wickham2023" role="doc-biblioref">Wickham et al., 2023</a>)</span>.</p>
 <!-- Examples of R in Spatial data analysis -->
-<p>Many packages have been developed for spatial data analysis to address various challenging tasks. <a href="https://r-spatial.org">R-spatial</a> provides a rich set of packages for handling spatial or spatio-temporal data. For example, <a href="https://cran.r-project.org/web/packages/sf/index.html">sf</a> provides simple features access in R, which is a standardized method for encoding spatial vector data. The <a href="https://cran.r-project.org/web/packages/stars/index.html">stars</a> package aims to handle spatiotemporal arrays. Additionally, the <a href="https://cran.r-project.org/web/packages/terra/index.html">terra</a> package works with spatial data and has the ability to process large datasets on the disk when loading into memory (RAM) is not feasible.</p>
+<p>Many packages have been developed for spatial data analysis to address various challenging tasks. <a href="https://r-spatial.org">R-spatial</a> provides a rich set of packages for handling spatial or spatiotemporal data. For example, sf <span class="citation" data-cites="sf2018 sf2023 R-sf">(<a href="references.html#ref-sf2018" role="doc-biblioref">Pebesma, 2018</a>, <a href="references.html#ref-R-sf" role="doc-biblioref">2024a</a>; <a href="references.html#ref-sf2023" role="doc-biblioref">Pebesma &amp; Bivand, 2023</a>)</span> provides simple features access in R, which is a standardized method for encoding spatial vector data. The stars package <span class="citation" data-cites="R-stars">(<a href="references.html#ref-R-stars" role="doc-biblioref">Pebesma, 2024b</a>)</span> aims to handle spatiotemporal arrays. Additionally, the terra package <span class="citation" data-cites="R-terra">(<a href="references.html#ref-R-terra" role="doc-biblioref">Hijmans, 2024</a>)</span> works with spatial data and has the ability to process large datasets on the disk when loading into memory (RAM) is not feasible.</p>
 <!-- hdf5 and ncdf4 -->
-<p>Furthermore, research produces a large data sets; therefore, it is essential to store them according to the FAIR principles (<strong>F</strong>indability, <strong>A</strong>ccessibility, <strong>I</strong>nteroperability, and <strong>R</strong>euse of digital assets; <span class="citation" data-cites="Wilkinson2016">Wilkinson et al. (<a href="references.html#ref-Wilkinson2016" role="doc-biblioref">2016</a>)</span>). NetCDF and HDF5 are among the most prominent scientific data formats owing to their numerous capabilities. The R package <a href="https://cran.r-project.org/web/packages/ncdf4/index.html">ncdf4</a> delivers a high-level R interface to data files written using Unidata’s netCDF library. Additionally, <a href="https://bioconductor.org/packages/release/bioc/html/rhdf5.html">rhdf5</a> provides an interface between HDF5 and R.</p>
+<p>Furthermore, research produces a large data sets; therefore, it is essential to store them according to the FAIR principles (<strong>F</strong>indability, <strong>A</strong>ccessibility, <strong>I</strong>nteroperability, and <strong>R</strong>euse of digital assets; <span class="citation" data-cites="Wilkinson2016">Wilkinson et al. (<a href="references.html#ref-Wilkinson2016" role="doc-biblioref">2016</a>)</span>). NetCDF and HDF5 are among the most prominent scientific data formats owing to their numerous capabilities. The ncdf4 package <span class="citation" data-cites="R-ncdf4">(<a href="references.html#ref-R-ncdf4" role="doc-biblioref">Pierce, 2023</a>)</span> delivers a high-level R interface to data files written using Unidata’s netCDF library. Additionally, rhdf5 <span class="citation" data-cites="R-rhdf5">(<a href="references.html#ref-R-rhdf5" role="doc-biblioref">Fischer et al., 2023</a>)</span> provides an interface between HDF5 and R.</p>
 <!-- Interpolatable with Python C, C++, Fortran -->
-<p>Regarding the integration of other programming languages, R has diverse interfaces, which are either a fundamental implementation of R or attainable via another R package <span class="citation" data-cites="Chambers2016">(<a href="references.html#ref-Chambers2016" role="doc-biblioref">Chambers, 2016</a>)</span>. The fundamental interfaces are <code>.Call()</code>, <code>.C()</code>, and <code>.Fortran()</code> to C and Fortran. The development of the <a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a> package has revolutionised seamless access to C++. Python is also accessible using the <a href="https://cran.r-project.org/web/packages/reticulate/index.html">reticulate</a> package. Finally, the Java interface was granted using the <a href="https://cran.r-project.org/web/packages/rJava/index.html">rJava</a> package.</p>
+<p>Regarding the integration of other programming languages, R has diverse interfaces, which are either a fundamental implementation of R or attainable via another R package <span class="citation" data-cites="Chambers2016">(<a href="references.html#ref-Chambers2016" role="doc-biblioref">Chambers, 2016</a>)</span>. The fundamental interfaces are <code>.Call()</code>, <code>.C()</code>, and <code>.Fortran()</code> to C and Fortran. The development of the Rcpp package <span class="citation" data-cites="R-Rcpp">(<a href="references.html#ref-R-Rcpp" role="doc-biblioref">Eddelbuettel et al., 2024</a>)</span> has revolutionised seamless access to C++. Python is also accessible using the reticulate package <span class="citation" data-cites="R-reticulate">(<a href="references.html#ref-R-reticulate" role="doc-biblioref">Ushey et al., 2024</a>)</span>. Finally, the Java interface was granted using the rJava package <span class="citation" data-cites="R-rJava">(<a href="references.html#ref-R-rJava" role="doc-biblioref">Urbanek, 2024</a>)</span>.</p>
 <p>In conclusion, R is a valuable tool in the Earth System, as it can effectively tackle multifarious scientific tasks and address numerous outstanding research inquiries.</p>
 </section>
 <section id="fortran" class="level2" data-number="1.2">
@@ -301,25 +295,61 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-Chambers2016" class="csl-entry" role="listitem">
-Chambers, F., John M. CRC Press Boca Raton. (2016). <em>Extending r</em>. <a href="http://slubdd.de/katalog?TN_libero_mab2">http://slubdd.de/katalog?TN_libero_mab2</a>
+Chambers, F., John M. CRC Press Boca Raton. (2016). <em>Extending r</em>. CRC Press, Taylor &amp; Francis Group. <a href="https://www.routledge.com/Extending-R/Chambers/p/book/9781498775717">https://www.routledge.com/Extending-R/Chambers/p/book/9781498775717</a>
 </div>
 <div id="ref-chirila2014introduction" class="csl-entry" role="listitem">
-Chirila, D. B., &amp; Lohmann, G. (2014). <em>Introduction to modern fortran for the earth system sciences</em>. Springer Berlin Heidelberg. <a href="https://books.google.de/books?id=bZCeBQAAQBAJ">https://books.google.de/books?id=bZCeBQAAQBAJ</a>
+Chirila, D. B., &amp; Lohmann, G. (2014). <em>Introduction to modern fortran for the earth system sciences</em>. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-37009-0">https://doi.org/10.1007/978-3-642-37009-0</a>
+</div>
+<div id="ref-R-Rcpp" class="csl-entry" role="listitem">
+Eddelbuettel, D., Francois, R., Allaire, J., Ushey, K., Kou, Q., Russell, N., Ucar, I., Bates, D., &amp; Chambers, J. (2024). <em>Rcpp: Seamless r and c++ integration</em>. <a href="https://www.rcpp.org">https://www.rcpp.org</a>
+</div>
+<div id="ref-R-rhdf5" class="csl-entry" role="listitem">
+Fischer, B., Smith, M., &amp; Pau, G. (2023). <em>rhdf5: R interface to HDF5</em>. <a href="https://doi.org/10.18129/B9.bioc.rhdf5">https://doi.org/10.18129/B9.bioc.rhdf5</a>
+</div>
+<div id="ref-R-terra" class="csl-entry" role="listitem">
+Hijmans, R. J. (2024). <em>Terra: Spatial data analysis</em>. <a href="https://rspatial.org/">https://rspatial.org/</a>
 </div>
 <div id="ref-Masuda_2020" class="csl-entry" role="listitem">
 Masuda, Y. (2020). <em>Modern fortran tutorial</em>. Introduction. <a href="https://masuday.github.io/fortran_tutorial/introduction.html">https://masuday.github.io/fortran_tutorial/introduction.html</a>
 </div>
 <div id="ref-metcalf2018modern" class="csl-entry" role="listitem">
-Metcalf, M., Reid, J., &amp; Cohen, M. (2018). <em>Modern fortran explained: Incorporating fortran 2018</em>. OUP Oxford. <a href="https://books.google.de/books?id=sB1rDwAAQBAJ">https://books.google.de/books?id=sB1rDwAAQBAJ</a>
+Metcalf, M., Reid, J., &amp; Cohen, M. (2018). <em><span>Modern Fortran Explained: Incorporating Fortran 2018</span></em>. Oxford University Press. <a href="https://doi.org/10.1093/oso/9780198811893.001.0001">https://doi.org/10.1093/oso/9780198811893.001.0001</a>
+</div>
+<div id="ref-sf2018" class="csl-entry" role="listitem">
+Pebesma, E. (2018). <span class="nocase">Simple Features for R: Standardized Support for Spatial Vector Data</span>. <em><span>The R Journal</span></em>, <em>10</em>(1), 439–446. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>
+</div>
+<div id="ref-R-sf" class="csl-entry" role="listitem">
+Pebesma, E. (2024a). <em>Sf: Simple features for r</em>. <a href="https://r-spatial.github.io/sf/">https://r-spatial.github.io/sf/</a>
+</div>
+<div id="ref-R-stars" class="csl-entry" role="listitem">
+Pebesma, E. (2024b). <em>Stars: Spatiotemporal arrays, raster and vector data cubes</em>. <a href="https://r-spatial.github.io/stars/">https://r-spatial.github.io/stars/</a>
+</div>
+<div id="ref-sf2023" class="csl-entry" role="listitem">
+Pebesma, E., &amp; Bivand, R. (2023). <em><span class="nocase">Spatial Data Science: With applications in R</span></em>. <span>Chapman and Hall/CRC</span>. <a href="https://doi.org/10.1201/9780429459016">https://doi.org/10.1201/9780429459016</a>
+</div>
+<div id="ref-R-ncdf4" class="csl-entry" role="listitem">
+Pierce, D. (2023). <em>ncdf4: Interface to unidata netCDF (version 4 or earlier) format data files</em>. <a href="https://cirrus.ucsd.edu/~pierce/ncdf/">https://cirrus.ucsd.edu/~pierce/ncdf/</a>
 </div>
 <div id="ref-RManual" class="csl-entry" role="listitem">
 R Core Team. (2023). <em>R: A language and environment for statistical computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
 </div>
+<div id="ref-R-rJava" class="csl-entry" role="listitem">
+Urbanek, S. (2024). <em>rJava: Low-level r to java interface</em>. <a href="http://www.rforge.net/rJava/">http://www.rforge.net/rJava/</a>
+</div>
+<div id="ref-R-reticulate" class="csl-entry" role="listitem">
+Ushey, K., Allaire, J., &amp; Tang, Y. (2024). <em>Reticulate: Interface to python</em>. <a href="https://rstudio.github.io/reticulate/">https://rstudio.github.io/reticulate/</a>
+</div>
 <div id="ref-wickham2015advanced" class="csl-entry" role="listitem">
-Wickham, H. (2015). <em>Advanced r</em>. CRC Press. <a href="https://books.google.de/books?id=FfsYCwAAQBAJ">https://books.google.de/books?id=FfsYCwAAQBAJ</a>
+Wickham, H. (2015). <em>Advanced r</em>. CRC Press. <a href="https://www.oreilly.com/library/view/advanced-r/9781466586963/">https://www.oreilly.com/library/view/advanced-r/9781466586963/</a>
+</div>
+<div id="ref-R-tidyverse" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>Tidyverse: Easily install and load the tidyverse</em>. <a href="https://tidyverse.tidyverse.org">https://tidyverse.tidyverse.org</a>
+</div>
+<div id="ref-tidyverse2019" class="csl-entry" role="listitem">
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., … Yutani, H. (2019). Welcome to the <span class="nocase">tidyverse</span>. <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>
 </div>
 <div id="ref-Wickham2023" class="csl-entry" role="listitem">
-Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for data science import, tidy, transform, visualize, and model data</em> (2nd edition). O’Reilly. <a href="http://slubdd.de/katalog?TN_libero_mab2">http://slubdd.de/katalog?TN_libero_mab2</a>
+Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for data science import, tidy, transform, visualize, and model data</em> (2nd edition). O’Reilly Media.
 </div>
 <div id="ref-Wilkinson2016" class="csl-entry" role="listitem">
 Wilkinson, M. D., Dumontier, M., Aalbersberg, Ij. J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J.-W., da Silva Santos, L. B., Bourne, P. E., Bouwman, J., Brookes, A. J., Clark, T., Crosas, M., Dillo, I., Dumon, O., Edmunds, S., Evelo, C. T., Finkers, R., … Mons, B. (2016). <span class="nocase">The FAIR Guiding Principles for scientific data management and stewardship</span>. <em>Scientific Data</em>, <em>3</em>(1), 160018. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>
@@ -883,7 +913,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./preface.html" class="pagination-link" aria-label="Preface">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>

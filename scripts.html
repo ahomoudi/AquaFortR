@@ -212,12 +212,6 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">&nbsp;</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./preface.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -272,7 +266,7 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="chap-scripts" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accelerate R Scripts with Fortran</span></span></h1>
+<h1 class="title"><span id="sec-scripts" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accelerate R Scripts with Fortran</span></span></h1>
 </div>
 
 
@@ -291,7 +285,7 @@ window.Quarto = {
 <span class="header-section-number">2.1</span> 2D Coss-Correlation</h2>
 <!-- What is CC  -->
 <!-- What is used for  -->
-<p>In signal processing, cross-correlation is a measure of the similarity between two signals as a function of the displacement of one relative to the other <span class="citation" data-cites="Wang2019">(<a href="references.html#ref-Wang2019" role="doc-biblioref">Wang, 2019</a>)</span>. It can deliver information about the time lag between the two signals. 2D cross-correlation is often applied in computer vision for visual tracking. For example, it is used in template matching, feature detection, and motion tracking. 2D cross-correlation also plays an important role in convolutional networks and machine learning.</p>
+<p>In signal processing, cross-correlation measures similarity between two signals as a function of the displacement of one relative to the other <span class="citation" data-cites="Wang2019">(<a href="references.html#ref-Wang2019" role="doc-biblioref">Wang, 2019</a>)</span>. It can deliver information about the time lag between the two signals. 2D cross-correlation is often applied in computer vision for visual tracking. For example, it is used in template matching, feature detection, and motion tracking. 2D cross-correlation also plays an important role in convolutional networks and machine learning.</p>
 <!-- How it is important in Atmospheric Science, Oceanography, Climate, and Water Research -->
 <p>In atmospheric science, oceanography, climate, and water research, 2D cross-correlation can be applied in various ways. For example, it can be used to estimate ocean surface currents <span class="citation" data-cites="Warren2016">(<a href="references.html#ref-Warren2016" role="doc-biblioref">Warren et al., 2016</a>)</span>, cloud tracking using satellite imagery <span class="citation" data-cites="Seelig2021">(<a href="references.html#ref-Seelig2021" role="doc-biblioref">Seelig et al., 2021</a>)</span>, and Particle Image Velocimetry (PIV) in fluid dynamics applications <span class="citation" data-cites="Willert1991">(<a href="references.html#ref-Willert1991" role="doc-biblioref">Willert &amp; Gharib, 1991</a>)</span>.</p>
 <p>The 2D cross-correlation of an array <span class="math inline">\(F_{(M, N)}\)</span>, and array <span class="math inline">\(G_{(P, Q)}\)</span>, can be given as the array <span class="math inline">\(CC_{(M+P-1, N+Q-1)}\)</span> as shown in <a href="#eq-2DCC" class="quarto-xref">Equation&nbsp;<span>2.1</span></a>.</p>
@@ -408,7 +402,7 @@ Listing&nbsp;2.2: Cross-correlation in Fortran
 </figure>
 </div>
 </div>
-<p>Since Fortran is a compiled language, we need to save the subroutine in <code>xcorr2D.f90</code> file and compile it using: <code>R CMD SHLIB xcorr2D.f90</code></p>
+<p>Since Fortran is a compiled language, we need to save the subroutine in <code>xcorr2D.f90</code> file and compile it using: <code>R CMD SHLIB xcorr2D.f90</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -423,14 +417,14 @@ Note
 </div>
 </div>
 <p>As mentioned earlier, we need to pass the dimension of the arrays to Fortran. Therefore, it would logical to write a wrapping function for Fortran subroutine that provides other input arguments.</p>
-<p>In the wrapper function (<a href="#lst-xcorrfr" class="quarto-xref">Listing&nbsp;<span>2.3</span></a>), we initially require loading the shared object, which is the compiled Fortran subroutine, as <code>dyn.load("path/to/xcorr2D.so")</code>. Furthermore, it is important to prepare other input variables for Fortran such as the dimensions of the input and output arrays. Imperatively, data types should be approached carefully. Before calling <code><a href="https://rdrr.io/r/base/Foreign.html">.Fortran()</a></code>, all storage mode of the variables in R was converted to the appropriate type using either <code><a href="https://rdrr.io/r/base/double.html">as.double()</a></code> or <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code>. If the wrong type is passed, it can result in a hard-to-catch error or unexpected results<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>In the wrapper function (<a href="#lst-xcorrfr" class="quarto-xref">Listing&nbsp;<span>2.3</span></a>), we initially require loading the shared object (<code>.so</code> or <code>.dll</code>), which is the compiled Fortran subroutine, as <code>dyn.load("path/to/xcorr2D.so")</code>. Furthermore, it is important to prepare other input variables for Fortran such as the dimensions of the input and output arrays. Imperatively, data types should be approached carefully. Before calling <code><a href="https://rdrr.io/r/base/Foreign.html">.Fortran()</a></code>, all storage mode of the variables in R was converted to the appropriate type using either <code><a href="https://rdrr.io/r/base/double.html">as.double()</a></code> or <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code>. If the wrong type is passed, it can result in a hard-to-catch error or unexpected results<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell">
 <div id="lst-xcorrfr" class="r cell-code listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-xcorrfr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;2.3: Cross-correlation wrapping function
 </figcaption><div aria-describedby="lst-xcorrfr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode" id="lst-xcorrfr"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">xcorr2D_f0</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="co"># Please adjust the path to your setup. In my machine,</span></span>
+<span>  <span class="co"># Please adjust the path to your setup.</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/dynload.html">dyn.load</a></span><span class="op">(</span><span class="st">"AquaFortR_Codes/xcorr2D.so"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># the full CC matrix</span></span>
@@ -456,10 +450,23 @@ Listing&nbsp;2.3: Cross-correlation wrapping function
 </figure>
 </div>
 </div>
-<p>Now, we can use an example to compare the performance of the two functions. In order to do so, <code>microbenchmark</code> package needs to be installed, and <code>ggplot2</code> is required for plotting.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On Windows, <code>R CMD SHLIB</code> produces dynamic-link library (dll) files. Please adjust the library extension in R functions according to your OS.</p>
+</div>
+</div>
+<p>Now, we can use an example to compare the performance of the two functions. In order to do so, <code>microbenchmark</code> package <span class="citation" data-cites="R-microbenchmark">(<a href="references.html#ref-R-microbenchmark" role="doc-biblioref">Mersmann, 2024</a>)</span> and <code>ggplot2</code> <span class="citation" data-cites="ggplot22016 R-ggplot2">(<a href="references.html#ref-ggplot22016" role="doc-biblioref">Wickham, 2016</a>; <a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al., 2024</a>)</span> are required.</p>
 <p>The obtained benchmarking data allows (<code>mbm</code>) for a quantitative comparison of the computational efficiency between the two methods. By printing “mbm” in the console (<code>print(mbm)</code>) it is evident that Fortran outperforms the R implementation of 2D cross-correlation by a factor of ~10. The significance of leveraging Fortran becomes evident in <a href="#fig-xcorr2D" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">72</span><span class="op">)</span></span>
@@ -468,8 +475,8 @@ Listing&nbsp;2.3: Cross-correlation wrapping function
 <span><span class="co"># Assume b</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8L</span>, <span class="fl">8L</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span></span>
-<span>  xcorr2D_r <span class="op">=</span> <span class="fu">xcorr2D_r0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>,</span>
-<span>  xcorr2D_f <span class="op">=</span> <span class="fu">xcorr2D_f0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span>
+<span>  xcorr2D_r0 <span class="op">=</span> <span class="fu">xcorr2D_r0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>,</span>
+<span>  xcorr2D_f0 <span class="op">=</span> <span class="fu">xcorr2D_f0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span> <span class="op">+</span></span>
@@ -479,7 +486,7 @@ Listing&nbsp;2.3: Cross-correlation wrapping function
 <span>    width <span class="op">=</span> <span class="fl">0.6</span>,</span>
 <span>    colour <span class="op">=</span> <span class="st">"red"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-xcorr2D" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-xcorr2D-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="scripts_files/figure-html/fig-xcorr2D-1.png" class="img-fluid figure-img" width="672">
@@ -546,6 +553,19 @@ Listing&nbsp;2.4: Convolution in R
 </figure>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A Gaussian smoothing filter can be applied to an array <code>a</code> using <code>b</code> as the Gaussian kernel or the 2D Gaussian coefficients. However, the convolution and cross-correlation can be optimised using the Fast Fourier Transform (FFT). See <a href="summary.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
+</div>
+</div>
 <div class="cell">
 <div id="lst-convrf" class="fortran cell-code listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-convrf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -600,19 +620,23 @@ Listing&nbsp;2.5: Convolution in Fortran
 </div>
 <p>The gfortran compiler is also capable of creating shared libraries. It allows for easy addition of other flags, such as enabling the generation of the run-time check (<code>-fcheck=all</code>). The code below shows two options for compiling <code>conv2D.f90</code> by R or the gfortran compiler.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span> CMD SHLIB conv2D.f90</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># gfortran</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">gfortran</span> <span class="at">-fpic</span> <span class="at">-shared</span> conv2D.f90 <span class="at">-o</span> conv2D.so</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># gfortran on Unix-like</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">gfortran</span> <span class="at">-shared</span> conv2D.f90 <span class="at">-o</span> conv2D.so</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gfortran on Windows</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">gfortran</span> <span class="at">-shared</span> conv2D.f90 <span class="at">-o</span> conv2D.dll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>In R wrapper function, <code><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64()</a></code> from <a href="https://cran.r-project.org/web/packages/dotCall64/index.html">dotCall64</a> package will be used instead of <code><a href="https://rdrr.io/r/base/Foreign.html">.Fortran()</a></code>. According to <span class="citation" data-cites="GERBER2018217">Gerber et al. (<a href="references.html#ref-GERBER2018217" role="doc-biblioref">2018</a>)</span>, <code><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64()</a></code> transcends other foreign function interfaces in many aspects:</p>
+<p>In R wrapper function, <code><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64()</a></code> from dotCall64 package <span class="citation" data-cites="dotCall642018 R-dotCall64">(<a href="references.html#ref-dotCall642018" role="doc-biblioref">Gerber et al., 2018</a>; <a href="references.html#ref-R-dotCall64" role="doc-biblioref">Gerber &amp; Mösinger, 2023</a>)</span> will be used instead of <code><a href="https://rdrr.io/r/base/Foreign.html">.Fortran()</a></code>. According to <span class="citation" data-cites="dotCall642018">Gerber et al. (<a href="references.html#ref-dotCall642018" role="doc-biblioref">2018</a>)</span>, <code><a href="https://rdrr.io/pkg/dotCall64/man/dotCall64.html">.C64()</a></code> transcends other foreign function interfaces in many aspects:</p>
 <ul>
 <li>It supports long vectors.</li>
 <li>The <code>SIGNATURE</code> argument ensures that the interfaced R objects are of the specified types</li>
-<li>The <code>INTENT</code> argument helps avoid unnecessary copies of R objects between languages. It is very important when working with large data sets.</li>
+<li>The <code>INTENT</code> argument helps avoid unnecessary copies of R objects between languages.</li>
 </ul>
-<p>In <a href="#lst-convrfr" class="quarto-xref">Listing&nbsp;<span>2.6</span></a>, the basic input arguments, such as the dimensions of input and output arrays, are prepared. Afterwards, the <code>SIGNATURE</code> is defined as six integers and three doubles corresponding to the required types in the subroutine. <code>INTENT</code> will ensure that only the <code>conv</code> argument is copied between R and Fortran. This is particularly important in large productions, where coping the subroutine parameters can extend beyond the available memory (RAM).</p>
+<p>In <a href="#lst-convrfr" class="quarto-xref">Listing&nbsp;<span>2.6</span></a>, the basic input arguments, such as the dimensions of input and output arrays, are prepared. Afterwards, the <code>SIGNATURE</code> is defined as six integers and three doubles corresponding to the required types in the subroutine. <code>INTENT</code> will ensure that only the <code>conv</code> argument is copied between R and Fortran. This is particularly important when processing large data set, where coping the subroutine arguments extends beyond the available memory (RAM).</p>
 <div class="cell">
 <div id="lst-convrfr" class="r cell-code listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-convrfr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -653,21 +677,8 @@ Listing&nbsp;2.6: Convolution wrapping function
 </figure>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A Gaussian smoothing filter can be applied to an array <code>a</code> using <code>b</code> as the Gaussian kernel or the 2D Gaussian coefficients. However, the convolution and cross-correlation can be optimised using the Fast Fourier Transform (FFT). See <a href="summary.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
-</div>
-</div>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span></span>
@@ -677,8 +688,8 @@ Note
 <span><span class="co"># Assume b</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8L</span>, <span class="fl">8L</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span></span>
-<span>  conv2D_r <span class="op">=</span> <span class="fu">conv2D_r0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>,</span>
-<span>  conv2D_f <span class="op">=</span> <span class="fu">conv2D_f0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span>
+<span>  conv2D_r0 <span class="op">=</span> <span class="fu">conv2D_r0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span>,</span>
+<span>  conv2D_f0 <span class="op">=</span> <span class="fu">conv2D_f0</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span> <span class="op">+</span></span>
@@ -688,7 +699,7 @@ Note
 <span>    width <span class="op">=</span> <span class="fl">0.6</span>,</span>
 <span>    colour <span class="op">=</span> <span class="st">"red"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-conv2D" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-conv2D-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="scripts_files/figure-html/fig-conv2D-1.png" class="img-fluid figure-img" width="672">
@@ -721,9 +732,9 @@ Question
 CAPE =  R_d \sum_{p_{LFC}}^{p_{EL}} (T_p - T_v) . ln(\frac{p_{bottom}}{p_{top}})
 \tag{2.3}\]</span></span></p>
 <p>where <span class="math inline">\(R_d\)</span> is the gas constant for dry air, <span class="math inline">\(T_p\)</span> is the parcel temperature, <span class="math inline">\(T_e\)</span> is the environment temperature, <span class="math inline">\(p\)</span> is pressure, <span class="math inline">\(LFC\)</span> is the Level of Free Convection, and <span class="math inline">\(EL\)</span> is the Equilibrium Level.</p>
-<p>Under a warming climate, CAPE is expected to increase <span class="citation" data-cites="Chen2020">(<a href="references.html#ref-Chen2020" role="doc-biblioref">Chen et al., 2020</a>)</span>, which can result in an elevated risk of thunderstorms. It is crucial for humanity to quantify the future risk for proper preparation and mitigation. Typically, thunderstorms are investigated with convective-permitting modelling (CPM) where the horizontal resolution is less than 4km. CPM simulations produce vast amount of data sets, and CAPE estimation at a specific gridpoint and time is an integration along the vertical profile (@#eq-cape).</p>
-<p>Given the rapid advancements in computing power, it is anticipated that CPM is expected to be performed at finer horizontal and vertical resolution, thereby increasing the complexity of estimating CAPE. It is essential that the enhancement of computing power is accompanied by responsible management and allocation of these resources.</p>
-<p>Since CAPE calculation scripts are highly complex and lengthy, the necessary codes are only available in supplementary materials. Additionally, to test the two implementations of CAPE, the AquaFortR package should be installed to utilise the example data. See <a href="#lst-cape" class="quarto-xref">Listing&nbsp;<span>2.7</span></a>.</p>
+<p>In a warming climate, CAPE is expected to increase <span class="citation" data-cites="Chen2020">(<a href="references.html#ref-Chen2020" role="doc-biblioref">Chen et al., 2020</a>)</span>, which can result in an elevated risk of thunderstorms. It is crucial for humanity to quantify the future risk for proper preparation and mitigation. Typically, thunderstorms are investigated with convective-permitting modelling (CPM) where the horizontal resolution is less than 4km. CPM simulations produce vast amount of data sets, and CAPE estimation at a specific gridpoint and time is an integration along the vertical profile (<a href="#eq-cape" class="quarto-xref">Equation&nbsp;<span>2.3</span></a>).</p>
+<p>Given the rapid advancements in computing power, it is anticipated that CPM is expected to be performed at finer horizontal and vertical resolution, thereby increasing the complexity of the CAPE estimation. It is essential that the enhancement of computing power is accompanied by responsible management and resource allocation.</p>
+<p>Because the CAPE calculation scripts are highly complex and lengthy, the necessary codes are only available in the supplementary materials. Additionally, to test the two implementations of CAPE, the AquaFortR package was installed to utilise the example data. See <a href="#lst-cape" class="quarto-xref">Listing&nbsp;<span>2.7</span></a>.</p>
 <div class="cell">
 <div id="lst-cape" class="r cell-code listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-cape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -740,7 +751,7 @@ Listing&nbsp;2.7: CAPE implementation in R and Fortran
 <span><span class="va">Dewpoint</span> <span class="op">&lt;-</span> <span class="va">radiosonde</span><span class="op">$</span><span class="va">dpt</span> <span class="op">+</span> <span class="fl">273.15</span> <span class="co"># K</span></span>
 <span><span class="va">Pressure</span> <span class="op">&lt;-</span> <span class="va">radiosonde</span><span class="op">$</span><span class="va">pressure</span> <span class="co"># hPa</span></span>
 <span><span class="co"># Mixing ratio</span></span>
-<span><span class="va">MixingRatio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AquaFortR/man/mixing_ratio_from_dewpoint.html">mixing_ratio_from_dewpoint</a></span><span class="op">(</span><span class="va">Dewpoint</span>, <span class="va">Pressure</span><span class="op">)</span></span>
+<span><span class="va">MixingRatio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ahomoudi.github.io/AquaFortR/reference/mixing_ratio_from_dewpoint.html">mixing_ratio_from_dewpoint</a></span><span class="op">(</span><span class="va">Dewpoint</span>, <span class="va">Pressure</span><span class="op">)</span></span>
 <span><span class="va">t_parcel</span> <span class="op">&lt;-</span> <span class="va">Temperature</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">dwpt_parcel</span> <span class="op">&lt;-</span> <span class="va">Dewpoint</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">mr_parcel</span> <span class="op">&lt;-</span> <span class="va">MixingRatio</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
@@ -764,10 +775,10 @@ Important
 <p>Foremost, the Fortran subroutine need to be complied as shown in previous sections. The path to the shared library cape_f.so in cape_f.R file should be adapted to the correct path.</p>
 </div>
 </div>
-<p>As mentioned, integration between R and Fortran should be accomplished through subroutines. Nevertheless, some calculations are complex, and using functions or other subroutines is inevitable. In cape.f90, a module containing all the required utilities was written, and then the main subroutine was included. The approach ensures cape_f has access to the module and is simultaneously available to R.</p>
+<p>As mentioned, integration between R and Fortran should be accomplished through subroutines. Nevertheless, some calculations are complex, and using functions or other subroutines is inevitable. In cape.f90, a module containing all the required utilities was written, and then the main subroutine was included. The approach ensures <code>cape_f</code> has access to the module and is simultaneously available to R.</p>
 <p>Exploring <a href="#fig-cape" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>, it is evident that the implementation of Fortran is faster than R by a factor of ~28, proofing that integrating Fortran in R is vital for performance and beneficial for the environment.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span></span>
@@ -788,7 +799,7 @@ Important
 <span>    width <span class="op">=</span> <span class="fl">0.6</span>,</span>
 <span>    colour <span class="op">=</span> <span class="st">"red"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div id="fig-cape" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="scripts_files/figure-html/fig-cape-1.png" class="img-fluid figure-img" width="672">
@@ -799,6 +810,9 @@ Figure&nbsp;2.3: Performance comparison of CAPE in R and Fortran
 </div>
 </div>
 </div>
+<!-- ::: {.callout-important} -->
+<!-- In the file `cape_f.f90`, there is a module followed by a subroutine. This organization is utilised for two reasons: a) R only uses subroutines from Fortran compiled code.  In order to use helping functions in `cape_f.f90`, they must be enclosed in a module and called using `use :: tools`. -->
+<!-- ::: -->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -808,20 +822,32 @@ Chen, J., Dai, A., Zhang, Y., &amp; Rasmussen, K. L. (2020). Changes in convecti
 <div id="ref-Draelos_2019" class="csl-entry" role="listitem">
 Draelos, R. (2019). Convolution vs. Cross-correlation. In <em>Glass Box</em>. <a href="https://glassboxmedicine.com/2019/07/26/convolution-vs-cross-correlation/">https://glassboxmedicine.com/2019/07/26/convolution-vs-cross-correlation/</a>
 </div>
-<div id="ref-GERBER2018217" class="csl-entry" role="listitem">
-Gerber, F., Mösinger, K., &amp; Furrer, R. (2018). dotCall64: An r package providing an efficient interface to compiled c, c++, and fortran code supporting long vectors. <em>SoftwareX</em>, <em>7</em>, 217–221. https://doi.org/<a href="https://doi.org/10.1016/j.softx.2018.06.002">https://doi.org/10.1016/j.softx.2018.06.002</a>
+<div id="ref-dotCall642018" class="csl-entry" role="listitem">
+Gerber, F., Moesinger, K., &amp; Furrer, R. (2018). <span class="nocase">dotCall64</span>: An <span>R</span> package providing an efficient interface to compiled <span>C</span>, <span>C++</span>, and <span>Fortran</span> code supporting long vectors. <em>SoftwareX</em>, <em>7</em>, 217–221. <a href="https://doi.org/10.1016/j.softx.2018.06.002">https://doi.org/10.1016/j.softx.2018.06.002</a>
+</div>
+<div id="ref-R-dotCall64" class="csl-entry" role="listitem">
+Gerber, F., &amp; Mösinger, K. (2023). <em>dotCall64: Enhanced foreign function interface supporting long vectors</em>. <a href="https://git.math.uzh.ch/reinhard.furrer/dotCall64">https://git.math.uzh.ch/reinhard.furrer/dotCall64</a>
+</div>
+<div id="ref-R-microbenchmark" class="csl-entry" role="listitem">
+Mersmann, O. (2024). <em>Microbenchmark: Accurate timing functions</em>. <a href="https://github.com/joshuaulrich/microbenchmark/">https://github.com/joshuaulrich/microbenchmark/</a>
 </div>
 <div id="ref-Seelig2021" class="csl-entry" role="listitem">
 Seelig, T., Deneke, H., Quaas, J., &amp; Tesche, M. (2021). <span class="nocase">Life Cycle of Shallow Marine Cumulus Clouds From Geostationary Satellite Observations</span>. <em>Journal of Geophysical Research: Atmospheres</em>, <em>126</em>(22). <a href="https://doi.org/10.1029/2021JD035577">https://doi.org/10.1029/2021JD035577</a>
 </div>
 <div id="ref-stull2016practical" class="csl-entry" role="listitem">
-Stull, R. (2016). <em>Practical meteorology: An algebra-based survey of atmospheric science</em>. AVP International, University of British Columbia. <a href="https://books.google.de/books?id=xP2sDAEACAAJ">https://books.google.de/books?id=xP2sDAEACAAJ</a>
+Stull, R. (2016). <em>Practical meteorology: An algebra-based survey of atmospheric science</em>. AVP International, University of British Columbia. <a href="https://www.eoas.ubc.ca/books/Practical_Meteorology/">https://www.eoas.ubc.ca/books/Practical_Meteorology/</a>
 </div>
 <div id="ref-Wang2019" class="csl-entry" role="listitem">
 Wang, C. (2019). <em>Kernel learning for visual perception</em>. <a href="https://doi.org/10.32657/10220/47835">https://doi.org/10.32657/10220/47835</a>
 </div>
 <div id="ref-Warren2016" class="csl-entry" role="listitem">
 Warren, M. A., Quartly, G. D., Shutler, J. D., Miller, P. I., &amp; Yoshikawa, Y. (2016). Estimation of ocean surface currents from maximum cross correlation applied to GOCI geostationary satellite remote sensing data over the tsushima (korea) straits. <em>Journal of Geophysical Research: Oceans</em>, <em>121</em>(9), 6993–7009. https://doi.org/<a href="https://doi.org/10.1002/2016JC011814">https://doi.org/10.1002/2016JC011814</a>
+</div>
+<div id="ref-ggplot22016" class="csl-entry" role="listitem">
+Wickham, H. (2016). <em>ggplot2: Elegant graphics for data analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>
+</div>
+<div id="ref-R-ggplot2" class="csl-entry" role="listitem">
+Wickham, H., Chang, W., Henry, L., Pedersen, T. L., Takahashi, K., Wilke, C., Woo, K., Yutani, H., Dunnington, D., &amp; van den Brand, T. (2024). <em>ggplot2: Create elegant data visualisations using the grammar of graphics</em>. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>
 </div>
 <div id="ref-Willert1991" class="csl-entry" role="listitem">
 Willert, C. E., &amp; Gharib, M. (1991). <span class="nocase">Digital particle image velocimetry</span>. <em>Experiments in Fluids</em>, <em>10</em>(4), 181–193. <a href="https://doi.org/10.1007/BF00190388">https://doi.org/10.1007/BF00190388</a>

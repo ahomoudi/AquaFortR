@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.553">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R - 3&nbsp; Accelerate R Packages with Fortran</title>
 <style>
 code{white-space: pre-wrap;}
@@ -20,8 +17,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
-
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -42,8 +92,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -70,19 +119,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-
-
 <meta property="og:title" content="AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R - 3&nbsp; Accelerate R Packages with Fortran">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate,  and Water Research with Fortran-accelerated R">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -93,13 +137,9 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -108,26 +148,26 @@ ul.task-list li input[type="checkbox"] {
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
               <i class="bi bi-bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
               <i class="bi bi-bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
               <i class="bi bi-bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-    </div>
+</div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -144,15 +184,9 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">&nbsp;</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./preface.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -193,35 +227,30 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#brief-introduction-to-r-packages" id="toc-brief-introduction-to-r-packages" class="nav-link active" data-scroll-target="#brief-introduction-to-r-packages"><span class="header-section-number">3.1</span> Brief Introduction to R Packages</a>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li>
+<a href="#developing-aquafortr" id="toc-developing-aquafortr" class="nav-link" data-scroll-target="#developing-aquafortr"><span class="header-section-number">3.2</span> Developing AquaFortR</a>
   <ul class="collapse">
-  <li><a href="#devtools-package" id="toc-devtools-package" class="nav-link" data-scroll-target="#devtools-package"><span class="header-section-number">3.1.1</span> devtools package</a></li>
-  </ul></li>
-  <li><a href="#developing-aquafortr-package" id="toc-developing-aquafortr-package" class="nav-link" data-scroll-target="#developing-aquafortr-package"><span class="header-section-number">3.2</span> Developing AquaFortR Package</a>
-  <ul class="collapse">
-  <li><a href="#fortran-subroutine" id="toc-fortran-subroutine" class="nav-link" data-scroll-target="#fortran-subroutine"><span class="header-section-number">3.2.1</span> Fortran subroutine</a></li>
-  <li><a href="#r-function" id="toc-r-function" class="nav-link" data-scroll-target="#r-function"><span class="header-section-number">3.2.2</span> R function</a></li>
-  <li><a href="#c-funtions" id="toc-c-funtions" class="nav-link" data-scroll-target="#c-funtions"><span class="header-section-number">3.2.3</span> C funtions</a></li>
-  <li><a href="#packages-files" id="toc-packages-files" class="nav-link" data-scroll-target="#packages-files"><span class="header-section-number">3.2.4</span> Package’s files</a></li>
-  </ul></li>
+<li><a href="#fortran-subroutine" id="toc-fortran-subroutine" class="nav-link" data-scroll-target="#fortran-subroutine"><span class="header-section-number">3.2.1</span> Fortran Subroutine</a></li>
+  <li><a href="#sec-cfunctions" id="toc-sec-cfunctions" class="nav-link" data-scroll-target="#sec-cfunctions"><span class="header-section-number">3.2.2</span> C Functions</a></li>
+  <li><a href="#r-function" id="toc-r-function" class="nav-link" data-scroll-target="#r-function"><span class="header-section-number">3.2.3</span> R Function</a></li>
+  <li><a href="#system-dependencies" id="toc-system-dependencies" class="nav-link" data-scroll-target="#system-dependencies"><span class="header-section-number">3.2.4</span> System Dependencies</a></li>
   </ul>
-</nav>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accelerate R Packages with Fortran</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Accelerate R Packages with Fortran</span>
+</h1>
 </div>
 
 
@@ -235,47 +264,239 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<p>This chapter will focus on wrapping the developed routines from the previous chapter in an R package.</p>
-<section id="brief-introduction-to-r-packages" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="brief-introduction-to-r-packages"><span class="header-section-number">3.1</span> Brief Introduction to R Packages</h2>
-<section id="devtools-package" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="devtools-package"><span class="header-section-number">3.1.1</span> devtools package</h3>
-<!-- https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/ -->
-</section>
-</section>
-<section id="developing-aquafortr-package" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="developing-aquafortr-package"><span class="header-section-number">3.2</span> Developing AquaFortR Package</h2>
-<section id="fortran-subroutine" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="fortran-subroutine"><span class="header-section-number">3.2.1</span> Fortran subroutine</h3>
-<p>iso_c_binidng <!-- -  https://gcc.gnu.org/onlinedocs/gfortran/Intrinsic-Types.html --></p>
-</section>
-<section id="r-function" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="r-function"><span class="header-section-number">3.2.2</span> R function</h3>
-</section>
-<section id="c-funtions" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="c-funtions"><span class="header-section-number">3.2.3</span> C funtions</h3>
+</header><p>The chapter focuses on wrapping the routines developed in the previous chapter in the R package.</p>
+<section id="introduction" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">3.1</span> Introduction</h2>
+<p>A package in R is a bundle of R code, data, and documentation designed to perform a specific task or a set of tasks <span class="citation" data-cites="Wickham_Bryan_2023">(<a href="references.html#ref-Wickham_Bryan_2023" role="doc-biblioref">Wickham &amp; Bryan, 2023</a>)</span>. Packages are the fundamental units of reproducible R code. Packaging has many benefits:</p>
 <ul>
-<li>C to Fortran</li>
-<li>R to C</li>
+<li>It produces packages that are easily downloaded and used.</li>
+<li>It forces a tidy code and work process.</li>
+<li>It enables the re-usage of code from and for other projects.</li>
+<li>Files rapidly multiply when using foreign languages such as C, C++, or Fortran; thus, packaging makes it easier to maintain and manage dependencies and ports.</li>
 </ul>
-</section>
-<section id="packages-files" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="packages-files"><span class="header-section-number">3.2.4</span> Package’s files</h3>
-<!-- .Fortran is primarily intended for Fortran 77 code, and long precedes any support for ‘modern’ Fortran. Nowadays implementations of Fortran support the Fortran 2003 module iso_c_binding, a better way to interface modern Fortran code to R is to use .C and write a C interface using use iso_c_binding.  -->
-<!-- F77_NAME(name) to declare a Fortran routine in C before use  -->
-<!-- F77_CALL(name) to call a Fortran routine from C  -->
-<!-- void R_orderVector (int* indx, int n, SEXP arglist, Rboolean nalast, Rboolean decreasing) -->
-<!-- Cross Platform Development -->
+<p>Many tools are available to facilitate developing R packages, such as <code>devtools</code>, <code>usethis</code>, and <code>testthat</code>. Additionally, RStudio operates as an invaluable companion. To start the development of an R package within RStudio, navigate to File &gt; New Project &gt; New Directory &gt; R Package, and then proceed to create the project. Alternatively, you can use the <code>devtools::create("/path/to/package/location/")</code> or <code>usethis::create_package("/path/to/package/location/")</code> functions.</p>
+<p>By employing <code><a href="https://usethis.r-lib.org/reference/use_rcpp.html">usethis::use_c()</a></code>, you can easily incorporate the necessary infrastructure to utilise compiled code. It’s vital to ensure that your package is properly licensed. Various license templates are available through <code>usethis</code>, including the Creative Commons (e.g., CC BY 4.0), which can be implemented via <code><a href="https://usethis.r-lib.org/reference/licenses.html">usethis::use_ccby_license()</a></code>.</p>
+<div id="fig-rpackage" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-rpackage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="package_structure-transformed.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rpackage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: R package structure
+</figcaption></figure>
+</div>
+<p><a href="#fig-rpackage" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> shows a skeleton of a typical R package called <code>foo</code>. R code is placed in the <code>R/</code> directory, while the compiled code resides in the <code>src/</code> directory. R provides a standardised method of documenting packages. The <code>DESCRIPTION</code> is generated with the package template and contains essential documentation, including the package’s title, what the package does, the author, and dependencies. Additionally, the <code>SystemRequirements</code> is important in case the package depends on libraries or tools external to R, e.g., FFTW or GNU make.</p>
+<p>The R documentation files <code>.Rd</code> are stored within the <code>man/</code> folder. When employing <code>devtools</code> for package development, the <code>.Rd</code> files are automatically modified when the specially formatted “roxgen comments” above R source codes are modified <span class="citation" data-cites="Wickham_Bryan_2023">(<a href="references.html#ref-Wickham_Bryan_2023" role="doc-biblioref">Wickham &amp; Bryan, 2023</a>)</span>. Thus, it is important to run <code><a href="https://devtools.r-lib.org/reference/document.html">devtools::document()</a></code> whenever a function is completed. The <code>NAMESPACE</code> file is a fundamental component of a package. It delivers a context for looking up the value of an object associated with a name <span class="citation" data-cites="Wickham_Bryan_2023">(<a href="references.html#ref-Wickham_Bryan_2023" role="doc-biblioref">Wickham &amp; Bryan, 2023</a>)</span>. Typically, it is modified automatically by <code>roygen2</code> and contains routines such as <code>export</code> to make the package functions visible, <code>import</code> to import all objects from another package’s namespace or <code>importForm</code> to import selected objects, and <code>useDynLib()</code> for packages with compiled code to register routines from DLL.</p>
+<p>The second edition of the R Packages book by Hadley Wickham and Jennifer Bryan, particularly the chapter “<a href="https://r-pkgs.org/whole-game.html">The Whole Game</a>”, offers essential insights and presents a comprehensive overview of creating an R package.</p>
+</section><section id="developing-aquafortr" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="developing-aquafortr">
+<span class="header-section-number">3.2</span> Developing AquaFortR</h2>
+<p>In this section, we will wrap the routines developed in <a href="scripts.html" class="quarto-xref"><span>Chapter 2</span></a> within an R package. For simplicity, we will focus on implementing 2D cross-correlation here. In the package ecosystem, it is advantageous to avoid the <code>.Fortran</code> interface. The interface is mainly tailored for Fortran 77, predates any support for ‘modern’ Fortran, and carries a significant overhead. Therefore, we will use <code>.Call</code> the modern interface to C/C++.</p>
+<p>The development consists mainly of three stages:</p>
+<ul>
+<li>Writing the Fortran subroutine</li>
+<li>Crafting C functions to interact between R and Fortran</li>
+<li>And finally, creating an R function to call the C function.</li>
+</ul>
+<section id="fortran-subroutine" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="fortran-subroutine">
+<span class="header-section-number">3.2.1</span> Fortran Subroutine</h3>
+<p>The best approach to organising Fortran code with an R package is to use modules, storing each module in individual files. The intrinsic module <a href="https://gcc.gnu.org/onlinedocs/gfortran/Intrinsic-Types.html"><code>iso_c_binding</code></a> ensures that precisely the same variable type and kind is used in C and Fortran.</p>
+<p><a href="#lst-Fortranfile" class="quarto-xref">Listing&nbsp;<span>3.1</span></a> shows the structure of the Fortran file <code>AquaFortRmodulef.f90</code>. Fortran files can multiply rapidly, and thus, managing module dependencies can be a tedious task. Numbering the files and writing the routines sequentially, such as <code>AquaFortRmodulesf001.f90</code> to <code>AquaFortRmodulesf00n.f90</code>, can serve as a practical workaround.</p>
+<div class="cell">
+<div id="lst-Fortranfile" class="fortran cell-code listing quarto-float" data-code-fold="true">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-Fortranfile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3.1: Fortran file structure
+</figcaption><div aria-describedby="lst-Fortranfile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-Fortranfile" data-code-fold="true"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="lst-Fortranfile-1"><a href="#lst-Fortranfile-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> AquaFortRmodule</span>
+<span id="lst-Fortranfile-2"><a href="#lst-Fortranfile-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">use</span>, <span class="kw">intrinsic</span> <span class="dt">::</span> iso_c_binding</span>
+<span id="lst-Fortranfile-3"><a href="#lst-Fortranfile-3" aria-hidden="true" tabindex="-1"></a>   <span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="lst-Fortranfile-4"><a href="#lst-Fortranfile-4" aria-hidden="true" tabindex="-1"></a><span class="co">contains</span></span>
+<span id="lst-Fortranfile-5"><a href="#lst-Fortranfile-5" aria-hidden="true" tabindex="-1"></a>   <span class="co">! place subroutines and functions</span></span>
+<span id="lst-Fortranfile-6"><a href="#lst-Fortranfile-6" aria-hidden="true" tabindex="-1"></a>   <span class="co">! ...</span></span>
+<span id="lst-Fortranfile-7"><a href="#lst-Fortranfile-7" aria-hidden="true" tabindex="-1"></a>   <span class="co">! ...</span></span>
+<span id="lst-Fortranfile-8"><a href="#lst-Fortranfile-8" aria-hidden="true" tabindex="-1"></a>   <span class="co">! ...</span></span>
+<span id="lst-Fortranfile-9"><a href="#lst-Fortranfile-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end module</span> AquaFortRmodule</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#lst-xcorr2d_fpackage" class="quarto-xref">Listing&nbsp;<span>3.2</span></a> shows the subroutine <code>xcorr2d_f</code>. The differences in comparison to the script version in <a href="scripts.html#lst-xcorrf" class="quarto-xref">Listing&nbsp;<span>2.2</span></a> are:</p>
+<ul>
+<li>The kind of the variable is defined according to <code>iso_c_binding</code>. Integers are of the <code>c_int</code> kind, while double precision variables are defined as real with the <code>c_double</code> kind.</li>
+<li>Typically, variables are passed to Fortran (C) by reference (value). The <code>value</code> attribute allows passing by value to Fortran.</li>
+<li>Using <code>bind()</code> facilitates the interoperability of Fortran procedures with C. The binding label is the name by which the C processer recognises the Fortran procedure. The <code>F77_</code> prefixes in C add a trailing underscore.</li>
+</ul>
+<div class="cell">
+<div id="lst-xcorr2d_fpackage" class="fortran cell-code listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-xcorr2d_fpackage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3.2: Cross-correlation in Fortran in R package
+</figcaption><div aria-describedby="lst-xcorr2d_fpackage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-xcorr2d_fpackage"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="lst-xcorr2d_fpackage-1"><a href="#lst-xcorr2d_fpackage-1" aria-hidden="true" tabindex="-1"></a><span class="kw">subroutine</span> xcorr2d_f(m, n, p, q, k, l, a, b, cc) bind(C, name<span class="kw">=</span><span class="st">"xcorr2d_f_"</span>)</span>
+<span id="lst-xcorr2d_fpackage-2"><a href="#lst-xcorr2d_fpackage-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
+<span id="lst-xcorr2d_fpackage-3"><a href="#lst-xcorr2d_fpackage-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">integer(kind=c_int)</span>, <span class="dt">intent(in)</span>, value                <span class="dt">::</span> m, n, p, q, k<span class="co">, l</span></span>
+<span id="lst-xcorr2d_fpackage-4"><a href="#lst-xcorr2d_fpackage-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(kind=c_double)</span>, <span class="dt">intent(in)</span>, <span class="dt">dimension(m, n)</span>      <span class="dt">::</span> a</span>
+<span id="lst-xcorr2d_fpackage-5"><a href="#lst-xcorr2d_fpackage-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(kind=c_double)</span>, <span class="dt">intent(in)</span>, <span class="dt">dimension(p, q)</span>      <span class="dt">::</span> b</span>
+<span id="lst-xcorr2d_fpackage-6"><a href="#lst-xcorr2d_fpackage-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(kind=c_double)</span>, <span class="dt">intent(out)</span>, <span class="dt">dimension(k, l)</span>     <span class="dt">::</span> cc</span>
+<span id="lst-xcorr2d_fpackage-7"><a href="#lst-xcorr2d_fpackage-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">!     dummy vars</span></span>
+<span id="lst-xcorr2d_fpackage-8"><a href="#lst-xcorr2d_fpackage-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">integer(kind=c_int)</span>        <span class="dt">::</span> min_row_shift, min_col_shift</span>
+<span id="lst-xcorr2d_fpackage-9"><a href="#lst-xcorr2d_fpackage-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">integer(kind=c_int)</span>        <span class="dt">::</span> max_row_shift, max_col_shift</span>
+<span id="lst-xcorr2d_fpackage-10"><a href="#lst-xcorr2d_fpackage-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">integer(kind=c_int)</span>        <span class="dt">::</span> rows_padded, cols_padded</span>
+<span id="lst-xcorr2d_fpackage-11"><a href="#lst-xcorr2d_fpackage-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">integer(kind=c_int)</span>        <span class="dt">::</span> icol, irow, icc, icol2, irow2</span>
+<span id="lst-xcorr2d_fpackage-12"><a href="#lst-xcorr2d_fpackage-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(kind=c_double)</span>, <span class="dt">allocatable</span>, <span class="dt">dimension(:, :)</span>     <span class="dt">::</span> padded_a, padded_b</span>
+<span id="lst-xcorr2d_fpackage-13"><a href="#lst-xcorr2d_fpackage-13" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="lst-xcorr2d_fpackage-14"><a href="#lst-xcorr2d_fpackage-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">! The rest of the subroutine is similar to Listing 2.2 </span></span>
+<span id="lst-xcorr2d_fpackage-15"><a href="#lst-xcorr2d_fpackage-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">! or it can be found in src/AquaFortRmodulef.f90</span></span>
+<span id="lst-xcorr2d_fpackage-16"><a href="#lst-xcorr2d_fpackage-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end subroutine</span> xcorr2d_f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+</section><section id="sec-cfunctions" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="sec-cfunctions">
+<span class="header-section-number">3.2.2</span> C Functions</h3>
+<p>Now, we write C functions that communicate between Fortran and R. The R API has many entry points for the C code. To use the public stable API, the header files in <a href="#lst-cheading" class="quarto-xref">Listing&nbsp;<span>3.3</span></a> should be included in the <code>AquaFortRmodulec.c</code>. Additionally, <code>stdlib.h</code> is included for <code>NULL</code>. It is recommended to use <code>R_NO_REMAP</code> so all API functions have the prefix <code>R_</code> or <code>Rf_</code>.</p>
+<div class="cell">
+<div id="lst-cheading" class="c cell-code listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-cheading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3.3: C headers
+</figcaption><div aria-describedby="lst-cheading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-cheading"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="lst-cheading-1"><a href="#lst-cheading-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define R_NO_REMAP</span></span>
+<span id="lst-cheading-2"><a href="#lst-cheading-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;R.h&gt;</span></span>
+<span id="lst-cheading-3"><a href="#lst-cheading-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rinternals.h&gt;</span><span class="pp"> </span><span class="co">// Access to "public" internal API</span></span>
+<span id="lst-cheading-4"><a href="#lst-cheading-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span><span class="pp"> </span><span class="co">// for NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+<p><code>F77_NAME()</code> is used to declare the Fortran subroutine in C. Note that variables with value attribute should not be pointers, as shown in <a href="#lst-declareFortran" class="quarto-xref">Listing&nbsp;<span>3.4</span></a>.</p>
+<div class="cell">
+<div id="lst-declareFortran" class="c cell-code listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-declareFortran-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3.4: Declaring Fortran routine in C
+</figcaption><div aria-describedby="lst-declareFortran-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-declareFortran"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="lst-declareFortran-1"><a href="#lst-declareFortran-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> F77_NAME<span class="op">(</span>xcorr2d_f<span class="op">)(</span><span class="dt">int</span> m<span class="op">,</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> p<span class="op">,</span> <span class="dt">int</span> q<span class="op">,</span> <span class="dt">int</span> k<span class="op">,</span> <span class="dt">int</span> l<span class="op">,</span> </span>
+<span id="lst-declareFortran-2"><a href="#lst-declareFortran-2" aria-hidden="true" tabindex="-1"></a>                          <span class="dt">double</span> <span class="op">*</span>a<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span>b<span class="op">,</span> <span class="dt">double</span> <span class="op">*</span>cc<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+<p>In <a href="#lst-C2R" class="quarto-xref">Listing&nbsp;<span>3.5</span></a>, the <code>c_xcorr2d_f</code> function communicates between R and C, and invoke the declared Fortran subroutine in C. Everything that moves between R and C should be <code>SEXP</code>. Additional variables required by the Fortran subroutine, such as matrix dimensions, are created within the C code. The <code>F77_CALL()</code> macro is to call the Fortran routine, declared by <code>F77_NAME()</code>, from C. The <code>PROTECT</code> and <code>UNPROTECT</code> macros are required to save the result, i.e., <code>ret</code>, from being destroyed during R’s garbage collection. Variables of type <code>double</code> need to be altered to <code>real</code> before being passed to Fortran.</p>
+<div class="cell">
+<div id="lst-C2R" class="c cell-code listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-C2R-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3.5: Calling Fortran subroutine in C
+</figcaption><div aria-describedby="lst-C2R-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-C2R"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="lst-C2R-1"><a href="#lst-C2R-1" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> SEXP c_xcorr2d_f<span class="op">(</span>SEXP a<span class="op">,</span> SEXP b<span class="op">)</span></span>
+<span id="lst-C2R-2"><a href="#lst-C2R-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="lst-C2R-3"><a href="#lst-C2R-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> m <span class="op">=</span> Rf_nrows<span class="op">(</span>a<span class="op">);</span></span>
+<span id="lst-C2R-4"><a href="#lst-C2R-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> Rf_ncols<span class="op">(</span>a<span class="op">);</span></span>
+<span id="lst-C2R-5"><a href="#lst-C2R-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">//</span></span>
+<span id="lst-C2R-6"><a href="#lst-C2R-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> p <span class="op">=</span> Rf_nrows<span class="op">(</span>b<span class="op">);</span></span>
+<span id="lst-C2R-7"><a href="#lst-C2R-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> q <span class="op">=</span> Rf_ncols<span class="op">(</span>b<span class="op">);</span></span>
+<span id="lst-C2R-8"><a href="#lst-C2R-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">//</span></span>
+<span id="lst-C2R-9"><a href="#lst-C2R-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> k <span class="op">=</span> m <span class="op">+</span> p <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="lst-C2R-10"><a href="#lst-C2R-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> l <span class="op">=</span> n <span class="op">+</span> q <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="lst-C2R-11"><a href="#lst-C2R-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-C2R-12"><a href="#lst-C2R-12" aria-hidden="true" tabindex="-1"></a>    SEXP ret<span class="op">;</span></span>
+<span id="lst-C2R-13"><a href="#lst-C2R-13" aria-hidden="true" tabindex="-1"></a>    PROTECT<span class="op">(</span>ret <span class="op">=</span> Rf_allocMatrix<span class="op">(</span>REALSXP<span class="op">,</span> k<span class="op">,</span> l<span class="op">));</span></span>
+<span id="lst-C2R-14"><a href="#lst-C2R-14" aria-hidden="true" tabindex="-1"></a>    F77_CALL<span class="op">(</span>xcorr2d_f<span class="op">)</span></span>
+<span id="lst-C2R-15"><a href="#lst-C2R-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>m<span class="op">,</span> n<span class="op">,</span> p<span class="op">,</span> q<span class="op">,</span> k<span class="op">,</span> l<span class="op">,</span> REAL<span class="op">(</span>a<span class="op">),</span> REAL<span class="op">(</span>b<span class="op">),</span> REAL<span class="op">(</span>ret<span class="op">));</span></span>
+<span id="lst-C2R-16"><a href="#lst-C2R-16" aria-hidden="true" tabindex="-1"></a>    UNPROTECT<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="lst-C2R-17"><a href="#lst-C2R-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>ret<span class="op">);</span></span>
+<span id="lst-C2R-18"><a href="#lst-C2R-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Registration of native routines for compiled code is achieved in two stages: first, creating an array describing individual routines using <code>R_CallMethodDef</code>; then, actually registering the routines with R using <code>R_registerRoutines</code>, as shown in <a href="#lst-regiesterMethods" class="quarto-xref">Listing&nbsp;<span>3.6</span></a>. Registration’s benefits include a faster way to find the address of the entry point and a run-time check concerning the number and type of arguments. The <code>R_useDynamicSymbols</code> routine instructs the <code>.Call</code> function to find only registered routines, even when no package is provided, preventing unnecessary delay due to searching.</p>
+<p>For further information, please refer to <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Registering-native-routines-1">Writing R Extension: 5.4 Registering native routines</a>.</p>
+<div class="cell">
+<div id="lst-regiesterMethods" class="c cell-code listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-regiesterMethods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3.6: Registration of native routines
+</figcaption><div aria-describedby="lst-regiesterMethods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="lst-regiesterMethods"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="lst-regiesterMethods-1"><a href="#lst-regiesterMethods-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">const</span> R_CallMethodDef CallEntries<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="lst-regiesterMethods-2"><a href="#lst-regiesterMethods-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="st">"c_xcorr2d_f"</span><span class="op">,</span> <span class="op">(</span>DL_FUNC<span class="op">)&amp;</span>c_xcorr2d_f<span class="op">,</span> <span class="dv">2</span><span class="op">},</span></span>
+<span id="lst-regiesterMethods-3"><a href="#lst-regiesterMethods-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="st">"c_conv2d_f"</span><span class="op">,</span> <span class="op">(</span>DL_FUNC<span class="op">)&amp;</span>c_conv2d_f<span class="op">,</span> <span class="dv">2</span><span class="op">},</span></span>
+<span id="lst-regiesterMethods-4"><a href="#lst-regiesterMethods-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="st">"c_cape_f"</span><span class="op">,</span> <span class="op">(</span>DL_FUNC<span class="op">)&amp;</span>c_cape_f<span class="op">,</span> <span class="dv">7</span><span class="op">},</span></span>
+<span id="lst-regiesterMethods-5"><a href="#lst-regiesterMethods-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span>NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="dv">0</span><span class="op">}};</span></span>
+<span id="lst-regiesterMethods-6"><a href="#lst-regiesterMethods-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-regiesterMethods-7"><a href="#lst-regiesterMethods-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> R_init_AquaFortR<span class="op">(</span>DllInfo <span class="op">*</span>dll<span class="op">)</span></span>
+<span id="lst-regiesterMethods-8"><a href="#lst-regiesterMethods-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="lst-regiesterMethods-9"><a href="#lst-regiesterMethods-9" aria-hidden="true" tabindex="-1"></a>    R_registerRoutines<span class="op">(</span>dll<span class="op">,</span> NULL<span class="op">,</span> CallEntries<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">);</span></span>
+<span id="lst-regiesterMethods-10"><a href="#lst-regiesterMethods-10" aria-hidden="true" tabindex="-1"></a>    R_useDynamicSymbols<span class="op">(</span>dll<span class="op">,</span> FALSE<span class="op">);</span></span>
+<span id="lst-regiesterMethods-11"><a href="#lst-regiesterMethods-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All the C code in <a href="#sec-cfunctions" class="quarto-xref"><span>Section 3.2.2</span></a> is stored within the <code>AquaFortRmodulec.c</code> file.</p>
+</div>
+</div>
+</section><section id="r-function" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="r-function">
+<span class="header-section-number">3.2.3</span> R Function</h3>
+<p>After finishing the Fortran subroutine and C functions, we can write the R function, as shown in <a href="#lst-R2C" class="quarto-xref">Listing&nbsp;<span>3.7</span></a>. The first few lines contain the roxgen2 documentation for the function. We use the <code>.Call</code> function to invoke the C function <code>c_xcorr2d_f</code> that will invoke a Fortran subroutine <code>xcorr2d_f</code>.</p>
+<div class="cell">
+<div id="lst-R2C" class="r cell-code listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-R2C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3.7: Calling C in R
+</figcaption><div aria-describedby="lst-R2C-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-R2C"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' @title 2D cross-correlation using Fortran.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @description  Calculates the 2D cross-correlation</span></span>
+<span><span class="co">#'  of two matrices `a` and `b` using compiled Fortran subroutine.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @param a A matrix (2D array) of values.</span></span>
+<span><span class="co">#' @param b A matrix (2D array) of values.</span></span>
+<span><span class="co">#' @return A matrix representing the 2D cross-correlation of </span></span>
+<span><span class="co">#' the input matrices.</span></span>
+<span><span class="co">#' @export</span></span>
+<span><span class="co">#' @examples</span></span>
+<span><span class="co">#' a &lt;- matrix(c(1, 2, 3, 4), ncol = 2)</span></span>
+<span><span class="co">#' b &lt;- matrix(c(5, 6, 7, 8), ncol = 2)</span></span>
+<span><span class="co">#' xcorr2D_f(a, b)</span></span>
+<span><span class="co">#' @author Ahmed Homoudi</span></span>
+<span><span class="co">#' @export</span></span>
+<span><span class="va">xcorr2D_f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/CallExternal.html">.Call</a></span><span class="op">(</span></span>
+<span>    <span class="va">c_xcorr2d_f</span>,</span>
+<span>    <span class="va">a</span>,</span>
+<span>    <span class="va">b</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+<p>It is crucial to add the following line to the package-level documentation (i.e.<code>AquaFortR-package.R</code> file) to load the DLL and define them in the package’s namespace.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#' @useDynLib AquaFortR, .registration=TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This is the end of the general workflow for developing an R package with Fortran code using the <code>.Call</code> interface. In the <code>src/</code> directory, Fortran modules reside in .f90 files, while C routines are found in .c files. Some packages store their C code in an init.c file. All R code should be kept in the <code>R/</code> directory.</p>
+<!-- However, one needs to be careful because C uses call-by-value by default while Fortran behaves usually similar to call-by-reference. -->
+</section><section id="system-dependencies" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="system-dependencies">
+<span class="header-section-number">3.2.4</span> System Dependencies</h3>
+<p>Occasionally, you develop a package that needs system-dependent configuration or libraries before installation, such as FFTW. An executable is then executed by <code>R CMD INSTALL</code> before any other action is performed to ensure the successful installation of the package. R allows <code>/configure</code> scripts to check for these dependencies. The <code>/configure</code> script can be written manually or using Autoconf.</p>
+<p>Aaron Jacobs wrote about “An Autoconf Primer for R Package Authors.” It is a vital tutorial on developing a <code>/configure</code> script for an R package. Furthermore, detailed information concerning configuration and cleanup is available in <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Configure-and-cleanup-1">Writing R extensions, 1.2 Configure-and-cleanup</a>.</p>
+<p>In case the configure script requires auxiliary files, it is advised that they should be shipped with the R package in the tools directory. Numerous macros are available at the <a href="https://www.gnu.org/software/autoconf-archive/The-Macros.html%5D">GNU Autoconf Archive</a>.</p>
 
 
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-Wickham_Bryan_2023" class="csl-entry" role="listitem">
+Wickham, H., &amp; Bryan, J. (2023). <em>R packages: Organize, test, document, and share your code</em>. O’Reilly.
+</div>
+</div>
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -827,9 +1048,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./scripts.html" class="pagination-link" aria-label="Accelerate R Scripts with Fortran">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Accelerate R Scripts with Fortran</span></span>
       </a>          
@@ -841,7 +1060,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

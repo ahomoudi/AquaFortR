@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/index.html</loc>
+    <lastmod>2024-04-16T10:12:00.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/intro.html</loc>
+    <lastmod>2024-04-16T10:12:00.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/scripts.html</loc>
+    <lastmod>2024-04-16T10:12:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/package.html</loc>
+    <lastmod>2024-04-16T10:12:00.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/summary.html</loc>
+    <lastmod>2024-04-16T10:12:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/further_reading.html</loc>
+    <lastmod>2024-04-16T10:12:00.208Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/references.html</loc>
+    <lastmod>2024-04-16T10:12:00.212Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ahomoudi.github.io/AquaFortR/book/AquaFortR--Streamlining-Atmospheric-Science,-Oceanography,-Climate,--and-Water-Research-with-Fortran-accelerated-R.pdf</loc>
+    <lastmod>2024-04-16T10:24:58.685Z</lastmod>
+  </url>
+</urlset>

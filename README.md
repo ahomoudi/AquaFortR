@@ -59,7 +59,7 @@ within the German National Research Data Infrastructure (NFDI, <https://www.nfdi
 <!-- } -->
 <!-- ``` -->
 
-## Acknowledgement  {.unnumbered}
+## Acknowledgement
 
 Appreciation is extended to Dr. Klemens Barfus for providing invaluable 
 Fortran routines to estimate CAPE. 

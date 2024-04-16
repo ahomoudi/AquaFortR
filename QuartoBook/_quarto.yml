@@ -17,7 +17,7 @@ book:
                | TUD Dresden University of Technology
                | Institute of Hydrology and Meteorology
   date-format: "DD MMMM YYYY"
-  date: "16/08/2023"
+  date: "20/04/2024"
   #cover-image: 
   downloads: pdf
   reader-mode: true
@@ -29,7 +29,6 @@ book:
   
   chapters:
     - index.qmd
-    - preface.qmd
     - intro.qmd
     - scripts.qmd
     - package.qmd
@@ -40,7 +39,7 @@ book:
 
 
 
-bibliography: references.bib
+bibliography: [references.bib, rpackages.bib]
 csl: apa.csl
 
 format:
@@ -51,6 +50,7 @@ format:
      dark:
        - darkly
    code-link: true
+   code-fold: true
    #code-line-numbers: true
   pdf:
     documentclass: book

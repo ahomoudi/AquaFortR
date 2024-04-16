@@ -1,9 +1,0 @@
-# Preface {.unnumbered}
-<!-- • What is the book about? What is the scope of the book? -->
-  <!-- • Why is research in the field important? -->
-  <!-- • Why is there a need for the information contained in the book? -->
-  <!-- • Why is research in this field escalating? -->
-  <!-- • If is it a Symposium Series Title, what motivated the organization of the symposium? -->
-  <!-- • What makes the book unusual and worth reading? -->
-  <!-- • Who will be interested in reading this book? -->
-  <!-- • How will the reader benefit by reading this book? -->

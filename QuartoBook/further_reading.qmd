@@ -1,20 +1,55 @@
 # Further Reading 
+
+::: {.content-visible when-format="html"}
+
  * [Fortran and R – Speed Things Up](https://www.r-bloggers.com/2014/04/fortran-and-r-speed-things-up/) by Steve Pittard
  * [The Need for Speed Part 1: Building an R Package with Fortran (or C)](https://www.r-bloggers.com/2018/12/the-need-for-speed-part-1-building-an-r-package-with-fortran-or-c/) by Avraham Adler
  * [The Need for Speed Part 2: C++ vs. Fortran vs. C](https://www.avrahamadler.com/2018/12/23/the-need-for-speed-part-2-c-vs-fortran-vs-c/) by Avraham Adler
+ * [The R Manuals](https://cran.r-project.org/manuals.html)  edited by the R Development Core Team
  * [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-Extensions) by R Core Team
+ * [R internals](https://github.com/hadley/r-internals) by Hadley Wickham
+ * [How to write your own R package and publish it on CRAN](https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/#section1) by Cosima Meyer & Dennis Hammerschmidt
+ * [Advanced R](http://adv-r.had.co.nz/) by Hadley Wickham
  * [Modern Fortran Tutorial](https://masuday.github.io/fortran_tutorial/index.html) by Yutaka Masuda
  * [Extend R with Fortran](https://masuday.github.io/fortran_tutorial/r.html) by Yutaka Masuda
- * [Advanced R](http://adv-r.had.co.nz/) by Hadley Wickham
  * [Fortran 90 Tutorial](http://web.stanford.edu/class/me200c/tutorial_90/) by Stanford University
  * [Fortran Libraries](https://fortranwiki.org/fortran/show/Libraries) by Fortran Wiki
  * [Fortran Best Practices](https://fortran-lang.org/en/learn/best_practices/#fortran-best-practices) by Fortran Community
  * [Fortran 90 Reference Card](https://web.pa.msu.edu/people/duxbury/courses/phy480/fortran90_refcard.pdf) by  Michael Goerz.
  * [Hands-On Programming with R](https://rstudio-education.github.io/hopr/) by Garrett Grolemund
  * [r-spatial](https://r-spatial.org/) by Edzer Pebesma, Marius Appel, and Daniel Nüst
- * [Spatial Data Science](https://rspatial.org/index.html)
+ * [Spatial Data Science: With Applications in R](https://r-spatial.org/book/) by Edzer Pebesma and Roger Bivand
  * [R for Data Science (2e)](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund
  * [Introduction to Environmental Data Science](https://bookdown.org/igisc/EnvDataSci/) by Jerry Davis
+ 
+:::
+
+::: {.content-visible when-format="pdf"}
+
+ * Fortran and R – Speed Things Up by Steve Pittard (<https://www.r-bloggers.com/2014/04/fortran-and-r-speed-things-up/>)
+ * The Need for Speed Part 1: Building an R Package with Fortran by Avraham Adler (<https://www.r-bloggers.com/2018/12/the-need-for-speed-part-1-building-an-r-package-with-fortran-or-c/>)
+ * The Need for Speed Part 2: C++ vs. Fortran vs. C by Avraham Adler (<https://www.avrahamadler.com/2018/12/23/the-need-for-speed-part-2-c-vs-fortran-vs-c/>)
+ * The R Manuals edited by the R Development Core Team (<https://cran.r-project.org/manuals.html>)
+ * Writing R Extensions by R Core Team (<https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Writing-R-Extensions>)
+ * R internals by Hadley Wickham (<https://github.com/hadley/r-internals>)
+ * How to write your own R package and publish it on CRAN by Cosima Meyer & Dennis Hammerschmidt (<https://www.mzes.uni-mannheim.de/socialsciencedatalab/article/r-package/#section1>)
+ * Advanced R by Hadley Wickham (<http://adv-r.had.co.nz/>)
+ * Modern Fortran Tutorial by Yutaka Masuda (<https://masuday.github.io/fortran_tutorial/index.html>)
+ * Extend R with Fortran by Yutaka Masuda (<https://masuday.github.io/fortran_tutorial/r.html>)
+ * Fortran 90 Tutorial by Stanford University (<http://web.stanford.edu/class/me200c/tutorial_90/>)
+ * Fortran Libraries by Fortran Wiki (<https://fortranwiki.org/fortran/show/Libraries>)
+ * Fortran Best Practices by Fortran Community (<https://fortran-lang.org/en/learn/best_practices/#fortran-best-practices>)
+ * Fortran 90 Reference Card by Michael Goerz. (<https://web.pa.msu.edu/people/duxbury/courses/phy480/fortran90_refcard.pdf>)
+ * Hands-On Programming with R by Garrett Grolemund (<https://rstudio-education.github.io/hopr/>)
+ * r-spatial by Edzer Pebesma, Marius Appel, and Daniel Nüst (<https://r-spatial.org/>)
+ * Spatial Data Science: With Applications in R by Edzer Pebesma and Roger Bivand (<https://r-spatial.org/book/>)
+ * R for Data Science by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund (<https://r4ds.hadley.nz/>)
+ * Introduction to Environmental Data Science by Jerry Davis (<https://bookdown.org/igisc/EnvDataSci/>)
+
+
+ 
+::: 
+
 
 <!-- https://cran.r-project.org/doc/manuals/r-release/R-exts.html#System-and-foreign-language-interfaces-1 -->
 

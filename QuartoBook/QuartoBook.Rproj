@@ -12,8 +12,8 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
-PythonType: system
-PythonVersion: 3.11.8
-PythonPath: /usr/bin/python3.11
+PythonType: virtualenv
+PythonVersion: 3.11.9
+PythonPath: ~/Python/MeteoMate/bin/python
 
 SpellingDictionary: en_GB

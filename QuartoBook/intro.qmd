@@ -36,11 +36,11 @@ preferences and intricate details. Another significant factor is its ability
 to be extended to meet the user's demand. The Comprehensive R Archive Network 
 [(CRAN)](https://cran.r-project.org/) contains an extensive array of libraries 
 and packages to extend R's functionality for various tasks. With over 
-[20447](https://cran.r-project.org/web/packages/) available packages, the 
+[20447](https://cran.r-project.org/web/packages/) available packages (March 2024), the 
 CRAN package repository is a testament to R's versatility and adaptability.
 
 <!-- Examples of R in Data science -->
-[Tidyverse](https://www.tidyverse.org/) is the most popular bundle of R packages
+Tidyverse [@tidyverse2019; @R-tidyverse] is the most popular bundle of R packages
 for data science. It was developed by Hadley Wickham and his team. The common 
 shared design among tidyverse packages increases the consistency across functions
 and makes each new function or package a little easier to comprehend and utilise [@Wickham2023].
@@ -48,11 +48,10 @@ and makes each new function or package a little easier to comprehend and utilise
 <!-- Examples of R in Spatial data analysis -->
 Many packages have been developed for spatial data analysis to address various 
 challenging tasks. [R-spatial](https://r-spatial.org) provides a rich set of 
-packages for handling spatial or spatio-temporal data. For example, [sf](https://cran.r-project.org/web/packages/sf/index.html) provides simple features
-access in R, which is a standardized method for encoding spatial vector data. The [stars](https://cran.r-project.org/web/packages/stars/index.html) package aims 
+packages for handling spatial or spatiotemporal data. For example, sf [@sf2018; @sf2023; @R-sf] provides simple features
+access in R, which is a standardized method for encoding spatial vector data. The stars package [@R-stars] aims 
 to handle spatiotemporal arrays. Additionally, the 
-[terra](https://cran.r-project.org/web/packages/terra/index.html) 
-package works with spatial data and has the ability to process large datasets on
+terra package [@R-terra] works with spatial data and has the ability to process large datasets on
 the disk when loading into memory (RAM) is not feasible.
 
 <!-- hdf5 and ncdf4 -->
@@ -60,10 +59,8 @@ Furthermore, research produces a large data sets; therefore, it is essential to
 store them according to the FAIR principles (**F**indability, **A**ccessibility, 
 **I**nteroperability, and **R**euse of digital assets; @Wilkinson2016). NetCDF 
 and HDF5 are among the most prominent scientific data formats owing to their 
-numerous capabilities. The R package 
-[ncdf4](https://cran.r-project.org/web/packages/ncdf4/index.html) delivers a 
-high-level R interface to data files written using Unidata's netCDF library. 
-Additionally, [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html) 
+numerous capabilities. The ncdf4 package [@R-ncdf4] delivers a high-level R interface 
+to data files written using Unidata's netCDF library. Additionally, rhdf5 [@R-rhdf5]
 provides an interface between HDF5 and R.
 
 <!-- Interpolatable with Python C, C++, Fortran -->
@@ -72,10 +69,9 @@ Regarding the integration of other programming languages, R has diverse interfac
 which are either a fundamental implementation of R or attainable via another R 
 package [@Chambers2016]. The fundamental interfaces are `.Call()`, `.C()`, and 
 `.Fortran()` to C and Fortran. The development of the 
-[Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html) package has 
-revolutionised seamless access to C++. Python is also accessible using the [reticulate](https://cran.r-project.org/web/packages/reticulate/index.html) package.
-Finally, the Java interface was granted using the 
-[rJava](https://cran.r-project.org/web/packages/rJava/index.html) package. 
+Rcpp package [@R-Rcpp] has 
+revolutionised seamless access to C++. Python is also accessible using the reticulate package [@R-reticulate].
+Finally, the Java interface was granted using the rJava package [@R-rJava]. 
 
 
 In conclusion, R is a valuable tool in the Earth System, as it can effectively 
@@ -129,6 +125,8 @@ and ability to handle large amounts of data.
 
 ## Installation
 
+::: {.content-visible when-format="html"}
+
 **R**
 
 Installation of R differs according to the operating system:
@@ -162,3 +160,41 @@ sure that a Fortran compiler, i.e., the [GNU Fortran](https://gcc.gnu.org/fortra
   - For Windows, installing rtools should ensure the existence of gfortran
   - For macOS, binaries for gfortran are available [here](https://gcc.gnu.org/wiki/GFortranBinaries). 
   Furthermore, more information is available on R for macOS [here](https://cran.r-project.org/bin/macosx/tools/) 
+
+::: 
+
+
+::: {.content-visible when-format="pdf"}
+
+**R**
+
+Installation of R differs according to the operating system:
+
+  - The webpage provides 
+  information on installing R according to the Linux distribution (<https://cran.r-project.org/bin/linux/>).
+  - For Windows, the executable can be downloaded from (<https://cran.r-project.org/bin/windows/base/>).
+  Additionally, previous releases of R for Windows exit at <https://cran.r-project.org/bin/windows/base/old/>. 
+  - For macOS, various releases and versions are accessible at <https://cran.r-project.org/bin/macosx/>.
+
+**RStudio**
+
+As mentioned earlier, RStudio is an IDE for R. Although it is the most prominent,
+other IDEs exist, such as Jupyter Notebook and Visual Studio Code. In this book, 
+RStudio will be the main IDE. To install Rstudio, visit the posit to download the suitable installers
+(<https://posit.co/download/rstudio-desktop/>).
+
+**Fortran**
+
+Fortran doesn't require an explicit installation, unlike interpreted languages 
+such as R. The source code would be translated to the machine language using the 
+Fortran compiler, and then it can be executed. Therefore, it is important to make 
+sure that a Fortran compiler, i.e., the GNU Fortran (<https://gcc.gnu.org/fortran/>) 
+(gfortran) compiler, exists in the working machine. 
+
+  - In the majority of Linux distributions, the GCC compilers, including gfortran, 
+  come pre-installed.
+  - For Windows, installing rtools should ensure the existence of gfortran
+  - For macOS, binaries for gfortran are available at (<https://gcc.gnu.org/wiki/GFortranBinaries>). 
+  Furthermore, more information is available on R for macOS at <https://cran.r-project.org/bin/macosx/tools/>. 
+
+:::

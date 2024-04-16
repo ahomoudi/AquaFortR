@@ -1,9 +1,9 @@
 # AquaFortR
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/AHomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AHomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml)
-[![Quarto Publish](https://github.com/AHomoudi/AquaFortR/workflows/Quarto%20Publish/badge.svg)](https://github.com/AHomoudi/AquaFortR/actions?query=workflow:"Quarto+Publish")
-[![GitHub tag](https://img.shields.io/github/tag/AHomoudi/AquaFortR?include_prereleases=&sort=semver&color=blue)](https://github.com/AHomoudi/AquaFortR/releases/)
+[![R-CMD-check](https://github.com/ahomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ahomoudi/AquaFortR/actions/workflows/R-CMD-check.yaml)
+[![Quarto Publish](https://github.com/ahomoudi/AquaFortR/workflows/Quarto%20Publish/badge.svg)](https://github.com/ahomoudi/AquaFortR/actions?query=workflow:"Quarto+Publish")
+[![GitHub tag](https://img.shields.io/github/tag/ahomoudi/AquaFortR?include_prereleases=&sort=semver&color=blue)](https://github.com/ahomoudi/AquaFortR/releases/)
 [![License](https://img.shields.io/badge/License-CCBY-blue)](#license)
 <!-- badges: end -->
 
@@ -23,7 +23,7 @@ The documentation of the project is rendered [here](https://ahomoudi.github.io/A
 To install the AquaFortR package, please use: 
 
 ```r
-remotes::install_github("AHomoudi/AquaFortR", subdir = "RPackage")
+remotes::install_github("ahomoudi/AquaFortR", subdir = "RPackage")
 ```
 
 ### Swirl
@@ -34,7 +34,7 @@ To install the AquaFortR Swirl Course, please download the compressed course fro
 swirl::install_course_zip("path/to/AquaFortR_Swirl.zip")
 ```
 
-**_NOTE:_**  The R packages dotCall64, ggplot2, and microbenchmark are required for the course.
+**_NOTE:_**  The R packages `dotCall64`, `ggplot2`, and `microbenchmark` are required for the course.
 
 ### Book 
 
@@ -50,5 +50,3 @@ This work has been funded by the German Research Foundation (DFG) through the pr
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 
 International (CC BY-NC 4.0) License (<https://creativecommons.org/licenses/by-nc/4.0/>).
 
-
-<!---  setwd("C:\\Projects\\AquaFortR") --->

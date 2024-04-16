@@ -1,19 +1,20 @@
 # Conclusions and Optimization Insights {#sec-summary}
 
-- positive features of R 
-- positive features of Fortran 
+AquaFortR is an educational project for students and researchers in Atmospheric Science, Oceanography, Climate, and Water Research. It aims to demonstrate that simple Fortran scripts can meet the demand for accelerating R, especially considering that most data sets in these fields consist of large discretised arrays representing earth system processes. 
+
+Fortran is one of the fastest programming languages, and multidimensional arrays are a core part of it. Fortran subprogram calls are based on call by reference. In simpler terms, they directly modify the variables in memory, and no additional space is allocated, saving a lot of memory when dealing with immense arrays.
+
+When integrating Fortran in R scripts, the old `.Fortran` interface should be avoided. Instead, the `dotCall64::.C64` interface should be utilised. It supports long vectors and type 64-bit integers and provides a mechanism to avoid excessive argument copying. Another option to integrate Fortran in R is packaging and employing `.Call`, the modern C/C++ interface. Packaging is advantageous since it delivers numerous benefits like code tidiness and reusability.
+
+Integrating Fortran in R provides access to the Open Multi-Processing (OpenMP), a standardised API for writing shared-memory multi-process applications (i.e. all processors share memory and data). The R package [Romp](https://github.com/wrathematics/Romp), by Drew Schmidt, presents introductory OpenMP implementation with R for C, C++, F77, and Fortran 2003.
+
+Nowadays, multicore CPUs are easily accessible. With their proliferation,
+harnessing the capability of parallelism through OpenMP is a practical reality. For example, the performance of CAPE estimation can easily be improved by passing the atmospheric profiles from R to Fortran (i.e. array[latitude, longitude, level, time]) and distributing the calculation among cores, simultaneously exploiting the power of Fortran and parallelism. Moreover, the convolution of precipitation data can be sped up by passing the data to Fortran and sharing the calculation along the time axis among cores. 
+
+Cross-correlation and convolution can be optimised by utilising the Fast Fourier Transform (FTT). The computational efficiency originates from the fact that FFT reduces the computation from O[N^2^] operations to O[Nlog~2~ N] operations. It is possible to use the FFTW C subroutine library to compute the discrete Fourier transform (DFT) in one or more dimensions, either in Fortran or C. Furthermore, Fortran can directly utilise linear algebra libraries such as BLAS, LAPACK, and LINPACK. 
+
+R is a versatile, growing, and expanding language and environment for statistical computing and graphics. It excels in wrangling data and generating publication-quality visualisations (e.g., `ggplot2`), making it a standout choice. While it is primarily focused on flexibility and functionality rather than performance, integrating Fortran compiled codes can render substantial speed enhancements.
+
+
+
   <!-- - https://www.tat.physik.uni-tuebingen.de/~kley/lehre/ftn77/tutorial/arrays2.html -->
-- Why .Fortran() should not be used. dotCall64 is recommended for scripts. 
-- Mention the memory allocation issues related to .Fortran
-- OpenMp implementation in Fortran, [Romp](https://github.com/wrathematics/Romp) 
-- Explain how beneficial R, Fortran with OpenMP is. For examples calculating cape for each vertical profile 
-in a high resolution (1-4km) climate simulation (years) output (nlat, lon, nlevels, ntime) can be accelerated 
-by passing the whole input arrays from R to Fortran, then loop over (nlat, lon, ntime) with OpenMP. 
-
-- The cross-correlation can be speed up by using FFT. Also, in Fortran, the FFTW C library can be used. 
-- Possibility of calling BLAS, LAPACK and LINPACK linear algebra functions 
-- Fortran using C (R_ext/BLAS.h, R_ext/Lapack.h and R_ext/Linpack.h)
-
-- Final words why packaging is better. 
-
-

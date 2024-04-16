@@ -1,4 +1,4 @@
-module tools
+::module tools
    implicit none
 
 contains
@@ -180,7 +180,7 @@ end module tools
 subroutine cape_f(t_parcel, dwpt_parcel, mr_parcel, &
                   nlevel, p_profile, t_profile, mr_profile, &
                   vtc, nresult, result)
-   use :: tools
+   use            :: tools
    use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_quiet_nan, ieee_is_nan
    implicit none
 

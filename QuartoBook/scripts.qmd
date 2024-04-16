@@ -4,7 +4,7 @@ editor:
     wrap: 72
 ---
 
-# Accelerate R Scripts with Fortran {#chap-scripts}
+# Accelerate R Scripts with Fortran {#sec-scripts}
 
 In this chapter, we will compare the efficiency of running three
 computationally demanding examples in pure R script versus using another
@@ -16,7 +16,7 @@ R script with the core computations performed in Fortran.
 
 <!-- What is used for  -->
 
-In signal processing, cross-correlation is a measure of the similarity
+In signal processing, cross-correlation measures similarity
 between two signals as a function of the displacement of one relative to
 the other [@Wang2019]. It can deliver information about the time lag
 between the two signals. 2D cross-correlation is often applied in computer
@@ -160,7 +160,7 @@ end subroutine xcorr2d_f
 ```
 
 Since Fortran is a compiled language, we need to save the subroutine in
-`xcorr2D.f90` file and compile it using: `R CMD SHLIB xcorr2D.f90`
+`xcorr2D.f90` file and compile it using: `R CMD SHLIB xcorr2D.f90`.
 
 ::: callout-note
 Please use the terminal tab in Rstudio or open a new terminal using
@@ -172,7 +172,7 @@ Fortran. Therefore, it would logical to write a wrapping function for
 Fortran subroutine that provides other input arguments. 
 
 In the wrapper function (@lst-xcorrfr), we initially require loading 
-the shared object, which is the compiled Fortran subroutine, as 
+the shared object (`.so` or `.dll`), which is the compiled Fortran subroutine, as 
 `dyn.load("path/to/xcorr2D.so")`. Furthermore, it is important to prepare 
 other input variables for Fortran such as the dimensions of the input and 
 output arrays. Imperatively, data types should be approached carefully. Before 
@@ -187,7 +187,7 @@ unexpected results^[Writing R Extensions, 5.2 Interface functions .C and .Fortra
 #| lst-label: lst-xcorrfr
 #| lst-cap: Cross-correlation wrapping function 
 xcorr2D_f0 <- function(a, b) {
-  # Please adjust the path to your setup. In my machine,
+  # Please adjust the path to your setup.
   dyn.load("AquaFortR_Codes/xcorr2D.so")
 
   # the full CC matrix
@@ -211,9 +211,14 @@ xcorr2D_f0 <- function(a, b) {
 }
 ```
 
+::: callout-important
+On Windows, `R CMD SHLIB` produces dynamic-link library (dll) files. Please 
+adjust the library extension in R functions according to your OS.  
+:::
+
 Now, we can use an example to compare the performance of the two functions. 
-In order to do so, `microbenchmark` package needs to be installed, and `ggplot2` 
-is required for plotting.
+In order to do so, `microbenchmark` package [@R-microbenchmark] and `ggplot2` [@ggplot22016; @R-ggplot2] 
+are required.
  
 The obtained benchmarking data allows (`mbm`) for a quantitative comparison of 
 the computational efficiency between the two methods. By printing "mbm" in the console 
@@ -234,8 +239,8 @@ a <- structure(runif(64), dim = c(8L, 8L))
 # Assume b
 b <- structure(runif(64), dim = c(8L, 8L))
 mbm <- microbenchmark(
-  xcorr2D_r = xcorr2D_r0(a, b),
-  xcorr2D_f = xcorr2D_f0(a, b)
+  xcorr2D_r0 = xcorr2D_r0(a, b),
+  xcorr2D_f0 = xcorr2D_f0(a, b)
 )
 
 autoplot(mbm) +
@@ -319,6 +324,11 @@ conv2D_r0 <- function(a, b) {
 }
 ```
 
+::: {.callout-note}
+A Gaussian smoothing filter can be applied to an array `a` using `b` as the Gaussian kernel 
+or the 2D Gaussian coefficients. However, the convolution and cross-correlation 
+can be optimised using the Fast Fourier Transform (FFT). See @sec-summary. 
+:::
 
 ```{fortran, eval=FALSE}
 #| lst-label: lst-convrf
@@ -380,25 +390,28 @@ compiling `conv2D.f90` by R or the gfortran compiler.
 # R
 R CMD SHLIB conv2D.f90
 
-# gfortran
-gfortran -fpic -shared conv2D.f90 -o conv2D.so
+# gfortran on Unix-like
+gfortran -shared conv2D.f90 -o conv2D.so
+
+# gfortran on Windows
+gfortran -shared conv2D.f90 -o conv2D.dll
 ```
 
-In R wrapper function, `.C64()` from [dotCall64](https://cran.r-project.org/web/packages/dotCall64/index.html) package will be used instead of `.Fortran()`. According to @GERBER2018217, `.C64()` transcends other foreign function interfaces in many aspects: 
+In R wrapper function, `.C64()` from dotCall64 package [@dotCall642018; @R-dotCall64] will be used instead of `.Fortran()`. According to @dotCall642018, `.C64()` transcends other foreign function interfaces in many aspects: 
 
   - It supports long vectors. 
   - The `SIGNATURE` argument ensures that the interfaced R objects 
       are of the specified types
   - The `INTENT` argument helps avoid unnecessary copies of R objects
-      between languages. It is very important when working with large data sets. 
+      between languages. 
  
 
 In @lst-convrfr, the basic input arguments, such as the dimensions of input and 
 output arrays, are prepared. Afterwards, the `SIGNATURE` is defined as six 
 integers and three doubles corresponding to the required types in the subroutine. 
 `INTENT` will ensure that only the `conv` argument is copied between R and Fortran. 
-This is particularly important in large productions, where coping the subroutine 
-parameters can extend beyond the available memory (RAM).
+This is particularly important when processing large data set, where coping the subroutine 
+arguments extends beyond the available memory (RAM).
 
 
 ```{r}
@@ -437,11 +450,6 @@ conv2D_f0 <- function(a, b) {
 }
 ```
 
-::: {.callout-note}
-A Gaussian smoothing filter can be applied to an array `a` using `b` as the Gaussian kernel 
-or the 2D Gaussian coefficients. However, the convolution and cross-correlation 
-can be optimised using the Fast Fourier Transform (FFT). See @sec-summary. 
-:::
 
 ```{r}
 #| label: fig-conv2D
@@ -456,8 +464,8 @@ a <- structure(runif(64), dim = c(8L, 8L))
 # Assume b
 b <- structure(runif(64), dim = c(8L, 8L))
 mbm <- microbenchmark(
-  conv2D_r = conv2D_r0(a, b),
-  conv2D_f = conv2D_f0(a, b)
+  conv2D_r0 = conv2D_r0(a, b),
+  conv2D_f0 = conv2D_f0(a, b)
 )
 
 autoplot(mbm) +
@@ -496,24 +504,24 @@ where $R_d$ is the gas constant for dry air, $T_p$ is the parcel temperature, $T
 is the environment temperature, $p$ is pressure, $LFC$ is the Level of Free Convection,
 and $EL$ is the Equilibrium Level.  
 
-Under a warming climate, CAPE is expected to increase [@Chen2020], which can result 
+In a warming climate, CAPE is expected to increase [@Chen2020], which can result 
 in an elevated risk of thunderstorms. It is crucial for humanity to quantify the 
 future risk for proper preparation and mitigation. Typically, thunderstorms are 
 investigated with convective-permitting modelling (CPM) where the horizontal 
 resolution is less than 4km. CPM simulations produce vast amount of data sets, 
-and CAPE estimation at a specific gridpoint and time is an integration along the vertical profile (@#eq-cape). 
+and CAPE estimation at a specific gridpoint and time is an integration along the vertical profile (@eq-cape). 
+
 
 Given the rapid advancements in computing power, it is anticipated that  CPM is 
 expected to be performed at finer horizontal and vertical resolution, 
-thereby increasing the complexity of estimating CAPE. It is essential that the 
+thereby increasing the complexity of the CAPE estimation. It is essential that the 
 enhancement of computing power is accompanied by responsible management and 
-allocation of these resources.
+resource allocation.
 
-
-Since CAPE calculation scripts are highly complex and lengthy, the necessary 
-codes are only available in supplementary materials. Additionally, to test the 
-two implementations of CAPE, the AquaFortR package should be installed to 
-utilise the example data. See @lst-cape.
+Because the CAPE calculation scripts are highly complex and lengthy, the necessary 
+codes are only available in the supplementary materials. Additionally, to test the 
+two implementations of CAPE, the AquaFortR package was installed to utilise the 
+example data. See @lst-cape.
 
 
 ```{r}
@@ -551,7 +559,7 @@ As mentioned, integration between R and Fortran should be accomplished through
 subroutines. Nevertheless, some calculations are complex, and using functions 
 or other subroutines is inevitable. In cape.f90, a module containing all the 
 required utilities was written, and then the main subroutine was included. 
-The approach ensures cape_f has access to the module and is simultaneously available to R. 
+The approach ensures `cape_f` has access to the module and is simultaneously available to R. 
 
 Exploring @fig-cape, it is evident that the implementation of Fortran is faster than R by a factor of ~28, proofing that integrating Fortran in R is vital for performance and beneficial for the environment.
 
@@ -580,5 +588,9 @@ autoplot(mbm) +
     colour = "red"
   )
 ```
+
+<!-- ::: {.callout-important} -->
+<!-- In the file `cape_f.f90`, there is a module followed by a subroutine. This organization is utilised for two reasons: a) R only uses subroutines from Fortran compiled code.  In order to use helping functions in `cape_f.f90`, they must be enclosed in a module and called using `use :: tools`. -->
+<!-- ::: -->
 
 

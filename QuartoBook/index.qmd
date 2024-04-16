@@ -1,21 +1,53 @@
-# &nbsp; {.unnumbered .unlisted} 
+# Preface {.unnumbered}
 
- Welcome to the enlightening journey through the pages of **"AquaFortR: Streamlining 
- Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R"**. 
- In this book, you will gain invaluable insights into seamlessly speeding up R scripts 
- by harnessing the power of Fortran. You will acquire 
- essential perspectives into speeding up your package using simple Fortran codes.
- Furthermore, you will accumulate tweaks to accelerate your scripts or packages, 
- and supplementary reading will prove to be both advantageous and highly beneficial for further 
- optimization, and efficiency. 
+```{r echo=FALSE,eval=FALSE}
+knitr::write_bib(c(
+  "tidyverse",
+  "sf",
+  "stars",
+  "terra",
+  "ncdf4",
+  "rhdf5",
+  "Rcpp",
+  "reticulate",
+  "rJava",
+  "microbenchmark",
+  "ggplot2",
+  "dotCall64"
+  
+), "rpackages.bib", width = 60)
+```
 
-&nbsp;
+Welcome to the enlightening journey through the pages of **"AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R"**. It is an educational book aimed, in general, at  R programmers who want to increase the performance of their codes using Fortran, particularly for bachelor's, master’s, and PhD students and researchers in the fields mentioned above. Typically, simulation and modelling of the environmental processes are accomplished on the grid level in which the investigation region is discretised to numerous grid points in time and space. Consequently, these simulations produce enormous data sets and processing this data extends beyond the current average personal computer capacity. Nevertheless, a few have access to high-performance computing infrastructures. The possibility of speeding up calculations and modelling exists in each PC through compiled programming languages such as Fortran. This solution speeds up computations and can reduce the CO~2~ emissions drastically. Fortran is well-suited for numerical and scientific computations due to its array processing capabilities, performance, and efficiency. Combining R with Fortran, data can be smoothly wrangled and visualised. In this book, you will gain invaluable insights into seamlessly speeding up R scripts by harnessing the power of Fortran. You will acquire essential perspectives into speeding up your package using simple Fortran codes. Furthermore, you will accumulate tweaks to accelerate your scripts or packages, and supplementary reading will prove to be both advantageous and highly beneficial for further optimisation and efficiency. 
+
+::: {.content-visible when-format="pdf"}
+\clearpage
+:::
+
+## Funding  {.unnumbered}
 
 This work has been funded by the German Research Foundation (DFG) through the 
 project NFDI4Earth (DFG project no. 460036893, <https://www.nfdi4earth.de/>) 
 within the German National Research Data Infrastructure (NFDI, <https://www.nfdi.de/>).
 
-&nbsp;
+<!-- ## Citation -->
+
+<!-- ``` -->
+<!-- @book{AquaFortR, -->
+<!--   author = {Ahmed Homoudi}, -->
+<!--   year = 2024, -->
+<!--   title = {AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated {R}}, -->
+<!--   URL = {https://doi.org/10.5281/zenodo.xxxxxxx}, -->
+<!--   doi = {10.5281/zenodo.xxxxxxxx} -->
+<!-- } -->
+<!-- ``` -->
+
+## Acknowledgement  {.unnumbered}
+
+Appreciation is extended to Dr. Klemens Barfus for providing invaluable 
+Fortran routines to estimate CAPE. 
+
+## License {.unnumbered}
 
 This book is licensed under the Creative Commons Attribution-NonCommercial 4.0 
 International (CC BY-NC 4.0) License (<https://creativecommons.org/licenses/by-nc/4.0/>).

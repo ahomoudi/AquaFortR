@@ -7,7 +7,6 @@
 [![License](https://img.shields.io/badge/License-CCBY-blue)](#license)
 <!-- badges: end -->
 
-This is the main webpage of the project AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated R. 
 
 The project's [repository](https://github.com/ahomoudi/AquaFortR/) is structured as follows:
 
@@ -15,7 +14,7 @@ The project's [repository](https://github.com/ahomoudi/AquaFortR/) is structured
  - RPackage  
  - AquaFortR_Swirl
 
-## Installation 
+## Installation & Materials
 
 ### Package
 

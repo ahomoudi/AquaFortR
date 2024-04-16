@@ -41,12 +41,31 @@ swirl::install_course_zip("path/to/AquaFortR_Swirl.zip")
 Materials for Chapter 2 are available <a href="AquaFortR_Codes.zip">here</a>. Please, 
 revise the path to the shared libraries files in the R-Fortran functions.
 
-## Acknowledgment
+## Funding
 
-This work has been funded by the German Research Foundation (DFG) through the project NFDI4Earth (DFG project no. 460036893, https://www.nfdi4earth.de/) within the German National Research Data Infrastructure (NFDI, https://www.nfdi.de/). 
+This work has been funded by the German Research Foundation (DFG) through the 
+project NFDI4Earth (DFG project no. 460036893, <https://www.nfdi4earth.de/>) 
+within the German National Research Data Infrastructure (NFDI, <https://www.nfdi.de/>).
+
+<!-- ## Citation -->
+
+<!-- ``` -->
+<!-- @book{AquaFortR, -->
+<!--   author = {Ahmed Homoudi}, -->
+<!--   year = 2024, -->
+<!--   title = {AquaFortR: Streamlining Atmospheric Science, Oceanography, Climate, and Water Research with Fortran-accelerated {R}}, -->
+<!--   URL = {https://doi.org/10.5281/zenodo.xxxxxxx}, -->
+<!--   doi = {10.5281/zenodo.xxxxxxxx} -->
+<!-- } -->
+<!-- ``` -->
+
+## Acknowledgement  {.unnumbered}
+
+Appreciation is extended to Dr. Klemens Barfus for providing invaluable 
+Fortran routines to estimate CAPE. 
 
 ## License
 
-This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 
+This book is licensed under the Creative Commons Attribution-NonCommercial 4.0 
 International (CC BY-NC 4.0) License (<https://creativecommons.org/licenses/by-nc/4.0/>).
 
